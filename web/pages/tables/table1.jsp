@@ -1,3 +1,10 @@
+<%-- 
+    Document   : table1
+    Created on : May 21, 2021, 12:04:46 PM
+    Author     : jatin
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
