@@ -122,61 +122,53 @@
 
 </html>
 
+
+<!--login-register-->
 <script>
-    var openLogin = false;
-    var openRegister = false;
-    $(document).ready(function () {
+          var openLogin = false;
+          var openRegister = false;
+          $(document).ready(function () {
+              $(".button-log a").click(function () {
+                   if (!openLogin) {
+                      $(".overlay-login-page").fadeIn(200);
+                      $(this).toggleClass('btn-open').toggleClass('btn-close');
+                      openLogin = true;
+                      
+                } else if (openLogin) {
+                      $(".overlay-login-page").fadeOut(200);
+                      $(this).toggleClass('btn-open').toggleClass('btn-close');
+                      openLogin = false;
+                      
+                }
+                
+                  if (openLogin && openRegister) {
+                      $(".overlay-login-page").fadeOut(200);
+                      $(".overlay-register-page").fadeOut(200);
 
+                      $(this).toggleClass('btn-open').toggleClass('btn-close');
+                      openLogin = false;
+                      openRegister = false;
+                  }
+              });
 
+          });
 
+          $(".page-reg a").click(function () {
+              $(".overlay-login-page").fadeToggle(200);
+              openLogin = false;
+              $(".overlay-register-page").fadeToggle(200);
+              openRegister = true;
+          });
 
-        $(".button-log a").click(function () {
-
-            if (!openLogin) {
-                $(".overlay-login-page").fadeIn(200);
-                $(this).toggleClass('btn-open').toggleClass('btn-close');
-                openLogin = true;
-
-            } else if (openLogin) {
-                $(".overlay-login-page").fadeOut(200);
-                $(this).toggleClass('btn-open').toggleClass('btn-close');
-                openLogin = false;
-
-            }
-
-            if (openLogin && openRegister) {
-                $(".overlay-login-page").fadeOut(200);
-                $(".overlay-register-page").fadeOut(200);
-
-                $(this).toggleClass('btn-open').toggleClass('btn-close');
-                openLogin = false;
-                openRegister = false;
-            }
-        });
-
-    });
-
-    $(".page-reg a").click(function () {
-        $(".overlay-login-page").fadeToggle(200);
-        openLogin = false;
-        $(".overlay-register-page").fadeToggle(200);
-        openRegister = true;
-    });
-
-    $('.overlay-close1').on('click', function () {
-        $(".overlay-register-page").fadeOut(200);
-        $(".overlay-login-page").fadeOut(200);
-        $(".button-log a").toggleClass('btn-open').toggleClass('btn-close');
-        openLogin = false;
-        openRegister = false;
-    });
+          $('.overlay-close1').on('click', function () {
+              $(".overlay-register-page").fadeOut(200);
+              $(".overlay-login-page").fadeOut(200);
+              $(".button-log a").toggleClass('btn-open').toggleClass('btn-close');
+ openLogin = false;
+                      openRegister = false;
+                  });
 
 </script>
-
-
-
-
-
 <!--login-register-->
 <script>
 // optional
@@ -187,7 +179,24 @@
 
 <!--pop-up-box-->
 <script src="assets/js/jquery.magnific-popup.js"></script>
+<!--//search-bar-->
+<script>
+  $(document).ready(function () {
+    $('.popup-with-zoom-anim').magnificPopup({
+      type: 'inline',
+      fixedContentPos: false,
+      fixedBgPos: true,
+      overflowY: 'auto',
+      closeBtnInside: true,
+      preloader: false,
+      midClick: true,
+      removalDelay: 300,
+      mainClass: 'my-mfp-zoom-in'
+    });
 
+  });
+</script>
+<!--//search-bar-->
 
 <!-- disable body scroll which navbar is in active -->
 
@@ -198,33 +207,4 @@
         })
     });
 </script>
-
-
-
-<!-- script for tabs -->
-<script>
-    $(function () {
-
-        var menu_ul = $('.faq > li > ul'),
-                menu_a = $('.faq > li > a');
-
-        menu_ul.hide();
-
-        menu_a.click(function (e) {
-            e.preventDefault();
-            if (!$(this).hasClass('active')) {
-                menu_a.removeClass('active');
-                menu_ul.filter(':visible').slideUp('normal');
-                $(this).addClass('active').next().stop(true, true).slideDown('normal');
-            } else {
-                $(this).removeClass('active');
-                $(this).next().stop(true, true).slideUp('normal');
-            }
-        });
-
-    });
-</script>
-<!-- script for tabs -->
-<!-- disable body scroll which navbar is in active -->
-<script src="assets/js/bootstrap.min.js"></script>
 

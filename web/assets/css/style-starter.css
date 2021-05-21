@@ -1,4 +1,4 @@
-
+﻿
 /*
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -300,6 +300,12 @@ a.read-more-btn2.btn:hover {
 .fa-pulse {
   -webkit-animation: fa-spin 1s infinite steps(8);
   animation: fa-spin 1s infinite steps(8);
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 @-webkit-keyframes fa-spin {
@@ -3686,7 +3692,8 @@ a.read-more-btn2.btn:hover {
   height: 100vh;
 }
 
-.w3l-banner-slider-main .search-right .pop-overlay:target {
+.w3l-banner-slider-main .search-right .pop-
+:target {
   visibility: visible;
   opacity: 1;
 }
@@ -9415,7 +9422,7 @@ pre code {
 
   .col-lg-2 {
     flex: 0 0 16.66667%;
-    max-width: 16.66667%;
+    max-width: 14.2%;
   }
 
   .col-lg-3 {
