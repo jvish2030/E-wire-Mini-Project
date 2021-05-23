@@ -349,36 +349,123 @@
                                 </div>
                             </div>
 
-
                             <div class="col-12 grid-margin">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Add New Category</h4>
-                                        <form class="form-sample">
+                                        <div class="row">
+                                            <div class="col-lg-5 col-md-6">
+                                                <form>
+                                                    <h4 class="card-title">Add New Category</h4>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label for="productName">Add Category</label>
+                                                            <input type="text" class="form-control" id="productName" placeholder="name">
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </form>
 
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3 col-form-label">Category</label>
-                                                        <div class="col-sm-9">
-                                                            <select class="form-control">
-                                                                <option>Category1</option>
-                                                                <option>Category2</option>
-                                                                <option>Category3</option>
-                                                                <option>Category4</option>
-                                                            </select>
+                                                <br/> <hr/>
+
+                                                <form>
+                                                    <h4 class="card-title">Add Sub Category</h4>
+                                                    <div class="form-group">
+                                                        <label for="sel1">Select Category to Add Sub Category</label>
+                                                        <select class="form-control" id="sel1" name="sellist1">
+                                                            <option>MultiStrand</option>
+                                                            <option>Programming</option>
+                                                            <option>Color</option>
+                                                            <option>Computer</option>
+                                                        </select>                                                                                                        
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="productName">Add Sub Category</label>
+                                                        <input type="text" class="form-control" id="productName" placeholder="name">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </form>
+                                            </div>
+                                            <div class="col-lg-5 offset-lg-2 col-md-6">
+                                                <div class="container">
+                                                    <h3>My Categories</h3>
+                                                    <div id="accordion">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                                                    Collapsible Group Item #1
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                                                <div class="card-body">
+                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                                                                    Collapsible Group Item #2
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                                                <div class="card-body">
+                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                                                                    Collapsible Group Item #3
+                                                                </a>
+                                                            </div>
+                                                            <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                                                <div class="card-body">
+                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                            <button class="btn btn-dark">Cancel</button>
+                                        </div>
                                     </div>
                                 </div>
-
                             </div>    
 
-
+                            <!-- <div class="col-12 grid-margin">
+                                 <div class="card">
+                                     <div class="card-body">
+                                         <h4 class="card-title">Add New Category</h4>
+                                         <form class="form-sample">
+                                             <div class="row">
+                                                 <div class="col-lg-6 offset-lg-0 col-md-6 " >
+                                                     <div class="form-group">
+                                                         <label for="productName">Name of Product</label>
+                                                         <input type="text" class="form-control" id="productName" placeholder="name">
+                                                     </div>
+                                                 </div>
+                                                 <div class="col-lg-5 offset-lg-1 col-md-6 " >
+                                                     <div class="form-group">
+                                                         <div class="form-group ">
+                                                             <label for="productRemark" >Discount Remark</label>
+                                                         </div>
+                                                        
+                                                         </form>
+                                                     </div>
+                                                     <div class="form-group ">
+                                                         <label for="productRemark" >Discount Remark</label>
+                                                         <input type="text" class="form-control" id="productRemark" placeholder="Discount Remark">
+                                                     </div>
+                                                 </div>
+                                                 <button type="submit" class="btn btn-primary mr-2">Upload</button>
+                                                 <button class="btn btn-dark">Cancel</button>
+                                             </div>
+                                     </div>
+                                     </form>		
+                                 </div>
+                             </div>	
+                         </div>  -->
 
                             <!-- content-wrapper ends -->
                             <!-- partial:../../partials/_footer.html -->

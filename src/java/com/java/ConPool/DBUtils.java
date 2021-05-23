@@ -34,7 +34,7 @@ public class DBUtils {
     static Connection con;
     public static Connection connect() 
     {
-        System.out.println("Inside connect() method ange getting :------" + con);
+        System.out.println("Inside connect() method and getting :------" + con);
         if (con != null) {
             return con;
         }
@@ -68,5 +68,7 @@ public class DBUtils {
         return count;
     }
     //--------------------static method to get total count of rows based in table name ----------------//
-
+    public static void main(String[] args) {
+        System.out.println(connect());
+    }
 }
