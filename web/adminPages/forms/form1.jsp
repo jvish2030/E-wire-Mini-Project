@@ -4,6 +4,10 @@
     Author     : jatin
 --%>
 
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.Set"%>
+<%@page import="com.java.ConPool.DBUtils"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -385,119 +389,70 @@
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </form>
                                             </div>
+
                                             <div class="col-lg-5 offset-lg-2 col-md-6">
                                                 <div class="container">
                                                     <h3>My Categories</h3>
                                                     <div id="accordion">
+                                                        <%
+                                                            Set CategorySet = DBUtils.getCategories();
+                                                            Iterator itr = CategorySet.iterator();
+                                                            while (itr.hasNext()) {
+                                                                Map.Entry CategoryEntry = (Map.Entry) itr.next();
+                                                                String s = (String) CategoryEntry.getValue();
+                                                                s = s.replaceAll(" ", "");
+                                                        %>
                                                         <div class="card">
                                                             <div class="card-header">
-                                                                <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                                                                    Collapsible Group Item #1
+                                                                <a class="card-link" data-toggle="collapse" href="#<%=s%>">
+                                                                    <%= CategoryEntry.getValue()%>
                                                                 </a>
                                                             </div>
-                                                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                                            <div id="<%=s%>" class="collapse" data-parent="#accordion">
                                                                 <div class="card-body">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                                                    <%
+                                                                        for (String s2 : DBUtils.getSubCategories((int) CategoryEntry.getKey())) {
+                                                                    %>
+                                                                    <p><%= s2%></p> 
+                                                                    <%}%>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-                                                                    Collapsible Group Item #2
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                                                                <div class="card-body">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-                                                                    Collapsible Group Item #3
-                                                                </a>
-                                                            </div>
-                                                            <div id="collapseThree" class="collapse" data-parent="#accordion">
-                                                                <div class="card-body">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <%}%>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>    
+
+                                           
+                                            <footer class="footer">
+
+                                            </footer>
+                                            <!-- partial -->
                                         </div>
+                                        <!-- main-panel ends -->
                                     </div>
+                                    <!-- page-body-wrapper ends -->
                                 </div>
-                            </div>    
+                                <!-- container-scroller -->
+                                <!-- plugins:js -->
+                                <script src="../../adminAssets/vendors/js/vendor.bundle.base.js"></script>
+                                <!-- endinject -->
+                                <!-- Plugin js for this page -->
+                                <script src="../../adminAssets/vendors/select2/select2.min.js"></script>
+                                <script src="../../adminAssets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+                                <!-- End plugin js for this page -->
+                                <!-- inject:js -->
+                                <script src="../../adminAssets/js/off-canvas.js"></script>
+                                <script src="../../adminAssets/js/hoverable-collapse.js"></script>
+                                <script src="../../adminAssets/js/misc.js"></script>
+                                <script src="../../adminAssets/js/settings.js"></script>
+                                <script src="../../adminAssets/js/todolist.js"></script>
+                                <!-- endinject -->
+                                <!-- Custom js for this page -->
+                                <script src="../../adminAssets/js/file-upload.js"></script>
+                                <script src="../../adminAssets/js/typeahead.js"></script>
+                                <script src="../../adminAssets/js/select2.js"></script>
+                                <!-- End custom js for this page -->
+                                </body>
 
-                            <!-- <div class="col-12 grid-margin">
-                                 <div class="card">
-                                     <div class="card-body">
-                                         <h4 class="card-title">Add New Category</h4>
-                                         <form class="form-sample">
-                                             <div class="row">
-                                                 <div class="col-lg-6 offset-lg-0 col-md-6 " >
-                                                     <div class="form-group">
-                                                         <label for="productName">Name of Product</label>
-                                                         <input type="text" class="form-control" id="productName" placeholder="name">
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-lg-5 offset-lg-1 col-md-6 " >
-                                                     <div class="form-group">
-                                                         <div class="form-group ">
-                                                             <label for="productRemark" >Discount Remark</label>
-                                                         </div>
-                                                        
-                                                         </form>
-                                                     </div>
-                                                     <div class="form-group ">
-                                                         <label for="productRemark" >Discount Remark</label>
-                                                         <input type="text" class="form-control" id="productRemark" placeholder="Discount Remark">
-                                                     </div>
-                                                 </div>
-                                                 <button type="submit" class="btn btn-primary mr-2">Upload</button>
-                                                 <button class="btn btn-dark">Cancel</button>
-                                             </div>
-                                     </div>
-                                     </form>		
-                                 </div>
-                             </div>	
-                         </div>  -->
-
-                            <!-- content-wrapper ends -->
-                            <!-- partial:../../partials/_footer.html -->
-                            <footer class="footer">
-
-                            </footer>
-                            <!-- partial -->
-                        </div>
-                        <!-- main-panel ends -->
-                    </div>
-                    <!-- page-body-wrapper ends -->
-                </div>
-                <!-- container-scroller -->
-                <!-- plugins:js -->
-                <script src="../../adminAssets/vendors/js/vendor.bundle.base.js"></script>
-                <!-- endinject -->
-                <!-- Plugin js for this page -->
-                <script src="../../adminAssets/vendors/select2/select2.min.js"></script>
-                <script src="../../adminAssets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-                <!-- End plugin js for this page -->
-                <!-- inject:js -->
-                <script src="../../adminAssets/js/off-canvas.js"></script>
-                <script src="../../adminAssets/js/hoverable-collapse.js"></script>
-                <script src="../../adminAssets/js/misc.js"></script>
-                <script src="../../adminAssets/js/settings.js"></script>
-                <script src="../../adminAssets/js/todolist.js"></script>
-                <!-- endinject -->
-                <!-- Custom js for this page -->
-                <script src="../../adminAssets/js/file-upload.js"></script>
-                <script src="../../adminAssets/js/typeahead.js"></script>
-                <script src="../../adminAssets/js/select2.js"></script>
-                <!-- End custom js for this page -->
-                </body>
-
-                </html>
+                                </html>
