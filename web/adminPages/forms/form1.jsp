@@ -315,79 +315,96 @@
                                                 <div class="col-lg-5 col-md-6 " >
                                                     <div class="form-group">
                                                         <label for="productName">Name of Product</label>
-                                                        <input type="text" class="form-control" id="productName" placeholder="name">
+                                                        <input type="text" class="form-control text-secondary" id="productName" placeholder="name">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="productPrice">Product Price</label>
-                                                        <input type="email" class="form-control" id="productPrice" placeholder="price">
+                                                        <input type="email" class="form-control text-primary" id="productPrice" placeholder="price">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="productDiscount">Discount Price</label>
-                                                        <input type="number" class="form-control" id="productDiscount" placeholder="Discount">
+                                                        <input type="number" class="form-control text-primary" id="productDiscount" placeholder="Discount">
                                                     </div>
+
+                                                </div>
+                                                <div class="col-lg-5 offset-lg-1 col-md-6 " >
                                                     <div class="form-group">
                                                         <label for="productCategory" >Product Category</label>
-                                                        <input type="text" class="form-control" id="productCategory" placeholder="Product Category">
+                                                        <input type="text" class="form-control text-primary" id="productCategory" placeholder="Product Category">
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-5 offset-lg-2 col-md-6 " >
                                                     <div class="form-group ">
                                                         <label for="product" >Product Photo</label>                                                    
                                                         <input  class="custom-control" type="file" id="actual-btn"/>                                                    
                                                     </div>
                                                     <div class="form-group ">
                                                         <label for="productRemark" >Discount Remark</label>
-                                                        <input type="text" class="form-control" id="productRemark" placeholder="Discount Remark">
+                                                        <input type="text" class="form-control text-primary" id="productRemark" placeholder="Discount Remark">
                                                     </div>
-                                                    <div class="form-group ">
-                                                        <label for="productDescription" >Description</label>
-                                                        <textarea class="form-control" id="productDescription" placeholder="Description" rows="4" cols="50" ></textarea>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                                    <button class="btn btn-dark">Cancel</button>
 
                                                 </div>
+                                                <div class="col-lg-11 offset-lg-0 col-md-6 " >
+                                                    <div class="form-group ">
+                                                        <label for="productDescription" >Description</label>
+                                                        <textarea class="form-control text-primary" id="productDescription" placeholder="Description" rows="4" cols="50" ></textarea>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                            <button class="btn btn-dark">Cancel</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-
+                            <%
+                                // getting SET of Key- value pair of Id and category
+                                Set CategorySet = DBUtils.getCategoriesSet();
+                                // Creating Iterators of CategorySet
+                                Iterator itr1 = CategorySet.iterator();
+                                Iterator itr2 = CategorySet.iterator();
+                            %>
                             <div class="col-12 grid-margin">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-lg-5 col-md-6">
-                                                <form>
+                                                <!--form to ADD CATEGORY-->
+                                                <form name="myCategoryForm" action="${pageContext.request.contextPath}/Operation" method="get" >
                                                     <h4 class="card-title">Add New Category</h4>
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <label for="productName">Add Category</label>
-                                                            <input type="text" class="form-control" id="productName" placeholder="name">
+                                                            <label for="CategoryName">Add Category</label>
+                                                            <input type="text" class="form-control text-primary" name="CategoryName" id="CategoryName" placeholder="name">
                                                         </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <input type="hidden" name="operation" value="addCategory"/>
+                                                    <button type="submit" class="btn btn-primary ">Submit</button>
                                                 </form>
-
+                                                <!--//form to ADD CATEGORY//-->
                                                 <br/> <hr/>
-
-                                                <form>
+                                                <!--form to ADD SUB CATEGORY-->
+                                                <form name="mySubCategoryForm" action="${pageContext.request.contextPath}/Operation" method="get" >
                                                     <h4 class="card-title">Add Sub Category</h4>
                                                     <div class="form-group">
-                                                        <label for="sel1">Select Category to Add Sub Category</label>
-                                                        <select class="form-control" id="sel1" name="sellist1">
-                                                            <option>MultiStrand</option>
-                                                            <option>Programming</option>
-                                                            <option>Color</option>
-                                                            <option>Computer</option>
+                                                        <label for="SelectCategory">Select Category to Add Sub Category</label>
+                                                        <select class="form-control text-primary" name="SelectCategory" id="SelectCategory">
+                                                            <%while (itr1.hasNext()) {
+                                                                    Map.Entry CategoryEntry = (Map.Entry) itr1.next();
+                                                                    String category = (String) CategoryEntry.getValue();
+                                                                    int id = (int) CategoryEntry.getKey();
+                                                            %>
+                                                            <option class="text-primary" value="<%= id%>"><%= category%></option>
+                                                            <%}%>
                                                         </select>                                                                                                        
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="productName">Add Sub Category</label>
-                                                        <input type="text" class="form-control" id="productName" placeholder="name">
+                                                        <label for="subCategory">Add Sub Category</label>
+                                                        <input type="text" name="subCategory" class="form-control text-primary" id="subCategory" placeholder="name">
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <input type="hidden" name="operation" value="addSubCategory"/>
+                                                    <button type="submit" class="btn btn-primary mb-4">Submit</button>
                                                 </form>
+                                                <!--//form to ADD SUB CATEGORY//-->
+
                                             </div>
 
                                             <div class="col-lg-5 offset-lg-2 col-md-6">
@@ -395,10 +412,8 @@
                                                     <h3>My Categories</h3>
                                                     <div id="accordion">
                                                         <%
-                                                            Set CategorySet = DBUtils.getCategories();
-                                                            Iterator itr = CategorySet.iterator();
-                                                            while (itr.hasNext()) {
-                                                                Map.Entry CategoryEntry = (Map.Entry) itr.next();
+                                                            while (itr2.hasNext()) {
+                                                                Map.Entry CategoryEntry = (Map.Entry) itr2.next();
                                                                 String s = (String) CategoryEntry.getValue();
                                                                 s = s.replaceAll(" ", "");
                                                         %>
@@ -423,7 +438,7 @@
                                                 </div>
                                             </div>    
 
-                                           
+
                                             <footer class="footer">
 
                                             </footer>

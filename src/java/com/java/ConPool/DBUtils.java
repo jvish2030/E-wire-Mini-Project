@@ -71,7 +71,7 @@ public class DBUtils {
     }
     //--------------------static method to get total count of rows based in table name ----------------//
 
-    public static Set getCategories() {
+    public static Set getCategoriesSet() {
         Connection con = DBUtils.connect();
         String query1 = "SELECT * FROM CATEGORIES where parent_id is null order by Category";
         Statement st;
