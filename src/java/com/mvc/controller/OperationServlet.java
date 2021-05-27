@@ -131,7 +131,7 @@ public class OperationServlet extends HttpServlet {
             } else {
                 try {
 
-                    response.sendRedirect("adminPage.jsp");
+                    response.sendRedirect("adminPages/main/adminPage.jsp");
                 } catch (IOException ex) {
                     Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
