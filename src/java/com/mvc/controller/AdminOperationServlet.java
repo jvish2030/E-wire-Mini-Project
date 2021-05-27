@@ -5,9 +5,15 @@
  */
 package com.mvc.controller;
 
+import com.mvc.beans.CategoryBean;
 import com.mvc.beans.ProductBean;
 import com.mvc.dao.AdminDao;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -52,15 +58,22 @@ public class AdminOperationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        //getting paameter vzllue of operation
         String operation = request.getParameter("operation");
         operation = operation.toLowerCase();
-
+        //CALLING CASE VALUE BASED OF OPERATOPN VALUE
         switch (operation) {
+            case "addcategory":
+                addCategoryOperation(request, response);
+                break;
+            case "addsubcategory":
+                addSubCategoryOperation(request, response);
+                break;
             case "addproduct":
                 addProduct(request, response);
                 break;
             default:
-
+                error(request, response);
         }
     }
 
@@ -75,6 +88,7 @@ public class AdminOperationServlet extends HttpServlet {
     }// </editor-fold>
 
     private void addProduct(HttpServletRequest request, HttpServletResponse response) {
+//        getting product data through Get Request
         String productName = request.getParameter("productName");
         String productCategory = request.getParameter("SelectCategory");
         int productPrice = Integer.parseInt(request.getParameter("productPrice"));
@@ -88,6 +102,7 @@ public class AdminOperationServlet extends HttpServlet {
         String productRemark = request.getParameter("productRemark");
         String productDescription = request.getParameter("productDescription");
 
+//          Creating & Storing productBean oject
         ProductBean proObj = new ProductBean();
         proObj.setpName(productName);
         proObj.setpCategory(productCategory);
@@ -97,9 +112,35 @@ public class AdminOperationServlet extends HttpServlet {
         proObj.setpPhoto(productPhoto.getSubmittedFileName());
         proObj.setpDescription(productDescription);
 
+        //Finding the path to store Image
+        String path = request.getRealPath("images") + File.separator + "products" + File.separator + productPhoto.getSubmittedFileName();
+        System.out.println(path);
+
+//using try with resource to perform auto close operation
+        //creating File output stream object to put image to that specified location
+        //getiing image binary data and creating Input stream object
+        try (FileOutputStream fos = new FileOutputStream(path);
+                InputStream is = productPhoto.getInputStream();) {
+
+//            creating byte array to store binary data of input stream
+            byte[] data = new byte[is.available()];
+
+//            read data from input stream to byte array
+            is.read(data);
+
+            //writing binary data to byte array
+            fos.write(data);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //creating DAO object and passing product Object to insert into database
         AdminDao dao = new AdminDao();
         String authorize = dao.saveProduct(proObj);
-        System.out.println(authorize);
+        //if inserted then redirecting to same page else to error page
         if (authorize.equals("PRODUCT ADDDED SUCCESSFULLY!")) //On success, you can display a message to user on Home page
         {
             try {
@@ -114,6 +155,64 @@ public class AdminOperationServlet extends HttpServlet {
             } catch (IOException | ServletException ex) {
                 Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+
+    private void addCategoryOperation(HttpServletRequest request, HttpServletResponse response) {
+        // INSERTING CATEGORY NAME IN CATEGORYBEANOBJECT
+        CategoryBean cat = new CategoryBean(request.getParameter("CategoryName"));
+        //PASSING & INSERTING CATEGORYBEANOBJECT TO DATABASE THROUGN DAO 
+        String authorize = AdminDao.createNewCategory(cat);
+        //if inserted then redirecting to same page else to error page
+        if (authorize.equals("CATEGORY INSERTED SUCCESSFULLY!")) //On success, you can display a message to user on Home page
+        {
+            try {
+                response.sendRedirect("adminPages/forms/form1.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else //On Failure, display a meaningful message to the User.
+        {
+            try {
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            } catch (IOException | ServletException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void addSubCategoryOperation(HttpServletRequest request, HttpServletResponse response) {
+        //GETTING CATEGORY ID AND STORING INTO LOCAL VARIABLE ID
+        int id = Integer.parseInt(request.getParameter("SelectCategory"));
+        //GETTING SUBCATEGORY NAME AND STORING INTO LOCAL VARIABLE SUBCATEGORY
+        String subCategory = request.getParameter("subCategory");
+        //CREATING CATEGORYBEAN OBJECT BY PASING ID AND SUBCATEGORY NAME
+        CategoryBean subCatObj = new CategoryBean(id, subCategory);
+        //PASSING &  CATEGORYBEAN OBJECT TO DATABASE THROUGN DAO 
+        String authorize = AdminDao.createNewSubCategory(subCatObj);
+        //if inserted then redirecting to same page else to error page
+        if (authorize.equals("SUBCATEGORY INSERTED SUCCESSFULLY!")) //On success, you can display a message to user on Home page
+        {
+            try {
+                response.sendRedirect("adminPages/forms/form1.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else //On Failure, display a meaningful message to the User.
+        {
+            try {
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            } catch (IOException | ServletException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void error(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            response.sendRedirect("error.jsp");
+        } catch (IOException ex) {
+            Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

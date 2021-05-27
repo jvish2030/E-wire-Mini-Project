@@ -386,7 +386,7 @@
                                 <div class="row">
                                     <div class="col-lg-5 col-md-6">
                                         <!--form to ADD CATEGORY-->
-                                        <form name="myCategoryForm" action="${pageContext.request.contextPath}/Operation" method="get" >
+                                        <form name="myCategoryForm" action="${pageContext.request.contextPath}/AdminOperation" method="get" >
                                             <h4 class="card-title">Add New Category</h4>
                                             <div class="form-group">
                                                 <div class="form-group">
@@ -400,7 +400,7 @@
                                         <!--//form to ADD CATEGORY//-->
                                         <br/> <hr/>
                                         <!--form to ADD SUB CATEGORY-->
-                                        <form name="mySubCategoryForm" action="${pageContext.request.contextPath}/Operation" method="get" >
+                                        <form name="mySubCategoryForm" action="${pageContext.request.contextPath}/AdminOperation" method="get" >
                                             <h4 class="card-title">Add Sub Category</h4>
                                             <div class="form-group">
                                                 <label for="SelectCategory">Select Category to Add Sub Category</label>

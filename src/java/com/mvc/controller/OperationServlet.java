@@ -37,19 +37,7 @@ public class OperationServlet extends HttpServlet {
         operation = operation.toLowerCase();
 
         switch (operation) {
-            case "addcategory":
-
-                System.out.println(request.getParameter("CategoryName"));
-               addCategoryOperation(request, response);
-                break;
-            case "addsubcategory":
-                int id = Integer.parseInt(request.getParameter("SelectCategory"));
-                String subCategory = request.getParameter("subCategory");
-                CategoryBean subCatObj = new CategoryBean(id, subCategory);
-                addSubCategoryOperation(request, response, subCatObj);
-                //  addCategoryOperation(request, response);
-                break;
-            case "logout":
+                   case "logout":
                 logout(request, response);
                 break;
             default:
@@ -180,44 +168,5 @@ public class OperationServlet extends HttpServlet {
         }
     }
 
-    private void addCategoryOperation(HttpServletRequest request, HttpServletResponse response) {
-
-        CategoryBean cat = new CategoryBean(request.getParameter("CategoryName"));        
-        String authorize = AdminDao.createNewCategory(cat);
-
-        if (authorize.equals("CATEGORY INSERTED SUCCESSFULLY!")) //On success, you can display a message to user on Home page
-        {
-            try {
-                response.sendRedirect("adminPages/forms/form1.jsp");
-            } catch (IOException ex) {
-                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else //On Failure, display a meaningful message to the User.
-        {
-            try {
-                request.getRequestDispatcher("error.jsp").forward(request, response);
-            } catch (IOException | ServletException ex) {
-                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    private void addSubCategoryOperation(HttpServletRequest request, HttpServletResponse response, CategoryBean subCatObj) {
-        String authorize = AdminDao.createNewSubCategory(subCatObj);
-        if (authorize.equals("SUBCATEGORY INSERTED SUCCESSFULLY!")) //On success, you can display a message to user on Home page
-        {
-            try {
-                response.sendRedirect("adminPages/forms/form1.jsp");
-            } catch (IOException ex) {
-                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else //On Failure, display a meaningful message to the User.
-        {
-            try {
-                request.getRequestDispatcher("error.jsp").forward(request, response);
-            } catch (IOException | ServletException ex) {
-                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+    
 }
