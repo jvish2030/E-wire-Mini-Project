@@ -31,6 +31,27 @@
         <link rel="stylesheet" href="../../adminAssets/css/style.css">
         <!-- End layout styles -->
         <link rel="shortcut icon" href="../../adminAssets/images/favicon.png" />
+        
+          <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="../../adminAssets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script src="../../adminAssets/vendors/select2/select2.min.js"></script>
+        <script src="../../adminAssets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="../../adminAssets/js/off-canvas.js"></script>
+        <script src="../../adminAssets/js/hoverable-collapse.js"></script>
+        <script src="../../adminAssets/js/misc.js"></script>
+        <script src="../../adminAssets/js/settings.js"></script>
+        <script src="../../adminAssets/js/todolist.js"></script>
+        <!-- endinject -->
+        <!-- Custom js for this page -->
+        <script src="../../adminAssets/js/file-upload.js"></script>
+        <script src="../../adminAssets/js/typeahead.js"></script>
+        <script src="../../adminAssets/js/select2.js"></script>
+        <!-- End custom js for this page -->
     </head>
 
     <body>
@@ -93,7 +114,7 @@
                         <span class="nav-link">Navigation</span>
                     </li>
                     <li class="nav-item menu-items">
-                        <a class="nav-link" href="../../index.html">
+                        <a class="nav-link" href="../../adminPage.jsp">
                             <span class="menu-icon">
                                 <i class="mdi mdi-speedometer"></i>
                             </span>
@@ -302,8 +323,11 @@
                 Iterator itr3 = CategorySet.iterator();//iterator to list category and SubCategories in MYCategories Accordian
             %>
             <!-- partial -->
+          
             <div class="main-panel">
+                 
                 <div class="content-wrapper">
+                      <jsp:include page="../../include/message.jsp"/>
                     <div class="page-header">
                         <h3 class="page-title"> Form elements </h3> 
                         <nav aria-label="breadcrumb">
@@ -386,7 +410,7 @@
                                 <div class="row">
                                     <div class="col-lg-5 col-md-6">
                                         <!--form to ADD CATEGORY-->
-                                        <form name="myCategoryForm" action="${pageContext.request.contextPath}/AdminOperation" method="get" >
+                                        <form name="myCategoryForm" action="${pageContext.request.contextPath}/AdminOperation" method="post" >
                                             <h4 class="card-title">Add New Category</h4>
                                             <div class="form-group">
                                                 <div class="form-group">
@@ -400,7 +424,7 @@
                                         <!--//form to ADD CATEGORY//-->
                                         <br/> <hr/>
                                         <!--form to ADD SUB CATEGORY-->
-                                        <form name="mySubCategoryForm" action="${pageContext.request.contextPath}/AdminOperation" method="get" >
+                                        <form name="mySubCategoryForm" action="${pageContext.request.contextPath}/AdminOperation" method="post" >
                                             <h4 class="card-title">Add Sub Category</h4>
                                             <div class="form-group">
                                                 <label for="SelectCategory">Select Category to Add Sub Category</label>
@@ -470,26 +494,7 @@
                 </div>
             </div>
         </div>
-        <!-- container-scroller -->
-        <!-- plugins:js -->
-        <script src="../../adminAssets/vendors/js/vendor.bundle.base.js"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page -->
-        <script src="../../adminAssets/vendors/select2/select2.min.js"></script>
-        <script src="../../adminAssets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-        <!-- End plugin js for this page -->
-        <!-- inject:js -->
-        <script src="../../adminAssets/js/off-canvas.js"></script>
-        <script src="../../adminAssets/js/hoverable-collapse.js"></script>
-        <script src="../../adminAssets/js/misc.js"></script>
-        <script src="../../adminAssets/js/settings.js"></script>
-        <script src="../../adminAssets/js/todolist.js"></script>
-        <!-- endinject -->
-        <!-- Custom js for this page -->
-        <script src="../../adminAssets/js/file-upload.js"></script>
-        <script src="../../adminAssets/js/typeahead.js"></script>
-        <script src="../../adminAssets/js/select2.js"></script>
-        <!-- End custom js for this page -->
+      
     </body>
 
 </html>

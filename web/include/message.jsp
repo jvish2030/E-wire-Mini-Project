@@ -1,11 +1,11 @@
 <!--   if user registered display success mesage-->
 <%
-    if (request.getAttribute("message") != null) {
+    if (session.getAttribute("message") != null) {
 %>  
 <div class="row" id="register-alert">
     <div class="col-sm-5 mx-auto">
         <div id="success-alert" class=" alert alert-success alert-dismissible fade show" role="alert">
-            <strong><%= request.getAttribute("message")%></strong>                               
+            <%= session.getAttribute("message")%>                             
         </div>
     </div>
 </div>
@@ -18,19 +18,19 @@
     });
 </script>
 <%
-        request.setAttribute("message",null);
+        session.removeAttribute("message");
     }
 %>                    
 <!--             //       if user registered display success mesage-->
 
 <!--   If User not register and try to login , show error-->
 <%
-    if (request.getAttribute("errMessage") != null) {
+    if (session.getAttribute("errMessage") != null) {
 %>  
 <div class="row" id="register-alert">
     <div class="col-sm-5 mx-auto">
         <div id="danger-alert" class=" alert alert-danger alert-dismissible fade show" role="alert">
-            <strong><%= request.getAttribute("errMessage")%></strong>                                
+           <%= session.getAttribute("errMessage")%>                              
         </div>
     </div>
 </div>
@@ -43,7 +43,7 @@
     });
 </script>
 <%
-        request.setAttribute("errMessage",null);
+        session.removeAttribute("errMessage");
     }
 %>     
 <!--   If User not register and try to login , show error-->

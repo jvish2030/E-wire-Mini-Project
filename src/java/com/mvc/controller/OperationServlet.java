@@ -37,7 +37,7 @@ public class OperationServlet extends HttpServlet {
         operation = operation.toLowerCase();
 
         switch (operation) {
-                   case "logout":
+            case "logout":
                 logout(request, response);
                 break;
             default:
@@ -88,7 +88,7 @@ public class OperationServlet extends HttpServlet {
 
             session.setAttribute("uname", user.getFullName());
             session.setAttribute("userid", user.getUserid());
-            request.setAttribute("message", authorize);
+            session.setAttribute("message", authorize);
             try {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } catch (IOException | ServletException ex) {
@@ -96,7 +96,7 @@ public class OperationServlet extends HttpServlet {
             }
         } else //On Failure, display a meaningful message to the User.
         {
-            request.setAttribute("errMessage", authorize);
+            session.setAttribute("errMessage", authorize);
             try {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } catch (IOException | ServletException ex) {
@@ -116,7 +116,7 @@ public class OperationServlet extends HttpServlet {
 
             session.setAttribute("uname", user.getFullName());
             session.setAttribute("userid", user.getUserid());
-            request.setAttribute("message", authorize);
+            session.setAttribute("message", authorize);
             if (user.getRole().equalsIgnoreCase("customer")) {
                 try {
                     try {
@@ -139,7 +139,7 @@ public class OperationServlet extends HttpServlet {
 
         } else //On Failure, display a meaningful message to the User.
         {
-            request.setAttribute("errMessage", authorize);
+            session.setAttribute("errMessage", authorize);
             try {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } catch (IOException | ServletException ex) {
@@ -168,5 +168,4 @@ public class OperationServlet extends HttpServlet {
         }
     }
 
-    
 }

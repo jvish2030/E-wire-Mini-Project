@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -61,6 +62,7 @@ public class AdminOperationServlet extends HttpServlet {
         //getting paameter vzllue of operation
         String operation = request.getParameter("operation");
         operation = operation.toLowerCase();
+        System.out.println(operation);
         //CALLING CASE VALUE BASED OF OPERATOPN VALUE
         switch (operation) {
             case "addcategory":
@@ -140,9 +142,14 @@ public class AdminOperationServlet extends HttpServlet {
         //creating DAO object and passing product Object to insert into database
         AdminDao dao = new AdminDao();
         String authorize = dao.saveProduct(proObj);
+
+        // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
+        HttpSession session = request.getSession();
+
         //if inserted then redirecting to same page else to error page
         if (authorize.equals("PRODUCT ADDDED SUCCESSFULLY!")) //On success, you can display a message to user on Home page
         {
+            session.setAttribute("message", authorize);
             try {
                 response.sendRedirect("adminPages/forms/form1.jsp");
             } catch (IOException ex) {
@@ -150,6 +157,7 @@ public class AdminOperationServlet extends HttpServlet {
             }
         } else //On Failure, display a meaningful message to the User.
         {
+            session.setAttribute("errMessage", authorize);
             try {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             } catch (IOException | ServletException ex) {
@@ -164,8 +172,13 @@ public class AdminOperationServlet extends HttpServlet {
         //PASSING & INSERTING CATEGORYBEANOBJECT TO DATABASE THROUGN DAO 
         String authorize = AdminDao.createNewCategory(cat);
         //if inserted then redirecting to same page else to error page
+
+        // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
+        HttpSession session = request.getSession();
+
         if (authorize.equals("CATEGORY INSERTED SUCCESSFULLY!")) //On success, you can display a message to user on Home page
         {
+            session.setAttribute("message", authorize);
             try {
                 response.sendRedirect("adminPages/forms/form1.jsp");
             } catch (IOException ex) {
@@ -173,6 +186,7 @@ public class AdminOperationServlet extends HttpServlet {
             }
         } else //On Failure, display a meaningful message to the User.
         {
+            session.setAttribute("errMessage", authorize);
             try {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             } catch (IOException | ServletException ex) {
@@ -191,8 +205,13 @@ public class AdminOperationServlet extends HttpServlet {
         //PASSING &  CATEGORYBEAN OBJECT TO DATABASE THROUGN DAO 
         String authorize = AdminDao.createNewSubCategory(subCatObj);
         //if inserted then redirecting to same page else to error page
+
+        // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
+        HttpSession session = request.getSession();
+
         if (authorize.equals("SUBCATEGORY INSERTED SUCCESSFULLY!")) //On success, you can display a message to user on Home page
         {
+            session.setAttribute("message", authorize);
             try {
                 response.sendRedirect("adminPages/forms/form1.jsp");
             } catch (IOException ex) {
@@ -200,6 +219,7 @@ public class AdminOperationServlet extends HttpServlet {
             }
         } else //On Failure, display a meaningful message to the User.
         {
+            session.setAttribute("errMessage", authorize);
             try {
                 request.getRequestDispatcher("error.jsp").forward(request, response);
             } catch (IOException | ServletException ex) {

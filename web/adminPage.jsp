@@ -30,6 +30,18 @@
         <link rel="stylesheet" href="adminAssets/css/style.css">
         <!-- End layout styles -->
         <link rel="shortcut icon" href="adminAssets/images/favicon.png" />
+        <script src="adminAssets/vendors/js/vendor.bundle.base.js"></script>
+        <script src="adminAssets/vendors/chart.js/Chart.min.js"></script>
+        <script src="adminAssets/vendors/progressbar.js/progressbar.min.js"></script>
+        <script src="adminAssets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+        <script src="adminAssets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="adminAssets/vendors/owl-carousel-2/owl.carousel.min.js"></script>       
+        <script src="adminAssets/js/off-canvas.js"></script>
+        <script src="adminAssets/js/hoverable-collapse.js"></script>
+        <script src="adminAssets/js/misc.js"></script>
+        <script src="adminAssets/js/settings.js"></script>
+        <script src="adminAssets/js/todolist.js"></script>
+        <script src="adminAssets/js/dashboard.js"></script>
     </head>
 
     <body>
@@ -199,7 +211,7 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav navbar-nav-right">
-                            
+
                             <li class="nav-item dropdown border-left">
                                 <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown"
                                    aria-expanded="false">
@@ -339,6 +351,7 @@
                 <!-- partial -->
                 <div class="main-panel">
                     <div class="content-wrapper">
+                        <jsp:include page="include/message.jsp"/>
                         <!-- <div class="row">
                           <div class="col-12 grid-margin stretch-card">
                             <div class="card corona-gradient-card">
@@ -371,7 +384,7 @@
                                             <div class="col-9">
                                                 <div class="d-flex align-items-center align-self-start">
                                                     <h3 class="mb-0">Customer</h3>
-                                                    <p class="text-success ml-2 mb-0 font-weight-medium"><%= DBUtils.getCount("users") %></p>
+                                                    <p class="text-success ml-2 mb-0 font-weight-medium"><%= DBUtils.getCount("users")%></p>
                                                 </div>
                                             </div>
                                             <div class="col-3">
@@ -391,7 +404,7 @@
                                             <div class="col-9">
                                                 <div class="d-flex align-items-center align-self-start">
                                                     <h3 class="mb-0">Products</h3>
-                                                    <p class="text-success ml-2 mb-0 font-weight-medium"><%= DBUtils.getCount("productS") %></p>
+                                                    <p class="text-success ml-2 mb-0 font-weight-medium"><%= DBUtils.getCount("productS")%></p>
                                                 </div>
                                             </div>
                                             <div class="col-3">
@@ -411,7 +424,7 @@
                                             <div class="col-9">
                                                 <div class="d-flex align-items-center align-self-start">
                                                     <h3 class="mb-0">Categories</h3>
-                                                    <p class="text-success ml-2 mb-0 font-weight-medium"><%= DBUtils.getCount("categories") %></p>
+                                                    <p class="text-success ml-2 mb-0 font-weight-medium"><%= DBUtils.getCount("categories")%></p>
                                                 </div>
                                             </div>
                                             <div class="col-3">
@@ -431,7 +444,7 @@
                                             <div class="col-9">
                                                 <div class="d-flex align-items-center align-self-start">
                                                     <h3 class="mb-0">Orders</h3>
-                                                    <p class="text-danger ml-2 mb-0 font-weight-medium"><%= DBUtils.getCount("orders") %></p>
+                                                    <p class="text-danger ml-2 mb-0 font-weight-medium"><%= DBUtils.getCount("orders")%></p>
                                                 </div>
                                             </div>
                                             <div class="col-3">
@@ -446,23 +459,11 @@
                                 </div>
                             </div>
                         </div>
-                        <footer class="footer">
-                        </footer>
+                      
                     </div>
                 </div>
             </div>
-            <script src="adminAssets/vendors/js/vendor.bundle.base.js"></script>
-            <script src="adminAssets/vendors/chart.js/Chart.min.js"></script>
-            <script src="adminAssets/vendors/progressbar.js/progressbar.min.js"></script>
-            <script src="adminAssets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
-            <script src="adminAssets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-            <script src="adminAssets/vendors/owl-carousel-2/owl.carousel.min.js"></script>       
-            <script src="adminAssets/js/off-canvas.js"></script>
-            <script src="adminAssets/js/hoverable-collapse.js"></script>
-            <script src="adminAssets/js/misc.js"></script>
-            <script src="adminAssets/js/settings.js"></script>
-            <script src="adminAssets/js/todolist.js"></script>
-            <script src="adminAssets/js/dashboard.js"></script>
+        </div>
     </body>
 
 </html>
