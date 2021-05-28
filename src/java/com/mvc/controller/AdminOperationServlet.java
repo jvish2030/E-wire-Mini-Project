@@ -135,7 +135,7 @@ public class AdminOperationServlet extends HttpServlet {
         //Finding the path to store Image
         String path = request.getRealPath("images") + File.separator + "products" + File.separator + FileName;
 
-//using try with resource to perform auto close operation
+        //using try with resource to perform auto close operation
         //creating File output stream object to put image to that specified location
         //getiing image binary data and creating Input stream object
         try (FileOutputStream fos = new FileOutputStream(path);
