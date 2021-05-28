@@ -47,22 +47,22 @@
                                     <div class="col-lg-5 col-md-6 " >
                                         <div class="form-group">
                                             <label for="productName">Name of Product</label>
-                                            <input type="text" class="form-control text-secondary" name="productName" id="productName" placeholder="name">
+                                            <input type="text" style="font-weight: bold;" class="form-control text-primary" name="productName" id="productName" placeholder="name">
                                         </div>
                                         <div class="form-group">
                                             <label for="productPrice">Product Price</label>
-                                            <input type="text" class="form-control text-primary" name="productPrice" id="productPrice" placeholder="price">
+                                            <input type="number" style="font-weight: bold;" class="form-control  text-primary" name="productPrice" id="productPrice" placeholder="price">
                                         </div>
                                         <div class="form-group">
                                             <label for="productDiscount">Discount Price</label>
-                                            <input type="text" class="form-control text-primary" name="productDiscount" id="productDiscount" placeholder="Discount">
+                                            <input type="number" style="font-weight: bold;" class="form-control  text-primary" name="productDiscount" id="productDiscount" placeholder="Discount">
                                         </div>
 
                                     </div>
                                     <div class="col-lg-5 offset-lg-1 col-md-6 " >
                                         <div class="form-group">
-                                            <label for="productCategory" >Product Category</label>
-                                            <select id="SelectCategory" class="form-control text-primary" name="SelectCategory" >
+                                            <label for="Select_Id_Category" >Product Category</label>
+                                            <select id="Select_Id_Category" class="form-control text-primary" name="Select_Id_Category" >
                                                 <%while (itr1.hasNext()) {
                                                         Map.Entry CategoryEntry = (Map.Entry) itr1.next();
                                                         String category = (String) CategoryEntry.getValue();
@@ -72,7 +72,7 @@
                                                     <%
                                                         for (String subcat : DBUtils.getSubCategories(id)) {
                                                     %>
-                                                    <option class=" text-secondary" value="<%=subcat%>"><%=subcat%></option>
+                                                    <option class=" text-secondary"  value="<%=id%>,<%=subcat%>"><%=subcat%></option>
                                                     <%}%>
 
                                                 </optgroup>
@@ -112,14 +112,15 @@
                                 <!--form to ADD CATEGORY-->
                                 <form name="myCategoryForm" action="${pageContext.request.contextPath}/AdminOperation" method="post" >
                                     <h4 class="card-title">Add New Category</h4>
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label for="CategoryName">Add Category</label>
-                                            <input type="text" class="form-control text-primary" name="CategoryName" id="CategoryName" placeholder="name">
+
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control text-primary" name="CategoryName" id="CategoryName" placeholder="name">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit">Submit</button>
                                         </div>
                                     </div>
+
                                     <input type="hidden" name="operation" value="addCategory"/>
-                                    <button type="submit" class="btn btn-primary ">Submit</button>
                                 </form>
                                 <!--//form to ADD CATEGORY//-->
                                 <br/> <hr/>
@@ -138,9 +139,11 @@
                                             <%}%>
                                         </select>                                                                                                        
                                     </div>
-                                    <div class="form-group">
-                                        <label for="subCategory">Add Sub Category</label>
+                                    <div class="input-group mb-3">
                                         <input type="text" name="subCategory" class="form-control text-primary" id="subCategory" placeholder="name">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                        </div>
                                     </div>
                                     <input type="hidden" name="operation" value="addSubCategory"/>
                                     <button type="submit" class="btn btn-primary mb-4">Submit</button>

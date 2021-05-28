@@ -20,6 +20,15 @@ public class ProductBean {
     private String pRemark;
     private String pDescription;
     private String pDate;
+    private int parent_id;
+
+    public int getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(int parent_id) {
+        this.parent_id = parent_id;
+    }
 
     public int getpId() {
         return pId;
