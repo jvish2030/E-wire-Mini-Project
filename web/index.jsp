@@ -1,4 +1,4 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
+d<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <!doctype html>
 <html lang="zxx">
 
@@ -7,8 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Hari Om Electricals</title>
-        <!-- Template CSS Aman Gupta Performing Chsnges ,Adiing Some more changes by jatin
-        Adding one more line-->
+        <!-- deleted-->
         <jsp:include page="include/css_js.jsp"/>
     </head>
     <body>
