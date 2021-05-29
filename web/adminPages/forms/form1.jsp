@@ -186,9 +186,7 @@
                         </div>    
 
 
-                        <footer class="footer">
-
-                        </footer>
+                       
                         <!-- partial -->
                     </div>
                     <!-- main-panel ends -->
