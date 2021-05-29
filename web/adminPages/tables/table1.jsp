@@ -14,7 +14,14 @@
 <html lang="en">
 
     <jsp:include page="../include/header.jsp"/>
+
+
+
     <div class="content-wrapper">
+        <div class="jumbotron text-center bg-dark" style="margin-bottom:0">
+            <h1>My Products</h1>
+            <p>Resize this responsive page to see the effect!</p> 
+        </div>
 
         <%ResultSet rs1 = DBUtils.getParentRows();%>
         <div class="row ">
@@ -28,7 +35,8 @@
                     <div class="card">
                         <div class="card-header">
                             <a class="card-link" data-toggle="collapse" href="#<%=s%>">
-                                <h4 class="card-title  text-primary"><%=rs1.getString(3)%> <i class="fa fa-sort"></i></h4>
+                              
+                                <h4 class="card-title "><span><i class="fa fa-tasks">  </i></span> <%=rs1.getString(3)%> <i class="fa fa-sort"></i></h4>
                             </a>
                         </div>
                         <div id="<%=s%>" class="collapse" data-parent="#accordion">

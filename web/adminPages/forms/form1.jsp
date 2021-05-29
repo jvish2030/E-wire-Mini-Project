@@ -27,6 +27,10 @@
 
 
     <div class="content-wrapper">
+        <div class="jumbotron text-center bg-dark" style="margin-bottom:0">
+            <h1>E-Wire, Welcomes you!</h1>
+            <p>Add & Manages your products!</p> 
+        </div>
         <jsp:include page="../../include/message.jsp"/>
         <div class="page-header">
             <h3 class="page-title"> Form elements </h3> 
@@ -110,9 +114,12 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-6">
                             <!--form to ADD CATEGORY-->
-                            <form name="myCategoryForm" action="${pageContext.request.contextPath}/AdminOperation" method="post" >
+                            <form name="myCategoryForm" action="${pageContext.request.contextPath}/AdminOperation" method="post" enctype="multipart/form-data">
                                 <h4 class="card-title">Add New Category</h4>
-
+                                <div class="form-group">
+                                    <label for="productPhoto" >Product Photo</label>                                                    
+                                    <input  class="custom-control" type="file" name="categoryPhoto" id="categoryPhoto"/>                                                    
+                                </div>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control text-primary" name="CategoryName" id="CategoryName" placeholder="name">
                                     <div class="input-group-append">
@@ -164,10 +171,10 @@
                                     <div class="card ">
                                         <div class="card-header ">
                                             <a class="btn btn-link text-primary">Edit</a>
-                                            <a class="btn btn-link text-danger">Delete</a>
+                                            <a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteParentCat&id=<%=CategoryEntry.getKey()%>" class="btn btn-link text-danger">Delete</a>
                                             <a class="card-link text-light" data-toggle="collapse" href="#<%=s%>">
                                                 <%= CategoryEntry.getValue()%>
-                                              <i class="fa fa-sort"></i>
+                                                <i class="fa fa-sort"></i>
                                             </a>
                                         </div>
                                         <div id="<%=s%>" class="collapse" data-parent="#accordion">
@@ -186,7 +193,7 @@
                         </div>    
 
 
-                       
+
                         <!-- partial -->
                     </div>
                     <!-- main-panel ends -->

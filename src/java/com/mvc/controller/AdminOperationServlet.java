@@ -54,6 +54,9 @@ public class AdminOperationServlet extends HttpServlet {
             case "deleteproduct":
                 deleteproduct(request, response);
                 break;
+            case "deleteparentcat":
+                deleteParentCat(request, response);
+                break;
             default:
                 error(request, response);
         }
@@ -185,7 +188,41 @@ public class AdminOperationServlet extends HttpServlet {
 
     private void addCategoryOperation(HttpServletRequest request, HttpServletResponse response) {
         // INSERTING CATEGORY NAME IN CATEGORYBEANOBJECT
-        CategoryBean cat = new CategoryBean(request.getParameter("CategoryName"));
+
+        String name = request.getParameter("CategoryName");
+        Part categoryPhoto = null;
+        try {
+            categoryPhoto = request.getPart("categoryPhoto");
+        } catch (IOException | ServletException ex) {
+            Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String FileName = DBUtils.getMaxCatId() + ".jpg";
+        CategoryBean cat = new CategoryBean(name, FileName);
+
+        //Finding the path to store Image
+        String path = request.getRealPath("images") + File.separator + "category" + File.separator + FileName;
+
+        //using try with resource to perform auto close operation
+        //creating File output stream object to put image to that specified location
+        //getiing image binary data and creating Input stream object
+        try (FileOutputStream fos = new FileOutputStream(path);
+                InputStream is = categoryPhoto.getInputStream();) {
+
+//            creating byte array to store binary data of input stream
+            byte[] data = new byte[is.available()];
+
+//            read data from input stream to byte array
+            is.read(data);
+
+            //writing binary data to byte array
+            fos.write(data);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         //PASSING & INSERTING CATEGORYBEANOBJECT TO DATABASE THROUGN DAO 
         String authorize = AdminDao.createNewCategory(cat);
         //if inserted then redirecting to same page else to error page
@@ -275,6 +312,32 @@ public class AdminOperationServlet extends HttpServlet {
                 Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    private void deleteParentCat(HttpServletRequest request, HttpServletResponse response) {
+        //getting parameer id from get request
+        int id = Integer.parseInt(request.getParameter("id"));
+        String authorize = new AdminDao().deleteParentCat(id);
+        // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
+        HttpSession session = request.getSession();
+        if (authorize.equals("Category Deleted!")) //On success, you can display a message to user on Home page
+        {
+            session.setAttribute("message", authorize);
+            try {
+                response.sendRedirect("adminPages/forms/form1.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else //On Failure, display a meaningful message to the User.
+        {
+            session.setAttribute("errMessage", authorize);
+            try {
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            } catch (IOException | ServletException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
 
 }

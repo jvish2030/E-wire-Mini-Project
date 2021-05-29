@@ -14,14 +14,28 @@ public class CategoryBean {
     private int id;
     private Integer parent_id;
     private String Category;
+    private String categoryPhoto;
+
+    public CategoryBean() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public CategoryBean(String name, String FileName) {
+        this.Category = name;
+        this.categoryPhoto = FileName;
+    }
 
     public CategoryBean(int id, String subCategory) {
         this.id = id;
         this.Category = subCategory;
     }
 
-    public CategoryBean() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getCategoryPhoto() {
+        return categoryPhoto;
+    }
+
+    public void setCategoryPhoto(String categoryPhoto) {
+        this.categoryPhoto = categoryPhoto;
     }
 
     public CategoryBean(String Category) {

@@ -26,13 +26,14 @@ public class AdminDao {
         Connection con = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        String query = "INSERT INTO Categories (Category) values (?)";
+        String query = "INSERT INTO Categories (Category,photo) values (?,?)";
         int count = 0;
         // System.out.println(email+"..."+password);
         con = DBUtils.connect();//getting connection 
         try {
             pst = con.prepareStatement(query);
             pst.setString(1, cat.getCategory());
+             pst.setString(2, cat.getCategoryPhoto());
             count = pst.executeUpdate();
             // System.out.println("query executed");
             if (count > 0) {
@@ -115,21 +116,40 @@ public class AdminDao {
         int count = 0;
         Connection con = DBUtils.connect();
         PreparedStatement pst = null;
-        ResultSet rs = null;
         String query = String.format("Delete from products where prodid = ?");
         try {
             pst = con.prepareStatement(query);
-             pst.setInt(1, id);
-               count = pst.executeUpdate();
-                // System.out.println("query executed");
+            pst.setInt(1, id);
+            count = pst.executeUpdate();
+            // System.out.println("query executed");
             if (count > 0) {
                 return "Item Deleted!";
             }
         } catch (SQLException ex) {
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-          
+
         return "Having problem to delete product!";
+    }
+
+    public String deleteParentCat(int id) {
+        int count = 0;
+        Connection con = DBUtils.connect();
+        PreparedStatement pst = null;
+        String query = String.format("Delete from categories where id = ?");
+        try {
+            pst = con.prepareStatement(query);
+            pst.setInt(1, id);
+            count = pst.executeUpdate();
+            // System.out.println("query executed");
+            if (count > 0) {
+                return "Category Deleted!";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return "Having problem to delete Category!";
     }
 
 }

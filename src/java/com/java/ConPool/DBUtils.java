@@ -156,4 +156,23 @@ public class DBUtils {
         return Fname;
     }
 
+     public static String getMaxCatId() {
+        String Fname = null;
+        Connection con;
+        con = DBUtils.connect();
+        String query = "SELECT max(prodid)+1 FROM Categories";
+        ResultSet rs = null;
+        try {
+            rs = con.createStatement().executeQuery(query);
+            if (rs.next()) {
+                Fname = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Fname;
+    }
+     
+  
+
 }
