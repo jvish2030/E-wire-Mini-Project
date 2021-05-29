@@ -78,11 +78,12 @@ public class AdminDao {
         String pRemark = proObj.getpRemark();
         String pPhoto = proObj.getpPhoto();
         String pDescription = proObj.getpDescription();
+        int parent_id = proObj.getParent_id();
 
         Connection con = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        String query = "INSERT INTO products (PNAME,PCAT,PRICE,DISC_PRICE,REMARKS,DESCR,PHOTO) values (?,?,?,?,?,?,?)";
+        String query = "INSERT INTO products (PNAME,PCAT,PRICE,DISC_PRICE,REMARKS,DESCR,PHOTO,PARENT_ID) values (?,?,?,?,?,?,?,?)";
         int count = 0;
         // System.out.println(email+"..."+password);
         con = DBUtils.connect();//getting connection 
@@ -94,9 +95,11 @@ public class AdminDao {
             pst.setInt(3, pPrice);
             pst.setInt(4, pDiscount);
             pst.setString(5, pRemark);
-            pst.setString(6,pDescription);
-            pst.setString(7,pPhoto );
+            pst.setString(6, pDescription);
+            pst.setString(7, pPhoto);
+            pst.setInt(8, parent_id);
             count = pst.executeUpdate();
+
             // System.out.println("query executed");
             if (count > 0) {
                 return "PRODUCT ADDDED SUCCESSFULLY!";
@@ -106,6 +109,27 @@ public class AdminDao {
             Logger.getLogger(LoginDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "Having problem to Save new Product!";
+    }
+
+    public String deleteProduct(int id) {
+        int count = 0;
+        Connection con = DBUtils.connect();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String query = String.format("Delete from products where prodid = ?");
+        try {
+            pst = con.prepareStatement(query);
+             pst.setInt(1, id);
+               count = pst.executeUpdate();
+                // System.out.println("query executed");
+            if (count > 0) {
+                return "Item Deleted!";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+        return "Having problem to delete product!";
     }
 
 }

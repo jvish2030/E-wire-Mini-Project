@@ -5,6 +5,7 @@
  */
 package com.mvc.controller;
 
+import com.java.ConPool.DBUtils;
 import com.mvc.beans.CategoryBean;
 import com.mvc.beans.ProductBean;
 import com.mvc.dao.AdminDao;
@@ -45,6 +46,17 @@ public class AdminOperationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String operation = request.getParameter("operation");
+        operation = operation.toLowerCase();
+        System.out.println(operation);
+        //CALLING CASE VALUE BASED OF OPERATOPN VALUE
+        switch (operation) {
+            case "deleteproduct":
+                deleteproduct(request, response);
+                break;
+            default:
+                error(request, response);
+        }
     }
 
     /**
@@ -92,7 +104,11 @@ public class AdminOperationServlet extends HttpServlet {
     private void addProduct(HttpServletRequest request, HttpServletResponse response) {
 //        getting product data through Get Request
         String productName = request.getParameter("productName");
-        String productCategory = request.getParameter("SelectCategory");
+        String product_id_Category = request.getParameter("Select_Id_Category");
+        System.out.println("--------------------" + product_id_Category);
+        String[] id_cat = product_id_Category.split(",");
+        int parent_id = Integer.parseInt(id_cat[0]);
+        String category = id_cat[1];
         int productPrice = Integer.parseInt(request.getParameter("productPrice"));
         int productDiscount = Integer.parseInt(request.getParameter("productDiscount"));
         Part productPhoto = null;
@@ -103,22 +119,23 @@ public class AdminOperationServlet extends HttpServlet {
         }
         String productRemark = request.getParameter("productRemark");
         String productDescription = request.getParameter("productDescription");
+        String FileName = DBUtils.getMaxProId() + ".jpg";
 
 //          Creating & Storing productBean oject
         ProductBean proObj = new ProductBean();
         proObj.setpName(productName);
-        proObj.setpCategory(productCategory);
+        proObj.setpCategory(category);
+        proObj.setParent_id(parent_id);
         proObj.setpPrice(productPrice);
         proObj.setpDiscount(productDiscount);
         proObj.setpRemark(productRemark);
-        proObj.setpPhoto(productPhoto.getSubmittedFileName());
+        proObj.setpPhoto(FileName);
         proObj.setpDescription(productDescription);
 
         //Finding the path to store Image
-        String path = request.getRealPath("images") + File.separator + "products" + File.separator + productPhoto.getSubmittedFileName();
-        System.out.println(path);
+        String path = request.getRealPath("images") + File.separator + "products" + File.separator + FileName;
 
-//using try with resource to perform auto close operation
+        //using try with resource to perform auto close operation
         //creating File output stream object to put image to that specified location
         //getiing image binary data and creating Input stream object
         try (FileOutputStream fos = new FileOutputStream(path);
@@ -233,6 +250,30 @@ public class AdminOperationServlet extends HttpServlet {
             response.sendRedirect("error.jsp");
         } catch (IOException ex) {
             Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void deleteproduct(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String authorize = new AdminDao().deleteProduct(id);
+        // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
+        HttpSession session = request.getSession();
+        if (authorize.equals("Item Deleted!")) //On success, you can display a message to user on Home page
+        {
+            session.setAttribute("message", authorize);
+            try {
+                response.sendRedirect("adminPages/tables/table1.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else //On Failure, display a meaningful message to the User.
+        {
+            session.setAttribute("errMessage", authorize);
+            try {
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            } catch (IOException | ServletException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

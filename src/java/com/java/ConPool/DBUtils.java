@@ -33,12 +33,12 @@ import javax.sql.DataSource;
 public class DBUtils {
 
     //  ----------------- Singelton pattern for getting connection---------------//
-    static Connection con;
+    static Connection conn;
 
     public static Connection connect() {
-        System.out.println("Inside connect() method and getting :------" + con);
-        if (con != null) {
-            return con;
+        System.out.println("Inside connect() method and getting :------" + conn);
+        if (conn != null) {
+            return conn;
         }
         return getConnection();
     }
@@ -47,10 +47,10 @@ public class DBUtils {
         try {
             Context context = new InitialContext();
             DataSource ds = (DataSource) context.lookup("java:comp/env/e_wire");
-            con = ds.getConnection();
+            conn = ds.getConnection();
         } catch (NamingException | SQLException e) {
         }
-        return con;
+        return conn;
     }
     //  ------------- Singelton pattern for getting connection------------------//
 
@@ -87,7 +87,6 @@ public class DBUtils {
             Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         }
         Set s1 = map.entrySet();
-        System.out.println(s1);
         return s1;
     }
 
@@ -108,7 +107,53 @@ public class DBUtils {
         } catch (SQLException ex) {
             Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(l);
+
         return l;
     }
+
+    public static ResultSet getParentRows() {
+        Connection con;
+        con = DBUtils.connect();
+        System.out.println("CONNECTION-----" + con);
+        String query = "SELECT * FROM CATEGORIES where parent_id is null order by category";
+        ResultSet rs = null;
+        try {
+            rs = con.createStatement().executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return rs;
+    }
+
+    public static ResultSet getChildRows(int id) {
+        Connection con;
+        con = DBUtils.connect();
+        String query = String.format("SELECT * FROM Products where parent_id = %d order by pname", id);
+        ResultSet rs = null;
+        try {
+            rs = con.createStatement().executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+
+    public static String getMaxProId() {
+        String Fname = null;
+        Connection con;
+        con = DBUtils.connect();
+        String query = "SELECT max(prodid)+1 FROM Products";
+        ResultSet rs = null;
+        try {
+            rs = con.createStatement().executeQuery(query);
+            if (rs.next()) {
+                Fname = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Fname;
+    }
+
 }
