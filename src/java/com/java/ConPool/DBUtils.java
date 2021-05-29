@@ -160,7 +160,7 @@ public class DBUtils {
         String Fname = null;
         Connection con;
         con = DBUtils.connect();
-        String query = "SELECT max(prodid)+1 FROM Categories";
+        String query = "SELECT max(id)+1 FROM Categories";
         ResultSet rs = null;
         try {
             rs = con.createStatement().executeQuery(query);
