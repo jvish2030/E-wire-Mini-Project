@@ -33,7 +33,7 @@ public class AdminDao {
         try {
             pst = con.prepareStatement(query);
             pst.setString(1, cat.getCategory());
-             pst.setString(2, cat.getCategoryPhoto());
+            pst.setString(2, cat.getCategoryPhoto());
             count = pst.executeUpdate();
             // System.out.println("query executed");
             if (count > 0) {
@@ -140,6 +140,26 @@ public class AdminDao {
         try {
             pst = con.prepareStatement(query);
             pst.setInt(1, id);
+            count = pst.executeUpdate();
+            // System.out.println("query executed");
+            if (count > 0) {
+                return "Category Deleted!";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return "Having problem to delete Category!";
+    }
+
+    public String deleteChildCat(String name) {
+        int count = 0;
+        Connection con = DBUtils.connect();
+        PreparedStatement pst = null;
+        String query = String.format("Delete from categories where category = ?");
+        try {
+            pst = con.prepareStatement(query);
+            pst.setString(1, name);
             count = pst.executeUpdate();
             // System.out.println("query executed");
             if (count > 0) {

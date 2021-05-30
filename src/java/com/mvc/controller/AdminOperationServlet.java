@@ -15,6 +15,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -56,6 +58,9 @@ public class AdminOperationServlet extends HttpServlet {
                 break;
             case "deleteparentcat":
                 deleteParentCat(request, response);
+                break;
+            case "deletechildcat":
+                deleteChildCat(request, response);
                 break;
             default:
                 error(request, response);
@@ -359,7 +364,20 @@ public class AdminOperationServlet extends HttpServlet {
         String FileName = id + ".jpg";
         String path = request.getRealPath("images") + File.separator + "category" + File.separator + FileName;
         new File(path).delete();
-        //Deleted photo from server images/products Folder
+        //----Deleted photo from server images/products Folder----//
+
+        //deleting products photo realated to child categories
+        ResultSet rs = DBUtils.getDeletingProductsId(id);//getting list of prodId to be deleted
+        try {
+            while (rs.next()) {
+                FileName = rs.getString(1) + ".jpg";
+                path = request.getRealPath("images") + File.separator + "products" + File.separator + FileName;
+                new File(path).delete();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //----deleted products photo realated to child categories-----//
 
         String authorize = new AdminDao().deleteParentCat(id);
         // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
@@ -382,6 +400,30 @@ public class AdminOperationServlet extends HttpServlet {
             }
         }
 
+    }
+
+    private void deleteChildCat(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        String authorize = new AdminDao().deleteChildCat(name);
+        // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
+        HttpSession session = request.getSession();
+        if (authorize.equals("Category Deleted!")) //On success, you can display a message to user on Home page
+        {
+            session.setAttribute("message", authorize);
+            try {
+                response.sendRedirect("adminPages/forms/form1.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else //On Failure, display a meaningful message to the User.
+        {
+            session.setAttribute("errMessage", authorize);
+            try {
+                request.getRequestDispatcher("error.jsp").forward(request, response);
+            } catch (IOException | ServletException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }

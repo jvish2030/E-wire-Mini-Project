@@ -114,7 +114,6 @@ public class DBUtils {
     public static ResultSet getParentRows() {
         Connection con;
         con = DBUtils.connect();
-        System.out.println("CONNECTION-----" + con);
         String query = "SELECT * FROM CATEGORIES where parent_id is null order by category";
         ResultSet rs = null;
         try {
@@ -156,7 +155,7 @@ public class DBUtils {
         return Fname;
     }
 
-     public static String getMaxCatId() {
+    public static String getMaxCatId() {
         String Fname = null;
         Connection con;
         con = DBUtils.connect();
@@ -172,7 +171,19 @@ public class DBUtils {
         }
         return Fname;
     }
-     
-  
+
+    public static ResultSet getDeletingProductsId(int id) {
+        Connection con;
+        con = DBUtils.connect();
+        String query = "SELECT (prodid) FROM PRODUCTS where parent_id = "+id;
+        ResultSet rs = null;
+        try {
+            rs = con.createStatement().executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return rs;
+    }
 
 }

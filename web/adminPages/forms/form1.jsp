@@ -247,7 +247,7 @@
                                                                 </h6>
                                                             </div>
                                                             <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                                <p class="text-muted mb-0 mt-0 "><a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteParentCat&id=<%=CategoryEntry.getKey()%>" class="btn btn-link text-danger"><i class="fa fa-close" style="color:red"></i></a></p>
+                                                                <p class="text-muted mb-0 mt-0 "><a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteChildCat&name=<%=s2%>" class="btn btn-link text-danger"><i class="fa fa-close" style="color:red"></i></a></p>
                                                             </div> 
                                                         </div>
                                                     </div>
