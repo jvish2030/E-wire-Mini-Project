@@ -41,6 +41,42 @@
                 </ol>
             </nav>
         </div>
+        <script>
+            function fileValidation1() {
+              
+                var fileInput =
+                        document.getElementById('productPhoto');
+
+                var filePath = fileInput.value;
+
+                // Allowing file type
+                var allowedExtensions =
+                        /(\.jpg|\.jpeg|\.png)$/i;
+
+                if (!allowedExtensions.exec(filePath)) {
+                    alert('Invalid file type');
+                    fileInput.value = '';
+                    return false;
+                } 
+            }
+               function fileValidation2() {
+              
+                var fileInput =
+                        document.getElementById('categoryPhoto');
+
+                var filePath = fileInput.value;
+
+                // Allowing file type
+                var allowedExtensions =
+                        /(\.jpg|\.jpeg|\.png)$/i;
+
+                if (!allowedExtensions.exec(filePath)) {
+                    alert('Invalid file type');
+                    fileInput.value = '';
+                    return false;
+                } 
+            }
+        </script>
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
@@ -51,22 +87,22 @@
                                 <div class="col-lg-5 col-md-6 " >
                                     <div class="form-group">
                                         <label for="productName">Name of Product</label>
-                                        <input type="text" style="font-weight: bold;" class="form-control text-primary" name="productName" id="productName" placeholder="name">
+                                        <input type="text" style="font-weight: bold;" class="form-control text-primary" name="productName" id="productName" placeholder="name" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="productPrice">Product Price</label>
-                                        <input type="number" style="font-weight: bold;" class="form-control  text-primary" name="productPrice" id="productPrice" placeholder="price">
+                                        <input type="number" style="font-weight: bold;" class="form-control  text-primary" name="productPrice" id="productPrice" placeholder="price" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="productDiscount">Discount Price</label>
-                                        <input type="number" style="font-weight: bold;" class="form-control  text-primary" name="productDiscount" id="productDiscount" placeholder="Discount">
+                                        <input type="number" style="font-weight: bold;" class="form-control  text-primary" name="productDiscount" id="productDiscount" placeholder="Discount" required>
                                     </div>
 
                                 </div>
                                 <div class="col-lg-5 offset-lg-1 col-md-6 " >
                                     <div class="form-group">
                                         <label for="Select_Id_Category" >Product Category</label>
-                                        <select id="Select_Id_Category" class="form-control text-primary" name="Select_Id_Category" >
+                                        <select id="Select_Id_Category" class="form-control text-primary" name="Select_Id_Category" required>
                                             <%while (itr1.hasNext()) {
                                                     Map.Entry CategoryEntry = (Map.Entry) itr1.next();
                                                     String category = (String) CategoryEntry.getValue();
@@ -85,18 +121,18 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="productPhoto" >Product Photo</label>                                                    
-                                        <input  class=" form-control" type="file" name="productPhoto" id="productPhoto"/>                                                    
+                                        <input  class=" form-control" type="file" name="productPhoto" id="productPhoto"   onchange="return fileValidation1()" required/>                                                    
                                     </div>
                                     <div class="form-group ">
                                         <label for="productRemark" >Discount Remark</label>
-                                        <input type="text" class="form-control text-primary" name="productRemark" id="productRemark" placeholder="Discount Remark">
+                                        <input type="text" class="form-control text-primary" name="productRemark" id="productRemark" placeholder="Discount Remark" required>
                                     </div>
 
                                 </div>
                                 <div class="col-lg-11 offset-lg-0 col-md-6 " >
                                     <div class="form-group w3-blue">
                                         <label for="productDescription" >Description</label>
-                                        <textarea class="form-control text-primary" id="productDescription" name="productDescription" placeholder="Description" rows="4" cols="50" ></textarea>
+                                        <textarea class="form-control text-primary" id="productDescription" name="productDescription" placeholder="Description" rows="4" cols="50" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -118,10 +154,10 @@
                                 <h4 class="card-title">Add New Category</h4>
                                 <div class="form-group">
                                     <label for="productPhoto" >Category Photo</label>                                                    
-                                    <input  class="custom-control" type="file" name="categoryPhoto" id="categoryPhoto"/>                                                    
+                                    <input  class="custom-control" type="file" name="categoryPhoto" id="categoryPhoto" onchange="return fileValidation2()" required/>                                                    
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control text-primary" name="CategoryName" id="CategoryName" placeholder="name">
+                                    <input type="text" class="form-control text-primary" name="CategoryName" id="CategoryName" placeholder="name" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">Submit</button>
                                     </div>
@@ -136,7 +172,7 @@
                                 <h4 class="card-title">Add Sub Category</h4>
                                 <div class="form-group">
                                     <label for="SelectCategory">Select Category to Add Sub Category</label>
-                                    <select class="form-control text-primary" name="SelectCategory" id="SelectCategory">
+                                    <select class="form-control text-primary" name="SelectCategory" id="SelectCategory" required>
                                         <%while (itr2.hasNext()) {
                                                 Map.Entry CategoryEntry = (Map.Entry) itr2.next();
                                                 String category = (String) CategoryEntry.getValue();
@@ -147,12 +183,12 @@
                                     </select>                                                                                                        
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="text" name="subCategory" class="form-control text-primary" id="subCategory" placeholder="name">
+                                    <input type="text" name="subCategory" class="form-control text-primary" id="subCategory" placeholder="name" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">Submit</button>
                                     </div>
                                 </div>
-                                <input type="hidden" name="operation" value="addSubCategory"/>
+                                <input type="hidden" name="operation" value="addSubCategory"    />
                             </form>
                             <!--//form to ADD SUB CATEGORY//-->
 
@@ -207,7 +243,7 @@
                                                         <div class="preview-item-content d-sm-flex flex-grow">
                                                             <div class="flex-grow">
                                                                 <h6 class="preview-subject"> 
-                                                                    <a class="card-link ml-5 text-secondary">&emsp14;&DoubleRightArrow;<%= s2%></a> 
+                                                                    <a class="card-link ml-5 text-secondary"><%= s2%></a> 
                                                                 </h6>
                                                             </div>
                                                             <div class="mr-auto text-sm-right pt-2 pt-sm-0">

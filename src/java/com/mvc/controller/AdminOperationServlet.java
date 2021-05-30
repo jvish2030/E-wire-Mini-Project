@@ -122,18 +122,43 @@ public class AdminOperationServlet extends HttpServlet {
         }
         String productRemark = request.getParameter("productRemark");
         String productDescription = request.getParameter("productDescription");
-        String FileName = DBUtils.getMaxProId() + ".jpg";
+        String FileName = "unknown.jpg";
+        String authorize = null;
+        if (DBUtils.getMaxProId() == null) {
+            // Creating & Storing productBean oject
+            ProductBean proObj = new ProductBean();
+            proObj.setpName(productName);
+            proObj.setpCategory(category);
+            proObj.setParent_id(parent_id);
+            proObj.setpPrice(productPrice);
+            proObj.setpDiscount(productDiscount);
+            proObj.setpRemark(productRemark);
+            proObj.setpPhoto(FileName);
+            proObj.setpDescription(productDescription);
 
-//          Creating & Storing productBean oject
-        ProductBean proObj = new ProductBean();
-        proObj.setpName(productName);
-        proObj.setpCategory(category);
-        proObj.setParent_id(parent_id);
-        proObj.setpPrice(productPrice);
-        proObj.setpDiscount(productDiscount);
-        proObj.setpRemark(productRemark);
-        proObj.setpPhoto(FileName);
-        proObj.setpDescription(productDescription);
+            //creating DAO object and passing product Object to insert into database
+            AdminDao dao = new AdminDao();
+            authorize = dao.saveProduct(proObj);
+
+            Integer id = Integer.valueOf(DBUtils.getMaxProId()) - 1;
+            FileName = id + ".jpg";
+        } else {
+            FileName = DBUtils.getMaxProId() + ".jpg";
+            // Creating & Storing productBean oject
+            ProductBean proObj = new ProductBean();
+            proObj.setpName(productName);
+            proObj.setpCategory(category);
+            proObj.setParent_id(parent_id);
+            proObj.setpPrice(productPrice);
+            proObj.setpDiscount(productDiscount);
+            proObj.setpRemark(productRemark);
+            proObj.setpPhoto(FileName);
+            proObj.setpDescription(productDescription);
+
+            //creating DAO object and passing product Object to insert into database
+            AdminDao dao = new AdminDao();
+            authorize = dao.saveProduct(proObj);
+        }
 
         //Finding the path to store Image
         String path = request.getRealPath("images") + File.separator + "products" + File.separator + FileName;
@@ -158,10 +183,6 @@ public class AdminOperationServlet extends HttpServlet {
         } catch (IOException ex) {
             Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        //creating DAO object and passing product Object to insert into database
-        AdminDao dao = new AdminDao();
-        String authorize = dao.saveProduct(proObj);
 
         // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
         HttpSession session = request.getSession();
@@ -196,8 +217,21 @@ public class AdminOperationServlet extends HttpServlet {
         } catch (IOException | ServletException ex) {
             Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String FileName = DBUtils.getMaxCatId() + ".jpg";
-        CategoryBean cat = new CategoryBean(name, FileName);
+
+        String authorize = null;
+        String FileName = "unknown.jpg";
+        if (DBUtils.getMaxCatId() == null) {
+            CategoryBean cat = new CategoryBean(name, FileName);
+            authorize = AdminDao.createNewCategory(cat);
+            Integer id = Integer.valueOf(DBUtils.getMaxCatId()) - 1;
+            FileName = id + ".jpg";
+        } else {
+            FileName = DBUtils.getMaxCatId() + ".jpg";
+            CategoryBean cat = new CategoryBean(name, FileName);
+            //PASSING & INSERTING CATEGORYBEANOBJECT TO DATABASE THROUGN DAO 
+            authorize = AdminDao.createNewCategory(cat);
+            //if inserted then redirecting to same page else to error page
+        }
 
         //Finding the path to store Image
         String path = request.getRealPath("images") + File.separator + "category" + File.separator + FileName;
@@ -222,10 +256,6 @@ public class AdminOperationServlet extends HttpServlet {
         } catch (IOException ex) {
             Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        //PASSING & INSERTING CATEGORYBEANOBJECT TO DATABASE THROUGN DAO 
-        String authorize = AdminDao.createNewCategory(cat);
-        //if inserted then redirecting to same page else to error page
 
         // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
         HttpSession session = request.getSession();
@@ -292,6 +322,13 @@ public class AdminOperationServlet extends HttpServlet {
 
     private void deleteproduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
+
+        //Deleting photo from server images/products Folder
+        String FileName = id + ".jpg";
+        String path = request.getRealPath("images") + File.separator + "products" + File.separator + FileName;
+        new File(path).delete();
+        //Deleted photo from server images/products Folder
+
         String authorize = new AdminDao().deleteProduct(id);
         // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
         HttpSession session = request.getSession();
@@ -317,6 +354,13 @@ public class AdminOperationServlet extends HttpServlet {
     private void deleteParentCat(HttpServletRequest request, HttpServletResponse response) {
         //getting parameer id from get request
         int id = Integer.parseInt(request.getParameter("id"));
+
+        //Deleting photo from server images/products Folder
+        String FileName = id + ".jpg";
+        String path = request.getRealPath("images") + File.separator + "category" + File.separator + FileName;
+        new File(path).delete();
+        //Deleted photo from server images/products Folder
+
         String authorize = new AdminDao().deleteParentCat(id);
         // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
         HttpSession session = request.getSession();

@@ -61,7 +61,7 @@
                                                 <tr>
                                                     <td> <%=rs2.getInt(1)%> </td>
                                                     <td>
-                                                        <img alt="#" src="../../images/products/<%=rs2.getString(9)%>" />
+                                                        <img alt="#" src="../../images/products/<%=rs2.getInt(1)%>.jpg" />
                                                         <%=rs2.getString(2)%>
                                                     </td>
                                                     <td>  <%=rs2.getString(3)%></td>
