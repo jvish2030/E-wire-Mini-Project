@@ -83,9 +83,9 @@
                                             <%}%>
                                         </select>       
                                     </div>
-                                    <div class="form-group ">
+                                    <div class="form-group">
                                         <label for="productPhoto" >Product Photo</label>                                                    
-                                        <input  class="custom-control" type="file" name="productPhoto" id="productPhoto"/>                                                    
+                                        <input  class=" form-control" type="file" name="productPhoto" id="productPhoto"/>                                                    
                                     </div>
                                     <div class="form-group ">
                                         <label for="productRemark" >Discount Remark</label>
@@ -117,7 +117,7 @@
                             <form name="myCategoryForm" action="${pageContext.request.contextPath}/AdminOperation" method="post" enctype="multipart/form-data">
                                 <h4 class="card-title">Add New Category</h4>
                                 <div class="form-group">
-                                    <label for="productPhoto" >Product Photo</label>                                                    
+                                    <label for="productPhoto" >Category Photo</label>                                                    
                                     <input  class="custom-control" type="file" name="categoryPhoto" id="categoryPhoto"/>                                                    
                                 </div>
                                 <div class="input-group mb-3">
@@ -162,27 +162,60 @@
                             <div class="container">
                                 <h3>My Categories</h3>
                                 <div id="accordion">
+
                                     <%
                                         while (itr3.hasNext()) {
                                             Map.Entry CategoryEntry = (Map.Entry) itr3.next();
                                             String s = (String) CategoryEntry.getValue();
                                             s = s.replaceAll(" ", "");
                                     %>
+
                                     <div class="card ">
-                                        <div class="card-header ">
-                                            <a class="btn btn-link text-primary">Edit</a>
-                                            <a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteParentCat&id=<%=CategoryEntry.getKey()%>" class="btn btn-link text-danger">Delete</a>
-                                            <a class="card-link text-light" data-toggle="collapse" href="#<%=s%>">
-                                                <%= CategoryEntry.getValue()%>
-                                                <i class="fa fa-sort"></i>
-                                            </a>
+                                        <div class="card-header pb-0 mb-0">
+                                            <div class="preview-list">
+                                                <div class="preview-item border-bottom py-0">
+                                                    <div class="preview-thumbnail">
+                                                        <div class="preview-icon">
+                                                            <img  alt="#" class="rounded-circle border border-info" src="../../images/category/<%=CategoryEntry.getKey()%>.jpg">                                                                                                   
+                                                        </div>  
+                                                    </div>
+                                                    <div class="preview-item-content d-sm-flex flex-grow">
+                                                        <div class="flex-grow">
+                                                            <h6 class="preview-subject"> 
+                                                                <a class="card-link text-light " data-toggle="collapse" href="#<%=s%>">
+                                                                    <%= CategoryEntry.getValue()%>
+                                                                    <i class="fa fa-sort"></i>
+                                                                </a>
+                                                            </h6>
+                                                            <p class="text-muted mb-0">Categories</p>
+                                                        </div>
+                                                        <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                            <p class="text-muted mb-0 mt-0 "><a class="btn btn-link text-primary py-0">Rename</a></p>
+                                                            <p class="text-muted mb-0"><a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteParentCat&id=<%=CategoryEntry.getKey()%>" class="btn btn-link text-danger">Delete</a></p>
+                                                        </div>
+                                                    </div>
+                                                </div>  
+                                            </div>
                                         </div>
-                                        <div id="<%=s%>" class="collapse" data-parent="#accordion">
-                                            <div class="card-body">
+                                        <div id="<%=s%>" class="collapse " data-parent="#accordion">
+                                            <div class="card-body py-2">
                                                 <%
                                                     for (String s2 : DBUtils.getSubCategories((int) CategoryEntry.getKey())) {
                                                 %>
-                                                <p><%= s2%></p> 
+                                                <div class="preview-list">
+                                                    <div class="preview-item border-bottom py-0">
+                                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                                            <div class="flex-grow">
+                                                                <h6 class="preview-subject"> 
+                                                                    <a class="card-link ml-5 text-secondary">&emsp14;&DoubleRightArrow;<%= s2%></a> 
+                                                                </h6>
+                                                            </div>
+                                                            <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                                <p class="text-muted mb-0 mt-0 "><a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteParentCat&id=<%=CategoryEntry.getKey()%>" class="btn btn-link text-danger"><i class="fa fa-close" style="color:red"></i></a></p>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <%}%>
                                             </div>
                                         </div>
