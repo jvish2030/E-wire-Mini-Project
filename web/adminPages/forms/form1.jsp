@@ -27,23 +27,14 @@
 
 
     <div class="content-wrapper">
-        <div class="jumbotron text-center bg-dark" style="margin-bottom:0">
+        <div class="jumbotron text-center bg-primary" style="margin-bottom:0">
             <h1>E-Wire, Welcomes you!</h1>
             <p>Add & Manages your products!</p> 
         </div>
         <jsp:include page="../../include/message.jsp"/>
-        <div class="page-header">
-            <h3 class="page-title"> Form elements </h3> 
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Forms</a></li>
-                    <li class="breadcrumb-item active">Form elements</li>
-                </ol>
-            </nav>
-        </div>
         <script>
             function fileValidation1() {
-              
+
                 var fileInput =
                         document.getElementById('productPhoto');
 
@@ -57,10 +48,10 @@
                     alert('Invalid file type');
                     fileInput.value = '';
                     return false;
-                } 
+                }
             }
-               function fileValidation2() {
-              
+            function fileValidation2() {
+
                 var fileInput =
                         document.getElementById('categoryPhoto');
 
@@ -74,7 +65,7 @@
                     alert('Invalid file type');
                     fileInput.value = '';
                     return false;
-                } 
+                }
             }
         </script>
         <div class="row">
@@ -202,8 +193,8 @@
                                     <%
                                         while (itr3.hasNext()) {
                                             Map.Entry CategoryEntry = (Map.Entry) itr3.next();
-                                            String s = (String) CategoryEntry.getValue();
-                                            s = s.replaceAll(" ", "");
+                                            String s = "id" + CategoryEntry.getKey();
+
                                     %>
 
                                     <div class="card ">
