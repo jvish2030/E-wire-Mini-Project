@@ -157,19 +157,19 @@
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="../tables/table1.jsp">
                         <span class="menu-icon">
-                            <i class="mdi mdi-table-large"></i>
+                            <i class="mdi mdi-format-list-bulleted-type"></i>
                         </span>
                         <span class="menu-title">Products</span>
                     </a>
                 </li>
-                <!-- <li class="nav-item menu-items">
-                  <a class="nav-link" href="pages/charts/chartjs.html">
-                    <span class="menu-icon">
-                      <i class="mdi mdi-chart-bar"></i>
-                    </span>
-                    <span class="menu-title">Charts</span>
-                  </a>
-                </li> -->
+                <li class="nav-item menu-items">
+                    <a class="nav-link" href="../tables/table2.jsp">
+                        <span class="menu-icon">
+                            <i class="mdi mdi-account"></i>
+                        </span>
+                        <span class="menu-title">Customers</span>
+                    </a>
+                </li> 
                 <!-- <li class="nav-item menu-items">
                     <a class="nav-link" href="pages/icons/mdi.html">
                       <span class="menu-icon">

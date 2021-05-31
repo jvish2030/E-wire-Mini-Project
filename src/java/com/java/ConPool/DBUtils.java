@@ -175,7 +175,22 @@ public class DBUtils {
     public static ResultSet getDeletingProductsId(int id) {
         Connection con;
         con = DBUtils.connect();
-        String query = "SELECT (prodid) FROM PRODUCTS where parent_id = "+id;
+        String query = "SELECT (prodid) FROM PRODUCTS where parent_id = " + id;
+        ResultSet rs = null;
+        try {
+            rs = con.createStatement().executeQuery(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return rs;
+    }
+
+    public static ResultSet getAllCustomers() {
+    
+        Connection con;
+        con = DBUtils.connect();
+        String query = "SELECT * FROM USERS";
         ResultSet rs = null;
         try {
             rs = con.createStatement().executeQuery(query);

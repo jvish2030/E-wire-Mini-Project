@@ -1,3 +1,7 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.java.ConPool.DBUtils"%>
+<%@page import="java.util.Set"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <!doctype html>
 <html lang="zxx">
@@ -147,6 +151,16 @@
             </div>
         </section>
 
+        <%
+            int getid = 0;
+            // getting SET of Key- value pair of Id and category
+            Set CategorySet = DBUtils.getCategoriesSet();
+            // Creating Iterators of CategorySet
+            Iterator itr = CategorySet.iterator();//iterator to list category in addProduct from
+
+        %>
+
+
         <section class="w3l-grids-hny-2" id="Products-display">
             <!-- /content-6-section -->
             <div class="grids-hny-2-mian py-5">
@@ -157,102 +171,25 @@
                     </h3>
                     <p class="mb-4 text-center">Handpicked Favourites just for you</p>
                     <div class="welcome-grids row mt-5">
+
+                        <%                            while (itr.hasNext()) {
+                                Map.Entry CategoryEntry = (Map.Entry) itr.next();
+                                String s = (String) CategoryEntry.getValue();
+                                s = s.replaceAll(" ", "");
+                        %>
                         <div class="col-lg-2 col-md-4 col-6 welcome-image">
                             <div class="boxhny13">
-                                <a href="Multi Strand.html">
-                                    <img src="assets/images/grid1.jpg" class="img-fluid" alt="" />
-                                    <div class="boxhny-content">
-                                        <h3 class="title">Product
-                                    </div>
-                                </a>
-                            </div>
-                            <h4><a href="Multi Strand.html">Multi Strand Copper</a></h4>
-
-                        </div>
-
-                        <div class="col-lg-2 col-md-4 col-6 welcome-image">
-                            <div class="boxhny13">
-                                <a href="Industrial Round Cable Copper.html">
-                                    <img src="assets/images/grid3.jpg" class="img-fluid" alt="" />
+                                <a href="Multi Strand.html" >
+                                    <img src="images/category/<%=CategoryEntry.getKey()%>.jpg" class="img-fluid" alt="" />
                                     <div class="boxhny-content">
                                         <h3 class="title">Product</h3>
                                     </div>
                                 </a>
                             </div>
-                            <h4><a href="Industrial Round Cable Copper.html">
-                                    Industrial Round Cable Copper</a></h4>
-
-
+                            <h4><a href="Multi Strand.html"> <%= CategoryEntry.getValue()%></a></h4>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-6 welcome-image">
-                            <div class="boxhny13">
-                                <a href="Submersible Wire Copper.html">
-                                    <img src="assets/images/grid2.jpg" class="img-fluid" alt="" />
-                                    <div class="boxhny-content">
-                                        <h3 class="title">Product</h3>
-                                    </div>
-                                </a>
-                            </div>
-                            <h4><a href="Submersible Wire Copper.html">Submersible Wire Copper</a></h4>
-
-
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6 welcome-image">
-                            <div class="boxhny13">
-                                <a href="#URL">
-                                    <img src="assets/images/grid4.jpg" class="img-fluid" alt="" />
-                                    <div class="boxhny-content">
-                                        <h3 class="title">Product</h3>
-                                    </div>
-                                </a>
-                            </div>
-                            <h4><a href="#URL">1/18 VIR Copper & Alu Wire</a></h4>
-
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6 welcome-image">
-                            <div class="boxhny13">
-                                <a href="#URL">
-                                    <img src="assets/images/grid5.jpg" class="img-fluid" alt="" />
-                                    <div class="boxhny-content">
-                                        <h3 class="title">Product</h3>
-                                    </div>
-                                </a>
-                            </div>
-                            <h4><a href="#URL">
-                                    Aluminium Single Core Heavy</a></h4>
-
-
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6 welcome-image">
-                            <div class="boxhny13">
-                                <a href="#URL">
-                                    <img src="assets/images/grid6.jpg" class="img-fluid" alt="" />
-                                    <div class="boxhny-content">
-                                        <h3 class="title">Product</h3>
-                                    </div>
-                                </a>
-                            </div>
-                            <h4><a href="#URL">
-                                    Service Wire 2 Core Aluminium</a></h4>
-
-
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-6 welcome-image">
-                            <div class="boxhny13">
-                                <a href="#URL">
-                                    <img src="assets/images/grid7.jpg" class="img-fluid" alt="" />
-                                    <div class="boxhny-content">
-                                        <h3 class="title">Product</h3>
-                                    </div>
-                                </a>
-                            </div>
-                            <h4><a href="#URL">
-                                    Flexible Wire Copper & Aluminium</a></h4>
-
-
-                        </div>
+                        <%}%>                   
                     </div>
-
                 </div>
             </div>
         </section>

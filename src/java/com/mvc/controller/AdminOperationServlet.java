@@ -399,7 +399,6 @@ public class AdminOperationServlet extends HttpServlet {
                 Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
 
     private void deleteChildCat(HttpServletRequest request, HttpServletResponse response) {
