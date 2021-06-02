@@ -27,7 +27,19 @@
 
 
     <div class="content-wrapper">
-        <div class="jumbotron text-center bg-primary" style="margin-bottom:0">
+        <div class="jumbotron text-center bg-primary" style="margin-bottom:0;padding-top:5px;">
+            <div style=" overflow: hidden;">
+                <div class="header" style='float: left'>
+                    <a href="#default" class="logo">E-wire</a>
+                </div>
+                   <button style='float: right;padding-top: 15px' class="navbar-toggler navbar-toggler-right d-lg-none " type="button" data-toggle="offcanvas">
+                        <span class="mdi mdi-format-line-spacing text-light"></span>
+                    </button>      
+            </div>
+
+            
+
+
             <h1>E-Wire, Welcomes you!</h1>
             <p>Add & Manages your products!</p> 
         </div>
@@ -194,7 +206,6 @@
                                         while (itr3.hasNext()) {
                                             Map.Entry CategoryEntry = (Map.Entry) itr3.next();
                                             String s = "id" + CategoryEntry.getKey();
-
                                     %>
 
                                     <div class="card ">
@@ -216,10 +227,7 @@
                                                             </h6>
                                                             <p class="text-muted mb-0">Categories</p>
                                                         </div>
-                                                        <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                            <p class="text-muted mb-0 mt-0 "><a class="btn btn-link text-primary py-0">Rename</a></p>
-                                                            <p class="text-muted mb-0"><a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteParentCat&id=<%=CategoryEntry.getKey()%>" class="btn btn-link text-danger">Delete</a></p>
-                                                        </div>
+
                                                     </div>
                                                 </div>  
                                             </div>
@@ -237,9 +245,7 @@
                                                                     <a class="card-link ml-5 text-secondary"><%= s2%></a> 
                                                                 </h6>
                                                             </div>
-                                                            <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                                <p class="text-muted mb-0 mt-0 "><a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteChildCat&name=<%=s2%>" class="btn btn-link text-danger"><i class="fa fa-close" style="color:red"></i></a></p>
-                                                            </div> 
+
                                                         </div>
                                                     </div>
                                                 </div>

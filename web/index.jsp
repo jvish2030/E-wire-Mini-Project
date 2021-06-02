@@ -163,30 +163,29 @@
 
         <section class="w3l-grids-hny-2" id="Products-display">
             <!-- /content-6-section -->
-            <div class="grids-hny-2-mian py-5">
-                <div class="container py-lg-5">
+            <div class="grids-hny-2-mian py-5 ">
+                <div class="container py-lg-5 ">
 
                     <h3 class="hny-title mb-0 text-center">Shop 🛒 With <span>Us Onilne</span> To Get Best Deal
                         <span>Everyday</span> 🧬🔌
                     </h3>
                     <p class="mb-4 text-center">Handpicked Favourites just for you</p>
-                    <div class="welcome-grids row mt-5">
-
-                        <%                            while (itr.hasNext()) {
+                    <div class="welcome-grids row mt-5 justify-content-center">
+                        <%       while (itr.hasNext()) {
                                 Map.Entry CategoryEntry = (Map.Entry) itr.next();
-                                String s = (String) CategoryEntry.getValue();
-                                s = s.replaceAll(" ", "");
+                                String id = CategoryEntry.getKey().toString();
+                                String value = CategoryEntry.getValue().toString();
                         %>
                         <div class="col-lg-2 col-md-4 col-6 welcome-image">
                             <div class="boxhny13">
-                                <a href="Multi Strand.html" >
+                                <a href="${pageContext.request.contextPath}\home?page=category&id=<%=id%>&value=<%=value%>" >
                                     <img src="images/category/<%=CategoryEntry.getKey()%>.jpg" class="img-fluid" alt="" />
                                     <div class="boxhny-content">
                                         <h3 class="title">Product</h3>
                                     </div>
                                 </a>
                             </div>
-                            <h4><a href="Multi Strand.html"> <%= CategoryEntry.getValue()%></a></h4>
+                            <h4><a href="${pageContext.request.contextPath}\home?page=category"> <%= CategoryEntry.getValue()%></a></h4>
                         </div>
                         <%}%>                   
                     </div>

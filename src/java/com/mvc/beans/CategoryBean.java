@@ -17,7 +17,6 @@ public class CategoryBean {
     private String categoryPhoto;
 
     public CategoryBean() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public CategoryBean(String name, String FileName) {

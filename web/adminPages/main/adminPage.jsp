@@ -46,42 +46,56 @@
             </div> -->
 
 
-            <div id="Customers" class="tabcontent">
-                <p class="text-right">
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-content-end" type="button" data-toggle="offcanvas">
+            <div id="Customers" class="tabcontent" style="margin-top: 0px;padding-top: 10px; padding-bottom: 50px;">
+                <div style=" overflow: hidden;">
+                    <div class="header" style='float: left'>
+                        <a href="#default" class="logo">E-wire</a>
+                    </div>
+                    <button style='float: right;padding-top: 15px' class="navbar-toggler navbar-toggler-right d-lg-none " type="button" data-toggle="offcanvas">
                         <span class="mdi mdi-format-line-spacing text-light"></span>
-                    </button>    
-                </p>
+                    </button>      
+                </div>
+
                 <h1>
                     <span class="menu-icon"><i class="mdi mdi-account"></i>Customers</span>
                 </h1>
             </div>
-            <div id="Products" class="tabcontent">
-                <p class="text-right">
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-content-end" type="button" data-toggle="offcanvas">
+            <div id="Products" class="tabcontent" style="margin-top: 0px;padding-top: 10px; padding-bottom: 50px;">
+                <div style=" overflow: hidden;">
+                    <div class="header" style='float: left'>
+                        <a href="#default" class="logo">E-wire</a>
+                    </div>
+                    <button style='float: right;padding-top: 15px' class="navbar-toggler navbar-toggler-right d-lg-none " type="button" data-toggle="offcanvas">
                         <span class="mdi mdi-format-line-spacing text-light"></span>
-                    </button>    
-                </p>
+                    </button>      
+                </div>
                 <h1><span class="menu-icon"><i class="mdi mdi-basket"></i>Products</span></h1>
             </div>
 
-            <div id="Categories" class="tabcontent">
-                <p class="text-right">
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-content-end" type="button" data-toggle="offcanvas">
+            <div id="Categories" class="tabcontent" style="margin-top: 0px;padding-top: 10px; padding-bottom: 50px;">
+                <div style=" overflow: hidden;">
+                    <div class="header" style='float: left'>
+                        <a href="#default" class="logo">E-wire</a>
+                    </div>
+                    <button style='float: right;padding-top: 15px' class="navbar-toggler navbar-toggler-right d-lg-none " type="button" data-toggle="offcanvas">
                         <span class="mdi mdi-format-line-spacing text-light"></span>
-                    </button>    
-                </p>
+                    </button>      
+                </div>
                 <h1><span class="menu-icon"><i class="mdi mdi-format-float-none"></i>Categories</span></h1>
             </div>
 
-            <div id="Orders" class="tabcontent">
-                <p class="text-right">
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-content-end" type="button" data-toggle="offcanvas">
+            <div id="Orders" class="tabcontent" style="margin-top: 0px;padding-top: 10px; padding-bottom: 50px;">
+                <div style=" overflow: hidden;">
+                    <div class="header" style='float: left'>
+                        <a href="#default" class="logo">E-wire</a>
+                    </div>
+                    <button style='float: right;padding-top: 15px' class="navbar-toggler navbar-toggler-right d-lg-none " type="button" data-toggle="offcanvas">
                         <span class="mdi mdi-format-line-spacing text-light"></span>
-                    </button>    
-                </p>
+                    </button>      
+                </div>
                 <h1><span class="menu-icon"><i class="mdi mdi-package-variant"></i>Orders</span></h1>
             </div>
+
 
             <div class="row">
                 <div class="col-xl-3 col-sm-6 grid-margin stretch-card ">
@@ -175,27 +189,28 @@
                 <%ResultSet rs1 = DBUtils.getAllCustomers();%>
                 <div class="row ">
                     <div class="col-12 grid-margin">
-
-                        <table class="table table-hover table-dark text-white-50 py-5">
-                            <thead class="bg-primary p-lg-5" >
-                                <tr >
-                                    <th class="text-light"> <h3>Customer id</h3> </th>
-                                    <th class="text-light"><h3>FullName</h3>  </th>
-                                    <th class="text-light"> <h3>Email</h3> </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%while (rs1.next()) {%>
-                                <tr>
-                                    <td> <%=rs1.getInt(1)%> </td>
-                                    <td>  <%=rs1.getString(2)%></td>
-                                    <td>  <%=rs1.getString(3)%></td>
-                                </tr>   
-                                <%}%>
-                            </tbody>
-                        </table>
-
-
+                        <div style="height: 500px;overflow: scroll;">
+                            <div class="table-responsive ">
+                                <table class="table table-hover table-dark text-white-50 py-5">
+                                    <thead class="bg-primary p-lg-5" >
+                                        <tr >
+                                            <th class="text-light"> <h3>Customer id</h3> </th>
+                                            <th class="text-light"><h3>FullName</h3>  </th>
+                                            <th class="text-light"> <h3>Email</h3> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%while (rs1.next()) {%>
+                                        <tr>
+                                            <td> <%=rs1.getInt(1)%> </td>
+                                            <td>  <%=rs1.getString(2)%></td>
+                                            <td>  <%=rs1.getString(3)%></td>
+                                        </tr>   
+                                        <%}%>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -224,7 +239,8 @@
                                                 <table class="table table-hover table-dark text-white-50 py-5">
                                                     <thead style="background-color:#32CD32;">
                                                         <tr>
-                                                            <th class="text-light "><h3>Product id</h3>  </th>
+                                                            <th class="text-light"><h3>Product id</h3>  </th>
+                                                            <th class="text-light"><h3>Photo</h3>  </th>
                                                             <th class="text-light"><h3>Product</h3>  </th>
                                                             <th class="text-light"><h3>Category</h3>  </th>
                                                             <th class="text-light"><h3>Price</h3>  </th>
@@ -238,8 +254,9 @@
                                                         <%while (rs3.next()) {%>
                                                         <tr>
                                                             <td> <%=rs3.getInt(1)%> </td>
-                                                            <td>
-                                                                <img alt="#" src="../../images/products/<%=rs3.getInt(1)%>.jpg" />
+                                                            <td> <img class="center" alt="#" src="../../images/products/<%=rs3.getInt(1)%>.jpg" style="max-width: 230px;"/> </td>
+                                                            <td id='productData' >
+
                                                                 <%=rs3.getString(2)%>
                                                             </td>
                                                             <td>  <%=rs3.getString(3)%></td>
@@ -267,69 +284,69 @@
 
             </div>
             <div id="Categories2" class="tabcontent px-0">
-                    <div id="accordion">
+                <div id="accordion2">
 
-                        <%
-                            Set CategorySet = DBUtils.getCategoriesSet();
-                            Iterator itr4 = CategorySet.iterator();
-                            while (itr4.hasNext()) {
-                                Map.Entry CategoryEntry = (Map.Entry) itr4.next();
-                                String s = "id" + CategoryEntry.getKey();
+                    <%
+                        Set CategorySet = DBUtils.getCategoriesSet();
+                        Iterator itr4 = CategorySet.iterator();
+                        while (itr4.hasNext()) {
+                            Map.Entry CategoryEntry = (Map.Entry) itr4.next();
+                            String s = "id_" + CategoryEntry.getKey();
 
-                        %>
+                    %>
 
-                        <div class="card ">
-                            <div class="card-header pb-0 mb-0" id="products-red" >
-                                <div class="preview-list">
-                                    <div class="preview-item border-bottom py-0">
-                                        <div class="preview-thumbnail">
-                                            <div class="preview-icon">
-                                                <img  alt="#" class="rounded-circle border border-info" src="../../images/category/<%=CategoryEntry.getKey()%>.jpg">                                                                                                   
-                                            </div>  
+                    <div class="card ">
+                        <div class="card-header pb-0 mb-0" id="products-red" >
+                            <div class="preview-list" >
+                                <div class="preview-item border-bottom py-0">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon">
+                                            <img  alt="#" class="rounded-circle border border-info" src="../../images/category/<%=CategoryEntry.getKey()%>.jpg">                                                                                                   
+                                        </div>  
+                                    </div>
+                                    <div class="preview-item-content d-sm-flex flex-grow">
+                                        <div class="flex-grow">
+                                            <h6 class="preview-subject text-left"> 
+                                                <a class="card-link text-light " data-toggle="collapse" href="#<%=s%>">
+                                                    <%= CategoryEntry.getValue()%>
+                                                    <i class="fa fa-sort"></i>
+                                                </a>
+                                            </h6>
+                                            <p class="text-muted mb-0 ">Categories</p>
                                         </div>
-                                        <div class="preview-item-content d-sm-flex flex-grow">
-                                            <div class="flex-grow">
-                                                <h6 class="preview-subject text-left"> 
-                                                    <a class="card-link text-light " data-toggle="collapse" href="#<%=s%>">
-                                                        <%= CategoryEntry.getValue()%>
-                                                        <i class="fa fa-sort"></i>
-                                                    </a>
-                                                </h6>
-                                                <p class="text-muted mb-0 ">Categories</p>
-                                            </div>
-                                            <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                <p class="text-muted mb-0 mt-0 "><a class="btn btn-link text-primary py-0">Rename</a></p>
-                                                <p class="text-muted mb-0"><a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteParentCat&id=<%=CategoryEntry.getKey()%>" class="btn btn-link text-danger">Delete</a></p>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                </div>
-                            </div>
-                            <div id="<%=s%>" class="collapse " data-parent="#accordion">
-                                <div class="card-body py-2">
-                                    <%
-                                        for (String s2 : DBUtils.getSubCategories((int) CategoryEntry.getKey())) {
-                                    %>
-                                    <div class="preview-list">
-                                        <div class="preview-item border-bottom py-0">
-                                            <div class="preview-item-content d-sm-flex flex-grow">
-                                                <div class="flex-grow">
-                                                    <h6 class="preview-subject"> 
-                                                        <a class="card-link ml-5 text-secondary"><%= s2%></a> 
-                                                    </h6>
-                                                </div>
-                                                <div class="mr-auto text-sm-right pt-2 pt-sm-0">
-                                                    <p class="text-muted mb-0 mt-0 "><a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteChildCat&name=<%=s2%>" class="btn btn-link text-danger"><i class="fa fa-close" style="color:red"></i></a></p>
-                                                </div> 
-                                            </div>
+                                        <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                            <button type="button" class="btn btn-primary mb-0 mt-0">Rename</button>
+                                            <a href='${pageContext.request.contextPath}\AdminOperation?operation=deleteParentCat&id=<%=CategoryEntry.getKey()%>' class="btn btn-danger">Delete</a>
                                         </div>
                                     </div>
-                                    <%}%>
-                                </div>
+                                </div>  
                             </div>
                         </div>
-                        <%}%>
+                        <div id="<%=s%>" class="collapse " data-parent="#accordion2">
+                            <div class="card-body py-2">
+                                <%
+                                    for (String s2 : DBUtils.getSubCategories((int) CategoryEntry.getKey())) {
+                                %>
+                                <div class="preview-list">
+                                    <div class="preview-item border-bottom py-0">
+                                        <div class="preview-item-content d-sm-flex flex-grow">
+                                            <div class="flex-grow">
+                                                <h6 class="preview-subject float-left"> 
+                                                    <a class="card-link ml-5 text-secondary "><%= s2%></a> 
+                                                </h6>
+                                            </div>
+                                            <div class="mr-auto text-sm-right pt-2 pt-sm-0">
+                                                <p class="text-muted mb-0 mt-0 "><a href="${pageContext.request.contextPath}\AdminOperation?operation=deleteChildCat&name=<%=s2%>" class="btn btn-link text-danger"><i class="fa fa-close" style="color:red"></i></a></p>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+                            </div>
+                        </div>
                     </div>
+                    <%}%>
+                </div>
 
             </div>
 

@@ -148,7 +148,7 @@ public class AdminOperationServlet extends HttpServlet {
             Integer id = Integer.valueOf(DBUtils.getMaxProId()) - 1;
             FileName = id + ".jpg";
         } else {
-            FileName = DBUtils.getMaxProId() + ".jpg";
+
             // Creating & Storing productBean oject
             ProductBean proObj = new ProductBean();
             proObj.setpName(productName);
@@ -163,6 +163,8 @@ public class AdminOperationServlet extends HttpServlet {
             //creating DAO object and passing product Object to insert into database
             AdminDao dao = new AdminDao();
             authorize = dao.saveProduct(proObj);
+            Integer id = Integer.valueOf(DBUtils.getMaxProId()) - 1;
+            FileName = id + ".jpg";
         }
 
         //Finding the path to store Image
@@ -219,6 +221,7 @@ public class AdminOperationServlet extends HttpServlet {
         Part categoryPhoto = null;
         try {
             categoryPhoto = request.getPart("categoryPhoto");
+            System.out.println("photo  _ " + categoryPhoto.getName());
         } catch (IOException | ServletException ex) {
             Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -230,12 +233,16 @@ public class AdminOperationServlet extends HttpServlet {
             authorize = AdminDao.createNewCategory(cat);
             Integer id = Integer.valueOf(DBUtils.getMaxCatId()) - 1;
             FileName = id + ".jpg";
+            System.out.println("photo name _ " + FileName);
         } else {
-            FileName = DBUtils.getMaxCatId() + ".jpg";
             CategoryBean cat = new CategoryBean(name, FileName);
             //PASSING & INSERTING CATEGORYBEANOBJECT TO DATABASE THROUGN DAO 
             authorize = AdminDao.createNewCategory(cat);
             //if inserted then redirecting to same page else to error page
+            Integer id = Integer.valueOf(DBUtils.getMaxCatId()) - 1;
+            FileName = id + ".jpg";
+            System.out.println("photo name _ " + FileName);
+
         }
 
         //Finding the path to store Image
@@ -341,7 +348,7 @@ public class AdminOperationServlet extends HttpServlet {
         {
             session.setAttribute("message", authorize);
             try {
-                response.sendRedirect("adminPages/tables/table1.jsp");
+                response.sendRedirect("adminPages/main/adminPage.jsp?block=products");
             } catch (IOException ex) {
                 Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -386,7 +393,7 @@ public class AdminOperationServlet extends HttpServlet {
         {
             session.setAttribute("message", authorize);
             try {
-                response.sendRedirect("adminPages/forms/form1.jsp");
+                response.sendRedirect("adminPages/main/adminPage.jsp?block=categories");
             } catch (IOException ex) {
                 Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -410,7 +417,7 @@ public class AdminOperationServlet extends HttpServlet {
         {
             session.setAttribute("message", authorize);
             try {
-                response.sendRedirect("adminPages/forms/form1.jsp");
+                response.sendRedirect("adminPages/main/adminPage.jsp?block=categories");
             } catch (IOException ex) {
                 Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

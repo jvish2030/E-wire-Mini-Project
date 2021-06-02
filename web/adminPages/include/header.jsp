@@ -20,7 +20,7 @@
             opacity: 0.8;
         }
         #products-red:hover{
-             background-color: #DC143C;
+            background-color: #DC143C;
             opacity: 0.8;
         }
         .tabcontent {
@@ -42,10 +42,73 @@
             cursor: pointer;
         }
 
+        .header {
+            overflow: hidden;
+            padding: 0px 10px;
+        }
+
+        .header a {
+            float: left;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px; 
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .header a.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .header a:hover {
+
+            color: black;
+        }
+
+        .header a.active {
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        .header-right {
+            float: right;
+        }
+
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+
+            .header-right {
+                float: none;
+            }
+        }
+        #productData{
+
+            word-break: break-word;
+            white-space: pre-line;
+            overflow-wrap: break-word;
+            -ms-word-break: break-word;
+            word-break: break-word;
+            -ms-hyphens: auto;
+            -moz-hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+        }
+        .center {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
         #Customers {background-color:#0079C2;}
         #CustomersNav{background-color:#0079C2;}
         #Products {background-color:#32CD32;}
-        
+
         #Categories {background-color:#DC143C;}
         #Orders {background-color:#48D1CC;}
 
@@ -166,7 +229,7 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
-                               <li class="nav-item menu-items">
+                <li class="nav-item menu-items">
                     <a class="nav-link" href="../forms/form1.jsp">
                         <span class="menu-icon">
                             <i class="mdi mdi-playlist-play"></i>
@@ -174,8 +237,8 @@
                         <span class="menu-title">Form</span>
                     </a>
                 </li>
-             
-            
+
+
                 <li class="nav-item menu-items">
                     <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                         <span class="menu-icon">
@@ -194,7 +257,7 @@
                         </ul>
                     </div>
                 </li>
-            
+
             </ul>
         </nav>
         <!-- partial -->
@@ -206,64 +269,64 @@
                             </button>-->
 
 
-            <!--            <nav class="navbar p-0 fixed-top d-flex flex-row">
-                            <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-                                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="adminAssets/images/logo-mini.svg"
-                                                                                               alt="logo" /></a>
+            <!--     <nav class="navbar p-0 fixed-top d-flex flex-row">
+                <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="adminAssets/images/logo-mini.svg"
+                                                                                   alt="logo" /></a>
+                </div>
+                <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                        <span class="mdi mdi-menu"></span>
+                    </button>
+
+                    <ul class="navbar-nav navbar-nav-right">
+
+                        <li>
+                            <div id="Customers" class="tabcontent">
+                                <h1><span class="menu-icon"><i class="mdi mdi-account"></i>Customers</span></h1>
                             </div>
-                            <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-                                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-                                    <span class="mdi mdi-menu"></span>
-                                </button>
-            
-                                <ul class="navbar-nav navbar-nav-right">
-            
-                                    <li>
-                                        <div id="Customers" class="tabcontent">
-                                            <h1><span class="menu-icon"><i class="mdi mdi-account"></i>Customers</span></h1>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                                <div class="navbar-profile">
+                                    <img class="img-xs rounded-circle" src="adminAssets/images/faces/face15.jpg" alt="">
+                                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Hari Om</p>
+                                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                                 aria-labelledby="profileDropdown">
+                                <h6 class="p-3 mb-0">Profile</h6>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item preview-item">
+                                    <div class="preview-thumbnail">
+                                        <div class="preview-icon bg-dark rounded-circle">
+                                            <i class="mdi mdi-settings text-success"></i>
                                         </div>
-                                    </li>
-            
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
-                                            <div class="navbar-profile">
-                                                <img class="img-xs rounded-circle" src="adminAssets/images/faces/face15.jpg" alt="">
-                                                <p class="mb-0 d-none d-sm-block navbar-profile-name">Hari Om</p>
-                                                <i class="mdi mdi-menu-down d-none d-sm-block"></i>
-                                            </div>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                                             aria-labelledby="profileDropdown">
-                                            <h6 class="p-3 mb-0">Profile</h6>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item preview-item">
-                                                <div class="preview-thumbnail">
-                                                    <div class="preview-icon bg-dark rounded-circle">
-                                                        <i class="mdi mdi-settings text-success"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="preview-item-content">
-                                                    <p class="preview-subject mb-1">Settings</p>
-                                                </div>
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                                <div class="preview-thumbnail">
-                                                    <div class="preview-icon bg-dark rounded-circle">
-                                                        <i class="mdi mdi-logout text-danger"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="preview-item-content">
-                                                    <p class="preview-subject mb-1">Log out</p>
-                                                </div>
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <p class="p-3 mb-0 text-center">Advanced settings</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-                                        data-toggle="offcanvas">
-                                    <span class="mdi mdi-format-line-spacing"></span>
-                                </button>
+                                    </div>
+                                    <div class="preview-item-content">
+                                        <p class="preview-subject mb-1">Settings</p>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-dark rounded-circle">
+                                        <i class="mdi mdi-logout text-danger"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <p class="preview-subject mb-1">Log out</p>
+                                </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <p class="p-3 mb-0 text-center">Advanced settings</p>
                             </div>
-                        </nav>-->
+                        </li>
+                    </ul>
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                            data-toggle="offcanvas">
+                        <span class="mdi mdi-format-line-spacing"></span>
+                    </button>
+                </div>
+            </nav>-->

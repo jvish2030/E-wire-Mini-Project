@@ -100,6 +100,7 @@ public class ViewServlet extends HttpServlet {
     private void errorPage(HttpServletRequest request, HttpServletResponse response) {
         try {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
+              request.setAttribute("title", "error");
             requestDispatcher.forward(request,response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
