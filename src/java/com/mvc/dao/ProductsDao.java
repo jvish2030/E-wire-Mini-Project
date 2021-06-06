@@ -92,9 +92,9 @@ public class ProductsDao {
         return count;
     }
 
-    public List<ProductBean> getSubProducts(String subCat, int start, int end) {
+    public List<ProductBean> getSubProducts(int id,String subCat, int start, int end) {
 
-        String query = "select * from (select  products.prodid, products.pname, products.pcat, products.price,products.disc_price,products.remarks,products.descr,products.create_date,products.photo,products.parent_id,ROW_NUMBER() OVER (ORDER BY products.prodid asc ) ROW_NUM FROM PRODUCTS where pcat = '" + subCat + "') WHERE ROW_NUM BETWEEN " + start + " AND " + end + "";
+        String query = "select * from (select  products.prodid, products.pname, products.pcat, products.price,products.disc_price,products.remarks,products.descr,products.create_date,products.photo,products.parent_id,ROW_NUMBER() OVER (ORDER BY products.prodid asc ) ROW_NUM FROM PRODUCTS where pcat = '" + subCat + "' and parent_id=" + id + ") WHERE ROW_NUM BETWEEN " + start + " AND " + end + "";
 
         List<ProductBean> list = new ArrayList<ProductBean>();
         try {
@@ -135,12 +135,13 @@ public class ProductsDao {
         return list;
     }
 
-    public int getNoOfSubRecords(String subCat) {
+    public int getNoOfSubRecords(int id, String subCat) {
         int count = 0;
-        String query = "select count(*) from products where pcat = ?";
+        String query = "select count(*) from products where pcat = ? and parent_id = ?";
         try {
             pst = connection.prepareStatement(query);
             pst.setString(1, subCat);
+            pst.setInt(2, id);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {

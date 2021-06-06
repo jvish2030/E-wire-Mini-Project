@@ -82,13 +82,14 @@ public class HomeServlet extends HttpServlet {
         int start = 1;
         int end = productPerPage;
 
-        int id = 0;
-        String category = null;
+        int id;
+        String category;
         String subCat = null;
-        int noOfRecords = 0;
-        int noOfPages = 0;
+        int noOfRecords;
+        int noOfPages;
 
-        if (pageid != 1) {
+        if (request.getParameter("pageid") != null) {
+            pageid = Integer.parseInt(request.getParameter("pageid"));
             start = pageid - 1;
             start = start * productPerPage + 1;
             end = start + productPerPage - 1;
@@ -98,39 +99,28 @@ public class HomeServlet extends HttpServlet {
 
         ProductsDao dao = new ProductsDao();
 
-        List<ProductBean> productsList = null;
+        List<ProductBean> productsList;
 
         if (request.getParameter("pageid") != null) {
             pageid = Integer.parseInt(request.getParameter("pageid"));
         }
 
+        id = Integer.parseInt(request.getParameter("id"));
+        category = request.getParameter("value");
+
         if (request.getParameter("pcat") == null) {
-            id = Integer.parseInt(request.getParameter("id"));
-            category = request.getParameter("value");
             obj.setCategory(category);
             obj.setId(id);
-
             productsList = dao.getAllProducts(id, start, end);
-
             noOfRecords = dao.getNoOfRecords(id);
             noOfPages = (int) Math.ceil(noOfRecords * 1.0 / productPerPage);
-
         } else {
-            category = request.getParameter("value");
             subCat = request.getParameter("pcat");
             obj.setCategory(category);
             obj.setSubCategory(subCat);
-
-            System.out.println(" cat : " + category);
-            System.out.println(" sub : " + subCat);
-            System.out.println("start : " + start);
-            System.out.println("start : " + end);
-
-            productsList = dao.getSubProducts(subCat, start, end);
-
-            noOfRecords = dao.getNoOfSubRecords(subCat);
+            productsList = dao.getSubProducts(id, subCat, start, end);
+            noOfRecords = dao.getNoOfSubRecords(id, subCat);
             noOfPages = (int) Math.ceil(noOfRecords * 1.0 / productPerPage);
-
         }
 
         //FETCHGNG GET PARAMETERS & STORING IT INTO LOCAL VARIABLES

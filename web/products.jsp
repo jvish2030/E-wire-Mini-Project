@@ -59,7 +59,7 @@
                             <ul class="sub-menu">
                                 <!-- OUTER LOOP-->
                                 <% for (String subCat : DBUtils.getSubCategories((int) id)) {%>
-                                <li><a href="${pageContext.request.contextPath}\home?page=category&pcat=<%=subCat%>&value=<%=value%>"><%= subCat%><span>(90)</span></a></li>
+                                <li><a href="${pageContext.request.contextPath}\home?page=category&id=<%=id%>&pcat=<%=subCat%>&value=<%=value%>"><%= subCat%><span>(90)</span></a></li>
                                     <%}%>
                                 <!--                        OUTER LOOP-->
                             </ul>
@@ -117,14 +117,27 @@
                             </div>
                         </div>
                     </c:forEach>
-
+                    <script>
+                        function link(i) {
+                            var loc = window.location.href;
+                            var test = loc.search("pageid");
+                            if (test !== -1) {
+                                var n = loc.length;
+                                var res = loc.slice(0, n - 1);
+                                res = res + i;
+                                window.location.assign(res);
+                            } else {
+                                window.location.assign(loc + "&pageid=" + i);
+                            }
+                        }
+                    </script>
 
                     <div class="text-center w-100 pt-3">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
                                 <c:if test="${currentPage != 1}">
                                     <li class="page-item">
-                                        <a class="page-link" href="${pageContext.request.contextPath}\home?page=category&id=${param.id}&value=${param.value}&pageid=${currentPage -1}" aria-label="Previous" >
+                                        <a class="page-link"  onclick="link(${currentPage -1})" aria-label="Previous" >
                                             <span aria-hidden="true" >&laquo;</span>
                                             <span class="sr-only">Previous</span>
                                         </a>
@@ -136,13 +149,13 @@
                                             <li class="page-item active"><a class="page-link " href="#">${i}</a></li>
                                             </c:when>
                                             <c:otherwise>
-                                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}\home?page=category&id=${param.id}&value=${param.value}&pageid=${i}">${i}</a></li>
+                                            <li class="page-item"><a class="page-link" onclick="link(${i})">${i}</a></li>
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>
                                     <c:if test="${currentPage lt noOfPages}">
                                     <li class="page-item">
-                                        <a class="page-link" href="${pageContext.request.contextPath}\home?page=category&id=${param.id}&value=${param.value}&pageid=${currentPage +1}" aria-label="Next">
+                                        <a class="page-link"  onclick="link(${currentPage +1})" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                             <span class="sr-only">Next</span>
                                         </a>
@@ -279,8 +292,8 @@ Footer section end
 
 
 <!--====== Javascripts & Jquery ======-->
-<script src="categoryAssets/js/jquery-3.2.1.min.js"></script>
-<script src="categoryAssets/js/bootstrap.min.js"></script>
+<!--<script src="categoryAssets/js/jquery-3.2.1.min.js"></script>-->
+<!--<script src="categoryAssets/js/bootstrap.min.js"></script>-->
 <script src="categoryAssets/js/jquery.slicknav.min.js"></script>
 <script src="categoryAssets/js/owl.carousel.min.js"></script>
 <script src="categoryAssets/js/jquery.nicescroll.min.js"></script>
