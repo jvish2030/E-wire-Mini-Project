@@ -35,26 +35,18 @@ public class Test {
 
         //establish connection between java apllication and database
         System.out.println(con);
-        String query1 = "SELECT * FROM CATEGORIES where parent_id is null order by Category";
-        String query2 = "SELECT * FROM CATEGORIES where parent_id = ? order by category";
+        String subCat ="Aluminium";
+        int start=1, end=5;
+        String query = "select * from (select  products.prodid, products.pname, products.pcat, products.price,products.disc_price,products.remarks,products.descr,products.create_date,products.photo,products.parent_id,ROW_NUMBER() OVER (ORDER BY products.prodid asc ) ROW_NUM FROM PRODUCTS where pcat = '"+subCat+"') WHERE ROW_NUM BETWEEN "+start+" AND "+end+"";
         Statement st = null;
         ResultSet rs1 = null;
-        ResultSet rs2 = null;
         try {
             st = con.createStatement();
             //Executing Query to Select MainCategories from Table
-            rs1 = st.executeQuery(query1);
+            rs1 = st.executeQuery(query);
             while (rs1.next()) {
                 //Printing Category Name 
-                System.out.println(rs1.getString(3).toUpperCase());
-                //Preparing Query to get SubCategories of Category
-                PreparedStatement pst = con.prepareStatement(query2);
-                pst.setInt(1, rs1.getInt(1));
-                rs2 = pst.executeQuery();
-                //Printing SubCategory Name 
-                while (rs2.next()) {
-                    System.out.println("  -" + rs2.getString(3));
-                }
+                System.out.println(rs1.getInt(1));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);

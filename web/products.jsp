@@ -22,10 +22,20 @@
 <!-- Page info -->
 <div class="page-top-info">
     <div class="container">
-        <h4>${param.value}</h4>
+        <c:choose>
+            <c:when test="${param.pcat eq null}">
+                <h4>${param.value}</h4>      
+            </c:when>
+            <c:otherwise>
+                <h4>${param.pcat}</h4>      
+            </c:otherwise>
+        </c:choose>    
+
         <div class="site-pagination">
-            <a href="">Home</a> /
-          
+            <a href="">Home</a>/
+            <c:if test="${param.pcat ne null}">
+                <a href="">${param.value}</a>/
+            </c:if>
         </div>
     </div>
 </div>

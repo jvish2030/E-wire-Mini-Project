@@ -79,22 +79,14 @@ public class HomeServlet extends HttpServlet {
         int pageid = 1;
         int productPerPage = 9;
 
-        if (request.getParameter("pageid") != null) {
-            pageid = Integer.parseInt(request.getParameter("pageid"));
-        }
-
-        //FETCHGNG GET PARAMETERS & STORING IT INTO LOCAL VARIABLES
-        int id = Integer.parseInt(request.getParameter("id"));
-        String category = request.getParameter("value");
-        
-        //CREATING CategoryBean OBJ & SETTING PARAMETER VALUE
-        CategoryBean obj = new CategoryBean();
-        obj.setCategory(category);
-        obj.setId(id);
-
-        //initial local var tp get first n records;
         int start = 1;
         int end = productPerPage;
+
+        int id = 0;
+        String category = null;
+        String subCat = null;
+        int noOfRecords = 0;
+        int noOfPages = 0;
 
         if (pageid != 1) {
             start = pageid - 1;
@@ -102,21 +94,56 @@ public class HomeServlet extends HttpServlet {
             end = start + productPerPage - 1;
         }
 
-     
+        CategoryBean obj = new CategoryBean();
+
         ProductsDao dao = new ProductsDao();
-        List<ProductBean> productsList = dao.getAllProducts(id, start, end);
 
+        List<ProductBean> productsList = null;
 
-        int noOfRecords = dao.getNoOfRecords(id);
+        if (request.getParameter("pageid") != null) {
+            pageid = Integer.parseInt(request.getParameter("pageid"));
+        }
 
-        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / productPerPage);
+        if (request.getParameter("pcat") == null) {
+            id = Integer.parseInt(request.getParameter("id"));
+            category = request.getParameter("value");
+            obj.setCategory(category);
+            obj.setId(id);
 
+            productsList = dao.getAllProducts(id, start, end);
+
+            noOfRecords = dao.getNoOfRecords(id);
+            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / productPerPage);
+
+        } else {
+            category = request.getParameter("value");
+            subCat = request.getParameter("pcat");
+            obj.setCategory(category);
+            obj.setSubCategory(subCat);
+
+            System.out.println(" cat : " + category);
+            System.out.println(" sub : " + subCat);
+            System.out.println("start : " + start);
+            System.out.println("start : " + end);
+
+            productsList = dao.getSubProducts(subCat, start, end);
+
+            noOfRecords = dao.getNoOfSubRecords(subCat);
+            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / productPerPage);
+
+        }
+
+        //FETCHGNG GET PARAMETERS & STORING IT INTO LOCAL VARIABLES
+        //CREATING CategoryBean OBJ & SETTING PARAMETER VALUE
+        //initial local var tp get first n records;
         request.setAttribute("title", category);
+        request.setAttribute("subCat", subCat);
         request.setAttribute("productsList", productsList);
         request.setAttribute("noOfPages", noOfPages);
         request.setAttribute("currentPage", pageid);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("products.jsp");
+
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {

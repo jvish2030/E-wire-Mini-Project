@@ -14,6 +14,15 @@ public class CategoryBean {
     private int id;
     private Integer parent_id;
     private String Category;
+    private String SubCategory;
+
+    public String getSubCategory() {
+        return SubCategory;
+    }
+
+    public void setSubCategory(String SubCategory) {
+        this.SubCategory = SubCategory;
+    }
     private String categoryPhoto;
 
     public CategoryBean() {

@@ -5,6 +5,7 @@
  */
 package com.mvc.dao;
 
+import Testing.Test;
 import com.java.ConPool.DBUtils;
 import com.mvc.beans.ProductBean;
 import java.sql.Connection;
@@ -80,6 +81,66 @@ public class ProductsDao {
         try {
             pst = connection.prepareStatement(query);
             pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
+    public List<ProductBean> getSubProducts(String subCat, int start, int end) {
+
+        String query = "select * from (select  products.prodid, products.pname, products.pcat, products.price,products.disc_price,products.remarks,products.descr,products.create_date,products.photo,products.parent_id,ROW_NUMBER() OVER (ORDER BY products.prodid asc ) ROW_NUM FROM PRODUCTS where pcat = '" + subCat + "') WHERE ROW_NUM BETWEEN " + start + " AND " + end + "";
+
+        List<ProductBean> list = new ArrayList<ProductBean>();
+        try {
+            pst = connection.prepareStatement(query);
+
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int pId = rs.getInt(1);
+                String pName = rs.getString(2);
+                String pCat = rs.getString(3);
+                int pPrice = rs.getInt(4);
+                int pDiscPrice = rs.getInt(5);
+                String pRemark = rs.getString(6);
+                String pDesc = rs.getString(7);
+                String pDate = rs.getString(8);
+                String pPhoto = rs.getString(9);
+                int pParentId = rs.getInt(10);
+
+                // System.out.println(pId + "..." + pName + "..." + pCat + "..." + pPrice + "..." + pDiscPrice + "..." + pRemark + "..." + pDesc + "..." + pDate + "..." + pPhoto + "..." + pParentId);
+                ProductBean obj = new ProductBean();
+                obj.setpId(pId);
+                obj.setpName(pName);
+                obj.setpPrice(pPrice);
+                obj.setpCategory(pCat);
+                obj.setpDiscount(pDiscPrice);
+                obj.setpRemark(pRemark);
+                obj.setpDescription(pDesc);
+                obj.setpDate(pDate);
+                obj.setpPhoto(pPhoto);
+                obj.setParent_id(pParentId);
+
+                list.add(obj);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    public int getNoOfSubRecords(String subCat) {
+        int count = 0;
+        String query = "select count(*) from products where pcat = ?";
+        try {
+            pst = connection.prepareStatement(query);
+            pst.setString(1, subCat);
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
