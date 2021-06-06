@@ -28,14 +28,11 @@ import org.apache.tomcat.jni.SSLContext;
  */
 @WebServlet(name = "OperationServlet", urlPatterns = {"/Operation"})
 public class OperationServlet extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String operation = request.getParameter("operation");
         operation = operation.toLowerCase();
-
         switch (operation) {
             case "logout":
                 logout(request, response);
@@ -44,18 +41,15 @@ public class OperationServlet extends HttpServlet {
                 error(request, response);
         }
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String operation = request.getParameter("operation");
         operation = operation.toLowerCase();
-
         String fullName = null;
         String email = null;
         String password = null;
         UserBean user = null;
-
         switch (operation) {
             case "register":
                 fullName = request.getParameter("fullname");
@@ -74,18 +68,14 @@ public class OperationServlet extends HttpServlet {
             default:
                 error(request, response);
         }
-
     }
-
     private void register(HttpServletRequest request, HttpServletResponse response, UserBean user) {
         RegisterDao registerDao = new RegisterDao();
-
         //The core Logic of the Registration application is present here. We are going to insert user data in to the database.
         String authorize = registerDao.registerUser(user);
         HttpSession session = request.getSession();
         if (authorize.equals("REGISTRATION SUCCESSFUL!")) //On success, you can display a message to user on Home page
         {
-
             session.setAttribute("uname", user.getFullName());
             session.setAttribute("userid", user.getUserid());
             session.setAttribute("message", authorize);
@@ -106,14 +96,11 @@ public class OperationServlet extends HttpServlet {
     }
 
     private void login(HttpServletRequest request, HttpServletResponse response, UserBean user) {
-
         String authorize = new LoginDao().authorizedLogin(user);
         System.out.println(authorize);
         HttpSession session = request.getSession();
-
         if (authorize.equals("SUCCESS LOGIN")) //On success, you can display a message to user on Home page
         {
-
             session.setAttribute("uname", user.getFullName());
             session.setAttribute("userid", user.getUserid());
             session.setAttribute("message", authorize);
@@ -130,13 +117,11 @@ public class OperationServlet extends HttpServlet {
                 }
             } else {
                 try {
-
                     response.sendRedirect("adminPages/main/adminPage.jsp");
                 } catch (IOException ex) {
                     Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
         } else //On Failure, display a meaningful message to the User.
         {
             session.setAttribute("errMessage", authorize);
@@ -147,7 +132,6 @@ public class OperationServlet extends HttpServlet {
             }
         }
     }
-
     private void logout(HttpServletRequest request, HttpServletResponse response) {
         //response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
@@ -159,7 +143,6 @@ public class OperationServlet extends HttpServlet {
         }
 
     }
-
     private void error(HttpServletRequest request, HttpServletResponse response) {
         try {
             response.sendRedirect("error.jsp");

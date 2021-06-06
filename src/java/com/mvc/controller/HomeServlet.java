@@ -6,8 +6,11 @@
 package com.mvc.controller;
 
 import com.mvc.beans.CategoryBean;
+import com.mvc.beans.ProductBean;
+import com.mvc.dao.ProductsDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -73,23 +76,48 @@ public class HomeServlet extends HttpServlet {
     }
 
     private void category(HttpServletRequest request, HttpServletResponse response) {
+        int pageid = 1;
+        int productPerPage = 9;
+
+        if (request.getParameter("pageid") != null) {
+            pageid = Integer.parseInt(request.getParameter("pageid"));
+        }
+
         //FETCHGNG GET PARAMETERS & STORING IT INTO LOCAL VARIABLES
         int id = Integer.parseInt(request.getParameter("id"));
         String category = request.getParameter("value");
+        
         //CREATING CategoryBean OBJ & SETTING PARAMETER VALUE
         CategoryBean obj = new CategoryBean();
         obj.setCategory(category);
         obj.setId(id);
-        //SETTING CATEGORY OBJINTO SEESION OBJ
-        HttpSession session = request.getSession();
-        session.setAttribute("category", obj);
-        //GETTING RequestDispatcher TO CATEGORY.JSP
+
+        //initial local var tp get first n records;
+        int start = 1;
+        int end = productPerPage;
+
+        if (pageid != 1) {
+            start = pageid - 1;
+            start = start * productPerPage + 1;
+            end = start + productPerPage - 1;
+        }
+
+     
+        ProductsDao dao = new ProductsDao();
+        List<ProductBean> productsList = dao.getAllProducts(id, start, end);
+
+
+        int noOfRecords = dao.getNoOfRecords(id);
+
+        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / productPerPage);
+
+        request.setAttribute("title", category);
+        request.setAttribute("productsList", productsList);
+        request.setAttribute("noOfPages", noOfPages);
+        request.setAttribute("currentPage", pageid);
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("products.jsp");
-        
-        //setting title attribute
-         request.setAttribute("title", category);
         try {
-            //FORWARDING REQUEST
             requestDispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -19,12 +19,10 @@ import java.util.logging.Logger;
  * @author jatin
  */
 public class RegisterDao {
-
     public String registerUser(UserBean user) {
         int i = 0;
         Connection con = null;
         PreparedStatement pst = null;
-
         String fullName = user.getFullName();
         String email = user.getEmail();
         String password = user.getPassword();
@@ -60,5 +58,4 @@ public class RegisterDao {
         }
         return "Oops.. Something went wrong there..!";
     }
-
 }

@@ -76,7 +76,7 @@
                             <div class="carousel-item active">
                                 <div class="container">
                                     <div class="carousel-caption">
-                                        <h3>ROUND CABLE COPPER<br>
+                                        <h3 style="color: white;">ROUND CABLE COPPER<br>
                                             30% Off</h3>
                                         <a href="#" class="shop-button btn">
                                             Shop Now
@@ -88,7 +88,7 @@
                             <div class="carousel-item item2">
                                 <div class="container">
                                     <div class="carousel-caption">
-                                        <h3>Single Core
+                                        <h3 style="color: white;">Single Core
                                             Aluminium
                                             <br>40% Off</h3>
                                         <a href="#" class="shop-button btn">
@@ -101,7 +101,7 @@
                             <div class="carousel-item item3">
                                 <div class="container">
                                     <div class="carousel-caption">
-                                        <h3>Submersible
+                                        <h3 style="color: white;">Submersible
                                             Copper Wire
                                             <br>50% Off</h3>
                                         <a href="#" class="shop-button btn">
@@ -114,7 +114,7 @@
                             <div class="carousel-item item4">
                                 <div class="container">
                                     <div class="carousel-caption">
-                                        <h3>1/18 VIR
+                                        <h3 style="color: white;">1/18 VIR
                                             Copper wire
                                             <br>40% Off</h3>
                                         <a href="#" class="shop-button btn">

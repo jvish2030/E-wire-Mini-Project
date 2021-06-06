@@ -32,12 +32,12 @@
                 <div class="header" style='float: left'>
                     <a href="#default" class="logo">E-wire</a>
                 </div>
-                   <button style='float: right;padding-top: 15px' class="navbar-toggler navbar-toggler-right d-lg-none " type="button" data-toggle="offcanvas">
-                        <span class="mdi mdi-format-line-spacing text-light"></span>
-                    </button>      
+                <button style='float: right;padding-top: 15px' class="navbar-toggler navbar-toggler-right d-lg-none " type="button" data-toggle="offcanvas">
+                    <span class="mdi mdi-format-line-spacing text-light"></span>
+                </button>      
             </div>
 
-            
+
 
 
             <h1>E-Wire, Welcomes you!</h1>
@@ -234,9 +234,7 @@
                                         </div>
                                         <div id="<%=s%>" class="collapse " data-parent="#accordion">
                                             <div class="card-body py-2">
-                                                <%
-                                                    for (String s2 : DBUtils.getSubCategories((int) CategoryEntry.getKey())) {
-                                                %>
+                                                <% for (String s2 : DBUtils.getSubCategories((int) CategoryEntry.getKey())) {%>
                                                 <div class="preview-list">
                                                     <div class="preview-item border-bottom py-0">
                                                         <div class="preview-item-content d-sm-flex flex-grow">

@@ -3,26 +3,33 @@
     Created on : Jun 2, 2021, 2:53:17 PM
     Author     : jatin
 --%>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.java.ConPool.DBUtils"%>
+<%@page import="java.util.Set"%>
 <jsp:include page="include/header.jsp"/>
 
-
+<%
+    // getting SET of Key- value pair of Id and category
+    Set CategorySet = DBUtils.getCategoriesSet();
+    // Creating Iterators of CategorySet
+    Iterator itr1 = CategorySet.iterator();//iterator to list category in addProduct from
+%>
 <!-- Header section end -->
-
-
 <!-- Page info -->
 <div class="page-top-info">
     <div class="container">
-        <h4>1/18 VIR Copper & Aluminium wire</h4>
+        <h4>${param.value}</h4>
         <div class="site-pagination">
             <a href="">Home</a> /
-            <a href="">Shop</a> /
+          
         </div>
     </div>
 </div>
 <!-- Page info end -->
-
-
 <!-- Category section -->
 <section class="category-section spad">
     <div class="container">
@@ -31,46 +38,24 @@
                 <div class="filter-widget">
                     <h2 class="fw-title">Categories</h2>
                     <ul class="category-menu">
-                        <li><a href="Multi Strand.html">Multi Strand Wire</a>
+                        <!--                        OUTER LOOP-->
+                        <%                            while (itr1.hasNext()) {
+                                Map.Entry CategoryEntry = (Map.Entry) itr1.next();
+                                int id = (int) CategoryEntry.getKey();
+                                String value = CategoryEntry.getValue().toString();
+                        %> 
+                        <li>
+                            <a href="${pageContext.request.contextPath}\home?page=category&id=<%=id%>&value=<%=value%>"><%= value%></a>
                             <ul class="sub-menu">
-                                <li><a href="#">1 . 0 mm<span>(90)</span></a></li>
-                                <li><a href="#">1 . 5 mm<span>(56)</span></a></li>
-                                <li><a href="#">2 . 5 mm<span>(36)</span></a></li>
-                                <li><a href="#">4 . 0 mm<span>(27)</span></a></li>
-                                <li><a href="#">6 . 0 mm<span>(19)</span></a></li>
+                                <!-- OUTER LOOP-->
+                                <% for (String subCat : DBUtils.getSubCategories((int) id)) {%>
+                                <li><a href="${pageContext.request.contextPath}\home?page=category&pcat=<%=subCat%>&value=<%=value%>"><%= subCat%><span>(90)</span></a></li>
+                                    <%}%>
+                                <!--                        OUTER LOOP-->
                             </ul>
                         </li>
-                        <li><a href="Industrial Round Cable Copper.html">Industrial Round Cable Copper</a>
-                            <ul class="sub-menu">
-                                <li><a href="#">2 core <span>(26)</span></a></li>
-                                <li><a href="#">3 core<span>(56)</span></a></li>
-                                <li><a href="#">4 core<span>(36)</span></a></li>
-                            </ul>
-                        </li>
-                        <li><a href="Submersible Wire Copper.html">Submersible Wire Copper</a>
-                            <ul class="sub-menu">
-                                <li><a href="#">1 . 5 mm<span>(56)</span></a></li>
-                                <li><a href="#">2 . 5 mm<span>(36)</span></a></li>
-                                <li><a href="#">4 . 0 mm<span>(27)</span></a></li>
-                                <li><a href="#">6 . 0 mm<span>(19)</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li><a href="118 VIR Copper & Alu Wire.html">1/18 VIR Wire(Copper & Aluminium)</a>
-                            <ul class="sub-menu">
-                                <li><a href="#">Copper <span>(29)</span></a>
-                                <li><a href="#">Aluminium<span>(56)</span></a>
-                            </ul>
-                        </li>
-                        <li><a href="Aluminium Single Core Heavy.html">Aluminium Single Core Heavy </a></li>
-                        <li><a href="Service Wire 2 Core Aluminium.html">Service Wire 2core Aluminium</a>
-                            <ul class="sub-menu">
-                                <li><a href="#">2 . 5 mm<span>(36)</span></a></li>
-                                <li><a href="#">4 . 0 mm<span>(27)</span></a></li>
-                                <li><a href="#">6 . 0 mm<span>(19)</span></a></li>
-                                <li><a href="#">10 mm<span>(90)</span></a></li>
-                            </ul>
-                        </li>
+                        <%}%>
+                        <!--                        OUTER LOOP ENDS-->
                     </ul>
                 </div>
                 <div class="filter-widget mb-0">
@@ -101,214 +86,60 @@
 
             <div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
                 <div class="row">
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <div class="tag-sale">ON SALE</div>
-                                <img src="img\pics\1-18\1-18 alum\3.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
+
+                    <c:forEach var="product" items="${productsList}">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="product-item">
+                                <div class="pi-pic">
+                                    <div class="tag-sale">${product.pRemark}</div>
+                                    <img src="images/products/${product.pId}.jpg" alt="">
+                                    <div class="pi-links">
+                                        <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
+                                                CART</span></a>
+                                        <a href="#" class="wishlist-btn"><i class="fa fa-heart"
+                                                                            style="font-size: medium;"></i></a>
+                                    </div>
+                                </div>
+                                <div class="pi-text">
+                                    <h6>${product.pPrice}/-</h6>
+                                    <p>${product.pName}</p>
                                 </div>
                             </div>
-                            <div class="pi-text">
-                                <h6>1200 /-</h6>
-                                <p>Copper 1/29 180</p>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img\pics\1-18\1-18 alum\1.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>200 /-</h6>
-                                <p>Copper 1/36 240</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img\pics\1-18\1-18 alum\3.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>350 /-</h6>
-                                <p>Copper 140 325</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img\pics\1-18\1-18 alum\1.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>430</h6>
-                                <p>Copper 1/44 395</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img\pics\1-18\1-18 alum\1.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>350</h6>
-                                <p>Copper 1/44 290</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img\pics\1-18\1-18 alum\3.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>1000</h6>
-                                <p>Copper CCA 1/40 125</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img\pics\1-18\1-18 alum\1.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>3500</h6>
-                                <p>Copper CCA 1/40 95</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img\pics\1-18\1-18 vir copp\2.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>550</h6>
-                                <p>Copper CCA 1/44</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img\pics\1-18\1-18 vir copp\1.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>1200</h6>
-                                <p>ALU 2.5 mm</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <div class="tag-new">new</div>
-                                <img src="img\pics\1-18\1-18 vir copp\2.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>250</h6>
-                                <p>ALU 4.0 mm 185</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img\pics\1-18\1-18 vir copp\4.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>750</h6>
-                                <p>ALU 6.0 mm 250</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="img\pics\1-18\1-18 vir copp\4.jpg" alt="">
-                                <div class="pi-links">
-                                    <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                            CART</span></a>
-                                    <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                        style="font-size: medium;"></i></a>
-                                </div>
-                            </div>
-                            <div class="pi-text">
-                                <h6>3500</h6>
-                                <p>ALU 2.5 mm</p>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
+
+
                     <div class="text-center w-100 pt-3">
-                        <button class="site-btn sb-line sb-dark">LOAD MORE</button>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <c:if test="${currentPage != 1}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}\home?page=category&id=${param.id}&value=${param.value}&pageid=${currentPage -1}" aria-label="Previous" >
+                                            <span aria-hidden="true" >&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:forEach begin="1" end="${noOfPages}" var="i">
+                                    <c:choose>
+                                        <c:when test="${currentPage eq i}">
+                                            <li class="page-item active"><a class="page-link " href="#">${i}</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}\home?page=category&id=${param.id}&value=${param.value}&pageid=${i}">${i}</a></li>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <c:if test="${currentPage lt noOfPages}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="${pageContext.request.contextPath}\home?page=category&id=${param.id}&value=${param.value}&pageid=${currentPage +1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
