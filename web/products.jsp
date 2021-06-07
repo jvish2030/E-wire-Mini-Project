@@ -10,6 +10,7 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="com.java.ConPool.DBUtils"%>
 <%@page import="java.util.Set"%>
+<%@ taglib uri="/WEB-INF/tlds/Helper.tld" prefix="helper"%>
 <jsp:include page="include/header.jsp"/>
 
 <%
@@ -96,41 +97,39 @@
 
             <div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
                 <div class="row">
-
                     <c:forEach var="product" items="${productsList}">
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="product-item">
-                                <div class="pi-pic">
-                                    <div class="tag-sale">${product.pRemark}</div>
-                                    <img src="images/products/${product.pId}.jpg" alt="">
-                                    <div class="pi-links">
-                                        <a href="#" class="add-card"><i class="fa fa-cart-plus"></i><span>ADD TO
-                                                CART</span></a>
-                                        <a href="#" class="wishlist-btn"><i class="fa fa-heart"
-                                                                            style="font-size: medium;"></i></a>
-                                    </div>
+
+                        <div class="col-md-3 col-sm-6 py-2">
+                            <div class="product-grid">
+                                <div class="product-image">
+                                    <a href="#">
+                                        <img class="pic-1" src="images/products/${product.pId}.jpg">
+                                    </a>
+                                    <ul class="social">
+                                        <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                                        <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                        <li><a href="" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                    <span class="product-new-label">Sale</span>
+                                    <span class="product-discount-label">${product.pRemark}</span>
                                 </div>
-                                <div class="pi-text">
-                                    <h6>${product.pPrice}/-</h6>
-                                    <p>${product.pName}</p>
+                                <ul class="rating">
+                                    <li class="fa fa-star"></li>
+                                    <li class="fa fa-star"></li>
+                                    <li class="fa fa-star"></li>
+                                    <li class="fa fa-star"></li>
+                                    <li class="fa fa-star"></li>
+                                </ul>
+                                <div class="product-content">
+                                    <h3 class="title"><a href="#">${helper:get10Words(product.pName)}</a></h3>
+                                    <div class="price">${product.getPriceAfterApplyingDiscount()}/-
+                                        <span>${product.pPrice}/-</span>
+                                    </div>
+                                    <a class="add-to-cart" href="">+ Add To Cart</a>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
-                    <script>
-                        function link(i) {
-                            var loc = window.location.href;
-                            var test = loc.search("pageid");
-                            if (test !== -1) {
-                                var n = loc.length;
-                                var res = loc.slice(0, n - 1);
-                                res = res + i;
-                                window.location.assign(res);
-                            } else {
-                                window.location.assign(loc + "&pageid=" + i);
-                            }
-                        }
-                    </script>
 
                     <div class="text-center w-100 pt-3">
                         <nav aria-label="Page navigation example">

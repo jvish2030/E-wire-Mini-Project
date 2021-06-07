@@ -244,7 +244,7 @@
                                                             <th class="text-light"><h3>Product</h3>  </th>
                                                             <th class="text-light"><h3>Category</h3>  </th>
                                                             <th class="text-light"><h3>Price</h3>  </th>
-                                                            <th class="text-light"><h3>Discount price</h3> </th>
+                                                            <th class="text-light"><h3>Discount </h3> </th>
                                                             <th class="text-light"><h3>Remark</h3>  </th>
                                                             <th class="text-light"><h3>Date </h3></th>
                                                             <th class="text-light"><h3>Edit </h3>  </th>
@@ -261,7 +261,7 @@
                                                             </td>
                                                             <td>  <%=rs3.getString(3)%></td>
                                                             <td>&#8377;<%=rs3.getInt(4)%></td>
-                                                            <td>&#8377;<%=rs3.getInt(5)%></td>
+                                                            <td><%=rs3.getInt(5)%>%</td>
                                                             <td> <%=rs3.getString(6)%>  </td>
                                                             <td> <%=rs3.getDate(8)%>  </td>
                                                             <td>

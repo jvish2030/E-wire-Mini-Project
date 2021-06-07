@@ -77,7 +77,7 @@ public class HomeServlet extends HttpServlet {
 
     private void category(HttpServletRequest request, HttpServletResponse response) {
         int pageid = 1;
-        int productPerPage = 9;
+        int productPerPage = 12;
 
         int start = 1;
         int end = productPerPage;

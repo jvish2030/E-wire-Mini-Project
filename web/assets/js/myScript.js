@@ -24,4 +24,17 @@ function validateUser()
         return false;
     }
 }
+
+function link(i) {
+    var loc = window.location.href;
+    var test = loc.search("pageid");
+    if (test !== -1) {
+        var n = loc.length;
+        var res = loc.slice(0, n - 1);
+        res = res + i;
+        window.location.assign(res);
+    } else {
+        window.location.assign(loc + "&pageid=" + i);
+    }
+}
   

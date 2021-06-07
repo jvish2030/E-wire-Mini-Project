@@ -97,8 +97,8 @@
                                         <input type="number" style="font-weight: bold;" class="form-control  text-primary" name="productPrice" id="productPrice" placeholder="price" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="productDiscount">Discount Price</label>
-                                        <input type="number" style="font-weight: bold;" class="form-control  text-primary" name="productDiscount" id="productDiscount" placeholder="Discount" required>
+                                        <label for="productDiscount">Discount %</label>
+                                        <input type="number" style="font-weight: bold;" class="form-control  text-primary" name="productDiscount" id="productDiscount" placeholder="Discount%" required>
                                     </div>
 
                                 </div>

@@ -102,4 +102,9 @@ public class ProductBean {
         this.pDate = pDate;
     }
 
+    public int getPriceAfterApplyingDiscount() {
+        int d = (int) ((this.getpDiscount() / 100.0) * this.getpPrice());
+        return this.getpPrice() - d;
+    }
+
 }
