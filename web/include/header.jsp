@@ -47,7 +47,7 @@ Author URL: http://w3layouts.com
     </head>
     <body>
         <section class="w3l-banner-slider-main inner-pagehny">
-            <div class="breadcrumb-infhny">
+            <div class="breadcrumb-infhny" style="min-height:6em;">
 
                 <div class="top-header-content">
 
@@ -76,8 +76,8 @@ Author URL: http://w3layouts.com
                         <jsp:include page="navbar.jsp"/>
                         <!--include navigation bar here-->
                     </header>
-                    <div class="breadcrumb-contentnhy">
-                        <div class="container">
+                    <div class="breadcrumb-contentnhy " style="padding-top: 140px;">
+                        <div class="container py-4">
                             <nav aria-label="breadcrumb">
                                 <h2 class="hny-title text-center"><%= request.getAttribute("title")%></h2>
                                 <ol class="breadcrumb mb-0">

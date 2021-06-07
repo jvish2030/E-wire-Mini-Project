@@ -22,3 +22,11 @@
 <script src="assets/js/jquery.magnific-popup.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <link href='https://fonts.googleapis.com/css?family=Comic Neue' rel='stylesheet'>
+
+
+<script src="categoryAssets/js/jquery.slicknav.min.js"></script>
+<script src="categoryAssets/js/owl.carousel.min.js"></script>
+<script src="categoryAssets/js/jquery.nicescroll.min.js"></script>
+<script src="categoryAssets/js/jquery.zoom.min.js"></script>
+<script src="categoryAssets/js/jquery-ui.min.js"></script>
+<script src="categoryAssets/js/main.js"></script>
