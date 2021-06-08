@@ -15,6 +15,37 @@ Author URL: http://w3layouts.com
         </title>
         <jsp:include page="css_js.jsp"/>
         <style>
+            .container {
+                padding: 2rem 0rem;
+            }
+
+            .table-image {
+
+                thead {
+                    td, th {
+                        border: 0;
+                        color: #666;
+                        font-size: 0.8rem;
+                    }
+                }
+
+                td, th {
+                    vertical-align: middle;
+                    text-align: center;
+
+                    &.qty {
+                        max-width: 2rem;
+                    }
+                }
+            }
+
+            .price {
+                margin-left: 1rem;
+            }
+
+            .modal-footer {
+                padding-top: 0rem;
+            }
             .product-grid{font-family:Raleway,sans-serif;text-align:center;padding:0 0 72px;border:1px solid rgba(0,0,0,.1);overflow:hidden;position:relative;z-index:1}
             .product-grid .product-image{position:relative;transition:all .3s ease 0s}
             .product-grid .product-image a{display:block}
@@ -76,7 +107,7 @@ Author URL: http://w3layouts.com
                         <jsp:include page="navbar.jsp"/>
                         <!--include navigation bar here-->
                     </header>
-                    <div class="breadcrumb-contentnhy " style="padding-top: 140px;">
+                    <div class="breadcrumb-contentnhy " style="padding-top: 100px;">
                         <div class="container py-4">
                             <nav aria-label="breadcrumb">
                                 <h2 class="hny-title text-center"><%= request.getAttribute("title")%></h2>
@@ -91,3 +122,6 @@ Author URL: http://w3layouts.com
                 </div>
             </div>
         </section>
+
+
+        <jsp:include page="common_modals.jsp"/>

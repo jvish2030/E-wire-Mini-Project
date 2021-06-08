@@ -15,12 +15,11 @@
     <% }%>
 
     <li class="transmitvcart galssescart2 cart cart box_1">
-        <form action="#" method="post" class="last">
 
-            <button class="top_transmitv_cart" type="submit" name="submit" value="">
-                <a href="cart.jsp">My Cart
-                    <span class="fa fa-shopping-cart"></span>  </a>
-            </button>
-        </form>
+        <button class="top_transmitv_cart "  data-toggle="modal" data-target="#cartModal" >
+            My Cart
+            <span class="fa fa-shopping-cart cart-items">(0)</span>
+        </button>
+
     </li>
 </ul>
