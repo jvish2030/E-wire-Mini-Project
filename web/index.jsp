@@ -13,8 +13,11 @@
         <title>Hari Om Electricals</title>
         <!-- Template CSS Aman Gupta Performing Chsnges ,Adiing Some more changes by jatin
         Adding one more line-->
+
         <jsp:include page="include/css_js.jsp"/>
+
     </head>
+
     <body>
 
         <%

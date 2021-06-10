@@ -9,11 +9,11 @@ function validateUser()
     var password = document.forms["myUserRegisterForm"]["password"].value;
     var conpassword = document.forms["myUserRegisterForm"]["conpassword"].value;
 
-    if (fullname == null || fullname == "")
+    if (fullname === null || fullname === "")
     {
         window.alert("Full Name can't be blank");
         return false;
-    } else if (email == null || email == "")
+    } else if (email === null || email === "")
     {
         window.alert("Email can't be blank");
         return false;
@@ -21,23 +21,25 @@ function validateUser()
     {
         window.alert("Password must be at least 6 characters long.");
         return false;
-    } else if (password != conpassword)
+    } else if (password !== conpassword)
     {
         window.alert("Confirm Password should match with the Password");
         return false;
     }
 }
 
-function add_to_cart(pid, pname, price)
+function add_to_cart(uid, pid, pname, price)
 {
-    let cart = localStorage.getItem("cart");
+    alert(uid);
+    let localStorageName = "cart" + uid;
+    let cart = localStorage.getItem(localStorageName);
     if (cart === null)
     {
         //no cart yet  
         let products = [];
         let product = {productId: pid, productName: pname, productQuantity: 1, productPrice: price};
         products.push(product);
-        localStorage.setItem("cart", JSON.stringify(products));
+        localStorage.setItem(localStorageName, JSON.stringify(products));
 //        console.log("Product is added for the first time")
         showToast("Item is added to cart");
     } else
@@ -59,16 +61,16 @@ function add_to_cart(pid, pname, price)
                 }
 
             });
-            localStorage.setItem("cart", JSON.stringify(pcart));
+            localStorage.setItem(localStorageName, JSON.stringify(pcart));
             console.log("Product quantity is increased");
-            showToast(oldProduct.productName + " quantity is increased , Quantity = " + oldProduct.productQuantity);
+            showToast("Product quantity is increased , Quantity = " + oldProduct.productQuantity);
 
         } else
         {
             //we have add the product
             let product = {productId: pid, productName: pname, productQuantity: 1, productPrice: price};
             pcart.push(product);
-            localStorage.setItem("cart", JSON.stringify(pcart));
+            localStorage.setItem(localStorageName, JSON.stringify(pcart));
             console.log("Product is added");
             showToast("Product is added to cart");
         }
@@ -76,16 +78,17 @@ function add_to_cart(pid, pname, price)
 
     }
 
+//    $('#cartModal').modal('show');
 
-    updateCart();
+    updateCart(localStorageName);
 
 }
 
 //update cart:
 
-function updateCart()
+function updateCart(localStorageName)
 {
-    let cartString = localStorage.getItem("cart");
+    let cartString = localStorage.getItem(localStorageName);
     let cart = JSON.parse(cartString);
     if (cart === null || cart.length === 0)
     {
@@ -130,7 +133,7 @@ function updateCart()
                         <td> ${item.productQuantity} </td>
                         <td> ${item.productQuantity * item.productPrice} </td>
                         <td>
-                                <a href='#' onclick='deleteItemFromCart(${item.productId})' class="btn btn-danger btn-sm">
+                                <a href='#' onclick="deleteItemFromCart('`+localStorageName+`',${item.productId})" class="btn btn-danger btn-sm">
                                     <i class="fa fa-times"></i>
                                 </a>
                         </td> 
@@ -157,35 +160,26 @@ function updateCart()
 
 
 //delete item 
-function deleteItemFromCart(pid)
+function deleteItemFromCart(localStorageName, pid)
 {
-    let cart = JSON.parse(localStorage.getItem('cart'));
+    let cart = JSON.parse(localStorage.getItem(localStorageName));
 
     let newcart = cart.filter((item) => item.productId !== pid);
 
-    localStorage.setItem('cart', JSON.stringify(newcart));
+    localStorage.setItem(localStorageName, JSON.stringify(newcart));
 
-    updateCart();
+    updateCart(localStorageName);
 
-    showToast("Item is removed from cart ");
-
+    $('#toast2').toast('show');
 }
-
-
-
 
 
 function showToast(content) {
-    $("#toast").addClass("display");
-    $("#toast").html(content);
-    setTimeout(() => {
-        $("#toast").removeClass("display");
-    }, 2000);
+    $(".toast-body").html(content);
+    $("#toast").toast({delay: 2000});
+    $('#toast').toast('show');
 }
 
-
 function goToCheckout() {
-
     window.location = "checkout.jsp";
-
 }

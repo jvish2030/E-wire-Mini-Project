@@ -5,7 +5,6 @@ Author URL: http://w3layouts.com
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="zxx">
-
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -15,10 +14,20 @@ Author URL: http://w3layouts.com
         </title>
         <jsp:include page="css_js.jsp"/>
         <style>
+            #toast {
+                position: fixed;
+                color:white;
+                left: 50%;
+                bottom: 30px;
+                z-index: 3;
+                margin-left: -120px;
+                background: #3b3b3b;
+                min-width: 300px;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);            }
+
             .container {
                 padding: 2rem 0rem;
             }
-
             .table-image {
 
                 thead {
@@ -28,7 +37,6 @@ Author URL: http://w3layouts.com
                         font-size: 0.8rem;
                     }
                 }
-
                 td, th {
                     vertical-align: middle;
                     text-align: center;
@@ -38,11 +46,9 @@ Author URL: http://w3layouts.com
                     }
                 }
             }
-
             .price {
                 margin-left: 1rem;
             }
-
             .modal-footer {
                 padding-top: 0rem;
             }

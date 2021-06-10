@@ -16,7 +16,7 @@
 
     <li class="transmitvcart galssescart2 cart cart box_1">
 
-        <button class="top_transmitv_cart "  data-toggle="modal" data-target="#cartModal" >
+        <button class="top_transmitv_cart " onclick="checkLogin()"  >
             My Cart
             <span class="fa fa-shopping-cart cart-items">(0)</span>
         </button>

@@ -108,7 +108,7 @@
                                     <ul class="social">
                                         <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
                                         <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                                        <li><a href="" data-tip="Add to Cart" onclick="add_to_cart(${product.pId}, '${product.pName}', '${product.getPriceAfterApplyingDiscount()}')"><i class="fa fa-shopping-cart" ></i></a></li>
+                                        <li><a data-tip="Add to Cart" onclick="addToCartCheck('${sessionScope.userid}',${product.pId}, '${product.pName}', '${product.getPriceAfterApplyingDiscount()}')"><i class="fa fa-shopping-cart" ></i></a></li>
                                     </ul>
                                     <span class="product-new-label">${product.pRemark}</span>
                                     <span class="product-discount-label">${product.pDiscount}% off</span>
@@ -125,7 +125,8 @@
                                     <div class="price">${product.getPriceAfterApplyingDiscount()}/-
                                         <span>${product.pPrice}/-</span>
                                     </div>
-                                    <a class="add-to-cart" style="cursor: pointer;" onclick="add_to_cart(${product.pId}, '${product.pName}', '${product.getPriceAfterApplyingDiscount()}')">+ Add To Cart</a>
+                                    <a class="add-to-cart" style="cursor: pointer;" onclick="addToCartCheck('${sessionScope.userid}',${product.pId}, '${product.pName}', '${product.getPriceAfterApplyingDiscount()}')">+ Add To Cart</a>
+
                                 </div>
                             </div>
                         </div>
@@ -185,6 +186,35 @@
     </nav>
 </div>
 <!-- Category section end -->
+
+
+<script>
+    function checkLogin() {
+    <c:choose>
+        <c:when test="${sessionScope.userid ne null}">
+        $('#cartModal').modal('toggle');
+        return true;
+        </c:when>
+        <c:otherwise>
+        $(".overlay-login-page").fadeIn(200);
+        return false;
+        </c:otherwise>
+    </c:choose>
+    }
+    function addToCartCheck(a, b, c, d) {
+    <c:choose>
+        <c:when test="${sessionScope.userid ne null}">
+        add_to_cart(a, b, c, d);
+        </c:when>
+        <c:otherwise>
+        $(".overlay-login-page").fadeIn(200);
+        </c:otherwise>
+    </c:choose>
+    }
+    $(document).ready(function () {
+        updateCart('cart${sessionScope.userid}');
+    });
+</script>
 <script src="categoryAssets/js/jquery-3.2.1.min.js"></script>
 <script src="categoryAssets/js/bootstrap.min.js"></script>
 <script src="categoryAssets/js/jquery.slicknav.min.js"></script>
@@ -193,10 +223,4 @@
 <script src="categoryAssets/js/jquery.zoom.min.js"></script>
 <script src="categoryAssets/js/jquery-ui.min.js"></script>
 <script src="categoryAssets/js/main.js"></script>
-<script>
-                        $(document).ready(function () {
-                            $('#cartModal').modal('show');
-                            updateCart();
-                        });</script>
-
 <jsp:include page="include/footer.jsp"/>
