@@ -125,48 +125,48 @@
 
 <!--login-register-->
 <script>
-          var openLogin = false;
-          var openRegister = false;
-          $(document).ready(function () {
-              $(".button-log a").click(function () {
-                   if (!openLogin) {
-                      $(".overlay-login-page").fadeIn(200);
-                      $(this).toggleClass('btn-open').toggleClass('btn-close');
-                      openLogin = true;
-                      
-                } else if (openLogin) {
-                      $(".overlay-login-page").fadeOut(200);
-                      $(this).toggleClass('btn-open').toggleClass('btn-close');
-                      openLogin = false;
-                      
-                }
-                
-                  if (openLogin && openRegister) {
-                      $(".overlay-login-page").fadeOut(200);
-                      $(".overlay-register-page").fadeOut(200);
+    var openLogin = false;
+    var openRegister = false;
+    $(document).ready(function () {
+        $(".button-log a").click(function () {
+            if (!openLogin) {
+                $(".overlay-login-page").fadeIn(200);
+                $(this).toggleClass('btn-open').toggleClass('btn-close');
+                openLogin = true;
 
-                      $(this).toggleClass('btn-open').toggleClass('btn-close');
-                      openLogin = false;
-                      openRegister = false;
-                  }
-              });
+            } else if (openLogin) {
+                $(".overlay-login-page").fadeOut(200);
+                $(this).toggleClass('btn-open').toggleClass('btn-close');
+                openLogin = false;
 
-          });
+            }
 
-          $(".page-reg a").click(function () {
-              $(".overlay-login-page").fadeToggle(200);
-              openLogin = false;
-              $(".overlay-register-page").fadeToggle(200);
-              openRegister = true;
-          });
+            if (openLogin && openRegister) {
+                $(".overlay-login-page").fadeOut(200);
+                $(".overlay-register-page").fadeOut(200);
 
-          $('.overlay-close1').on('click', function () {
-              $(".overlay-register-page").fadeOut(200);
-              $(".overlay-login-page").fadeOut(200);
-              $(".button-log a").toggleClass('btn-open').toggleClass('btn-close');
- openLogin = false;
-                      openRegister = false;
-                  });
+                $(this).toggleClass('btn-open').toggleClass('btn-close');
+                openLogin = false;
+                openRegister = false;
+            }
+        });
+
+    });
+
+    $(".page-reg a").click(function () {
+        $(".overlay-login-page").fadeToggle(200);
+        openLogin = false;
+        $(".overlay-register-page").fadeToggle(200);
+        openRegister = true;
+    });
+
+    $('.overlay-close1').on('click', function () {
+        $(".overlay-register-page").fadeOut(200);
+        $(".overlay-login-page").fadeOut(200);
+        $(".button-log a").toggleClass('btn-open').toggleClass('btn-close');
+        openLogin = false;
+        openRegister = false;
+    });
 
 </script>
 <!--login-register-->
@@ -181,20 +181,20 @@
 <script src="assets/js/jquery.magnific-popup.js"></script>
 <!--//search-bar-->
 <script>
-  $(document).ready(function () {
-    $('.popup-with-zoom-anim').magnificPopup({
-      type: 'inline',
-      fixedContentPos: false,
-      fixedBgPos: true,
-      overflowY: 'auto',
-      closeBtnInside: true,
-      preloader: false,
-      midClick: true,
-      removalDelay: 300,
-      mainClass: 'my-mfp-zoom-in'
-    });
+    $(document).ready(function () {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
 
-  });
+    });
 </script>
 <!--//search-bar-->
 
@@ -208,3 +208,8 @@
     });
 </script>
 
+<script>
+    $(document).ready(function () {
+        updateCart('${sessionScope.userid}');
+    });
+</script>

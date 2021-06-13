@@ -5,6 +5,8 @@
  */
 package com.mvc.controller;
 
+import com.mvc.beans.ProductBean;
+import com.mvc.dao.ProductsDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -38,6 +40,9 @@ public class ViewServlet extends HttpServlet {
             case "faq":
                 faqs(request, response);
                 break;
+            case "single":
+                single(request, response);
+                break;
             default:
                 errorPage(request, response);
         }
@@ -68,30 +73,30 @@ public class ViewServlet extends HttpServlet {
     }// </editor-fold>
 
     private void about(HttpServletRequest request, HttpServletResponse response) {
-         try {
+        try {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("about.jsp");
             request.setAttribute("title", "About");
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void contact(HttpServletRequest request, HttpServletResponse response) {
-         try {
+        try {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("contact.jsp");
             request.setAttribute("title", "Contact Us");
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-     private void faqs(HttpServletRequest request, HttpServletResponse response) {
-          try {
+    private void faqs(HttpServletRequest request, HttpServletResponse response) {
+        try {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("faq.jsp");
             request.setAttribute("title", "FAQ's");
-            requestDispatcher.forward(request,response);
+            requestDispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -100,12 +105,26 @@ public class ViewServlet extends HttpServlet {
     private void errorPage(HttpServletRequest request, HttpServletResponse response) {
         try {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
-              request.setAttribute("title", "error");
-            requestDispatcher.forward(request,response);
+            request.setAttribute("title", "error");
+            requestDispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-  
+    private void single(HttpServletRequest request, HttpServletResponse response) {
+        String cat = request.getParameter("cat");
+        int pid = Integer.parseInt(request.getParameter("pid"));
+        ProductsDao pdao = new ProductsDao();
+        ProductBean pObj = pdao.getProductInfo(pid);
+        request.setAttribute("product", pObj);
+        request.setAttribute("title", cat);
+        try {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("single.jsp");
+            requestDispatcher.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

@@ -153,6 +153,7 @@
 
             </div>
         </section>
+        <jsp:include page="include/common_modals.jsp"/>
 
         <%
             int getid = 0;
@@ -264,6 +265,5 @@
             </div>
         </section>
         <!-- //video-6-->
-
-
+        
         <jsp:include page="include/footer.jsp"/>

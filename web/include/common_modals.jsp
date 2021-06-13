@@ -6,7 +6,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">
                     Your Shopping Cart
                 </h5>
-               
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -16,7 +16,6 @@
 
                 </div>
                 <div class="d-flex justify-content-end cart-total">
-
                 </div>
             </div>
             <div class="modal-footer border-top-0 d-flex justify-content-between">
