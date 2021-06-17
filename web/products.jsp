@@ -255,12 +255,7 @@
                 </ul>
             </nav>
         </div>
-        <!-- Category section end -->
-<!--        <script>
-            $(document).ready(function () {
-                updateCart('${sessionScope.userid}');
-            });
-        </script>-->
+
         <!--        <script src="categoryAssets/js/jquery-3.2.1.min.js"></script>-->
         <!--        <script src="categoryAssets/js/bootstrap.min.js"></script>-->
         <script src="categoryAssets/js/jquery.slicknav.min.js"></script>

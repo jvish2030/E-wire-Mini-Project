@@ -201,4 +201,9 @@ public class DBUtils {
         return rs;
     }
 
+    public static void main(String[] args) {
+        System.out.println("conn................"+connect()); 
+    }
 }
+
+

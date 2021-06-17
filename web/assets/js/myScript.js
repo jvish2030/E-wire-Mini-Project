@@ -25,6 +25,7 @@ function validateUser()
     }
 }
 function checkLogin(uid) {
+
     if (!uid) {
         $(".overlay-login-page").fadeIn(200);
         return false;
@@ -118,9 +119,9 @@ function updateCart(uid)
                            <img src="images/products/${item.productId}.jpg" alt="e-wire">
                         </td>
                         <td> ${item.productName} </td>
-                        <td> ${item.productPrice} </td>
+                        <td> &#8377;${item.productPrice} </td>
                         <td><input type="number" style="width:90px;"  class="pass-quantity form-control" name="quantity" onChange="qtyChange('` + localStorageName + `',${item.productId},this.value);" placeholder="${item.productQuantity}" min="1"/> </td>
-                        <td id="${item.productId}"> ${item.productQuantity * item.productPrice} </td>
+                        <td id="${item.productId}">&#8377; ${item.productQuantity * item.productPrice} </td>
                         <td>
                                 <a href='#' onclick="deleteItemFromCart('` + localStorageName + `',${item.productId})" class="btn btn-danger btn-sm">
                                     <i class="fa fa-times"></i>
@@ -131,7 +132,7 @@ function updateCart(uid)
             totalPrice += item.productPrice * item.productQuantity;
         });
         table = table + `</table>`;
-        let totalRow = `<h5>Total: <span class="price text-success">${totalPrice}.00/-</span></h5>`;
+        let totalRow = `<h5>Total: <span class="price text-success">&#8377;${totalPrice}.00</span></h5>`;
         $(".cart-body").html(table);
         $(".cart-total").html(totalRow);
         $(".checkout-btn").attr('disabled', false);
@@ -183,11 +184,11 @@ function qtyChange(localStorageName, pid, qty) {
     let totalPrice = 0;
     cart.map((item) => {
         let id = '#' + item.productId + '';
-        $(id).html(item.productQuantity * item.productPrice);
+        $(id).html('&#8377;'+item.productQuantity * item.productPrice);
         totalPrice += item.productPrice * item.productQuantity;
     });
 
-    let totalRow = `<h5>Total: <span class="price text-success">${totalPrice}.00/-</span></h5>`;
+    let totalRow = `<h5>Total: <span class="price text-success">&#8377;${totalPrice}.00</span></h5>`;
     $(".cart-total").html(totalRow);
 }
 
