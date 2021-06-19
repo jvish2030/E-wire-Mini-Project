@@ -43,6 +43,9 @@ public class ViewServlet extends HttpServlet {
             case "single":
                 single(request, response);
                 break;
+            case "cart":
+                cart(request, response);
+                break;
             default:
                 errorPage(request, response);
         }
@@ -121,6 +124,17 @@ public class ViewServlet extends HttpServlet {
         request.setAttribute("title", cat);
         try {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("single.jsp");
+            requestDispatcher.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void cart(HttpServletRequest request, HttpServletResponse response) {
+        String cart = request.getParameter("cart");
+        request.setAttribute("title", "MyCart");
+        try {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("cart.jsp");
             requestDispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);

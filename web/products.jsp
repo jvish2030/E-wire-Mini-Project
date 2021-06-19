@@ -122,16 +122,19 @@
                     <div class="col-lg-3 order-2 order-lg-1">
                         <div class="filter-widget">
                             <h2 class="fw-title">Categories</h2>
-                            <ul class="category-menu">
+                            <ul class="category-menu" >
                                 <!--                        OUTER LOOP-->
-                                <%                            while (itr1.hasNext()) {
+                                <%  
+                                    while (itr1.hasNext()) {
                                         Map.Entry CategoryEntry = (Map.Entry) itr1.next();
                                         int id = (int) CategoryEntry.getKey();
                                         String value = CategoryEntry.getValue().toString();
                                 %> 
-                                <li>
-                                    <a href="${pageContext.request.contextPath}\home?page=category&id=<%=id%>&value=<%=value%>"><%= value%></a>
+                                <li style="list-style :none;">
+                                    <a style="font-size: 15px;background-color: #f1eeee"><%= value%> <i id="listhover" class="fa fa-caret-down"></i></a>
+                                  
                                     <ul class="sub-menu">
+                                        <li ><a  href="${pageContext.request.contextPath}\home?page=category&id=<%=id%>&value=<%=value%>" style="font-size: 13px;"><%= value%></a></li>
                                         <!-- OUTER LOOP-->
                                         <% for (String subCat : DBUtils.getSubCategories((int) id)) {%>
                                         <li><a href="${pageContext.request.contextPath}\home?page=category&id=<%=id%>&pcat=<%=subCat%>&value=<%=value%>"><%= subCat%><span>(90)</span></a></li>
@@ -256,9 +259,7 @@
             </nav>
         </div>
 
-        <!--        <script src="categoryAssets/js/jquery-3.2.1.min.js"></script>-->
-        <!--        <script src="categoryAssets/js/bootstrap.min.js"></script>-->
-        <script src="categoryAssets/js/jquery.slicknav.min.js"></script>
+      <script src="categoryAssets/js/jquery.slicknav.min.js"></script>
         <!--        <script src="categoryAssets/js/owl.carousel.min.js"></script>-->
         <script src="categoryAssets/js/jquery.nicescroll.min.js"></script>
         <!--        <script src="categoryAssets/js/jquery.zoom.min.js"></script>-->

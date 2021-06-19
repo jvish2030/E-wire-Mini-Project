@@ -189,7 +189,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <h4><a href="${pageContext.request.contextPath}\home?page=category"> <%= CategoryEntry.getValue()%></a></h4>
+                            <h4><a href="${pageContext.request.contextPath}\home?page=category&id=<%=id%>&value=<%=value%>"> <%= CategoryEntry.getValue()%></a></h4>
                         </div>
                         <%}%>                   
                     </div>

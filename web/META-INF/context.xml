@@ -3,8 +3,8 @@
         <Resource name="e_wire" 
                auth="Container" type="javax.sql.DataSource"	
                maxActive="25" maxIdle="5" maxWait="10000"     
-               username="e_wire" password="e-wire2030"     
+               username="e_wire" password="e_wire"     
                driverClassName="oracle.jdbc.OracleDriver"    
-               url="jdbc:oracle:thin:@oradb-12.csvmw74aqu4r.us-east-2.rds.amazonaws.com:1521:ORACLE12"/>
+               url="jdbc:oracle:thin:@localhost:1521:XE"/>
 </Context>
 

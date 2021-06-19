@@ -25,12 +25,12 @@ function validateUser()
     }
 }
 function checkLogin(uid) {
-
+// check for user login or not
     if (!uid) {
         $(".overlay-login-page").fadeIn(200);
         return false;
     } else {
-        $('#cartModal').modal('toggle');
+        window.location.assign("view?page=cart");
         return true;
     }
 }
@@ -90,51 +90,70 @@ function updateCart(uid)
     {
         console.log("Cart is empty !!");
         $(".cart-items").html("");
-        $(".cart-body").html("<h4>Cart does not have any items </h4>");
-        $(".cart-total").html(`<h5>Total: <span class="price text-success">0</span></h5>`);
+        $(".cart-body").html(`<div class="jumbotron">
+    <h1 style="color:#CD5C5C;text-align:center;">Cart does not have any items</h1>      
+   </div>`);
+        $("#product_total_amt").html('00.0');
+        $("#shipping_charge").html('00.0');
+
+        $("#total_cart_amt").html('00.0');
         $(".checkout-btn").attr('disabled', true);
     } else
     {
         //there is some in cart to show
         console.log(cart);
         $(".cart-items").html(`( ${cart.length} )`);
-        let table = `
-           <table class="table table-image">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Qty</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-            `;
+        let table = ``;
         let totalPrice = 0;
         cart.map((item) => {
             table += `
-                    <tr>
-                        <td class="w-25">
-                           <img src="images/products/${item.productId}.jpg" alt="e-wire">
-                        </td>
-                        <td> ${item.productName} </td>
-                        <td> &#8377;${item.productPrice} </td>
-                        <td><input type="number" style="width:90px;"  class="pass-quantity form-control" name="quantity" onChange="qtyChange('` + localStorageName + `',${item.productId},this.value);" placeholder="${item.productQuantity}" min="1"/> </td>
-                        <td id="${item.productId}">&#8377; ${item.productQuantity * item.productPrice} </td>
-                        <td>
-                                <a href='#' onclick="deleteItemFromCart('` + localStorageName + `',${item.productId})" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                        </td> 
-                        </tr>
+                             <div class="card p-4">
+                               
+                                <div class="row">
+                                    <!-- cart images div -->
+                                    <div class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
+                                        <img src="images/products/${item.productId}.jpg" class="img-fluid" alt="cart img">
+                                    </div>
+                                    <!-- cart product details -->
+                                    <div class="col-md-7 col-11 mx-auto px-4 mt-2">
+                                        <div class="row">
+                                            <!-- product name  -->
+                                            <div class="col-9  card-title">
+                                                <h1 class="mb-4 product_name">${item.productName}</h1>
+                                                <p class="mb-2">delivery charges applied.</p>
+                                                <p class="mb-2">Terms & coditions.</p>
+                                                <p class="mb-3">company assured.</p>
+                                            </div>
+                                            <!-- quantity inc dec -->
+                                            <div class="col-3 ">
+                                                 <input type="number" style="width:60px;"  class="pass-quantity form-control" name="quantity" onChange="qtyChange('` + localStorageName + `',${item.productId}, this.value);" placeholder="${item.productQuantity}" min="1"/>    
+                                                                                            
+                                            </div>
+                                        </div>
+                                        <!-- //remover move and price -->
+                                     
+                                            <div class=" d-flex justify-content-between remove_wish">
+                                                <p onclick="deleteItemFromCart('` + localStorageName + `',${item.productId})" style="color:red;"> REMOVE ITEM</p>
+                                                <p><i class="fas fa-heart"></i>MOVE TO WISH LIST </p>
+                                            </div>
+                                           <div class=" d-flex justify-content-between price_money">
+                                               <p> <h5>price:<span id="itemval"> &#8377;  ${item.productPrice}</span></h5></p>
+                                               <p> <h5> total: <span id="${item.productId}"> &#8377; ${item.productPrice * item.productQuantity}</span></h5></p>
+                                           </div>
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                            <hr/>
                  `;
             totalPrice += item.productPrice * item.productQuantity;
         });
-        table = table + `</table>`;
-        let totalRow = `<h5>Total: <span class="price text-success">&#8377;${totalPrice}.00</span></h5>`;
+
+
         $(".cart-body").html(table);
-        $(".cart-total").html(totalRow);
+        $("#product_total_amt").html(totalPrice);
+        $("#shipping_charge").html('50.0');
+        $("#total_cart_amt").html(totalPrice + 50);
         $(".checkout-btn").attr('disabled', false);
         console.log("removed");
     }
@@ -184,11 +203,11 @@ function qtyChange(localStorageName, pid, qty) {
     let totalPrice = 0;
     cart.map((item) => {
         let id = '#' + item.productId + '';
-        $(id).html('&#8377;'+item.productQuantity * item.productPrice);
+        $(id).html('&#8377;' + item.productQuantity * item.productPrice);
         totalPrice += item.productPrice * item.productQuantity;
     });
 
-    let totalRow = `<h5>Total: <span class="price text-success">&#8377;${totalPrice}.00</span></h5>`;
-    $(".cart-total").html(totalRow);
+    $("#product_total_amt").html(totalPrice);
+    $("#total_cart_amt").html(totalPrice + 50);
 }
 
