@@ -5,7 +5,9 @@
  */
 package com.mvc.controller;
 
+import com.mvc.beans.CustDetails;
 import com.mvc.beans.ProductBean;
+import com.mvc.dao.CustInfoDao;
 import com.mvc.dao.ProductsDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -120,6 +123,7 @@ public class ViewServlet extends HttpServlet {
     }
 
     private void single(HttpServletRequest request, HttpServletResponse response) {
+
         String cat = request.getParameter("cat");
         int pid = Integer.parseInt(request.getParameter("pid"));
         ProductsDao pdao = new ProductsDao();
@@ -147,6 +151,10 @@ public class ViewServlet extends HttpServlet {
 
     private void order(HttpServletRequest request, HttpServletResponse response) {
         String total = request.getParameter("total");
+        HttpSession session = request.getSession();
+        int userid = Integer.parseInt(session.getAttribute("userid").toString());
+        CustDetails obj = new CustInfoDao().getCustDetails(userid);
+        request.setAttribute("CustDetails", obj);   
         request.setAttribute("title", "Checkout form");
         request.setAttribute("total", total);
         try {

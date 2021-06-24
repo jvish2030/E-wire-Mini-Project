@@ -163,11 +163,13 @@ public class OperationServlet extends HttpServlet {
 
     private void saveInfo(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-       
+
         int userid = Integer.parseInt(session.getAttribute("userid").toString());
-       
+
         String fname = request.getParameter("fname");
+        System.out.println("fname : " + fname);
         String lname = request.getParameter("lname");
+        System.out.println("lname : " + lname);
         String email = request.getParameter("email");
         String address1 = request.getParameter("address1");
         String address2 = request.getParameter("address2");
@@ -194,15 +196,15 @@ public class OperationServlet extends HttpServlet {
 
         String authorize = new CustInfoDao().saveCustDetails(obj);
 
-        if (authorize.equals("Information saved successfully!")) //On success, you can display a message to user on Home page
+        if (authorize.equals("Information saved successfully!") || authorize.equals("Information Update successfully!")) //On success, you can display a message to user on Home page
         {
             session.setAttribute("message", authorize);
             System.out.println(authorize);
-//            try {
-//                request.getRequestDispatcher("index.jsp").forward(request, response);
-//            } catch (IOException | ServletException ex) {
-//                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+            try {
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } catch (IOException | ServletException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else //On Failure, display a meaningful message to the User.
         {
             session.setAttribute("errMessage", authorize);
