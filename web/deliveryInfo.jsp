@@ -32,43 +32,43 @@
         </div>
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Billing address</h4>
-            <form class="needs-validation" method="post" action="">
+            <form class="needs-validation" method="post" action="Operation" >
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="firstName">First name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                        <label for="fname">First name</label>
+                        <input type="text" class="form-control" id="fname" name="fname" placeholder="" required="">
                         <div class="invalid-feedback"> Valid first name is required. </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName">Last name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                        <input type="text" class="form-control" id="lname" name="lname" placeholder="" required="">
                         <div class="invalid-feedback"> Valid last name is required. </div>
                     </div>
                 </div>
-
+                <input type="hidden" name="operation" value="saveinfo"/>
                 <div class="mb-3">
                     <label for="email">Email</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com" required="">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required="">
                         <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                    <label for="address1">Address</label>
+                    <input type="text" class="form-control" id="address1" name="address1" placeholder="1234 Main St" required="">
                     <div class="invalid-feedback"> Please enter your shipping address. </div>
                 </div>
                 <div class="mb-3">
                     <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                    <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment or suite">
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="country">Country</label>
-                        <select class="custom-select d-block w-100" id="country" required="">
+                        <select class="custom-select d-block w-100" id="country" name="country" required="">
                             <option value="">Choose...</option>
                             <option>India</option>
                         </select>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="state">State</label>
-                        <select class="custom-select d-block w-100" id="state" required="">
+                        <select class="custom-select d-block w-100" id="state" name="state" required="">
                             <option value="">Choose State Name</option>
                             <option value="Andhra Pradesh">Andhra Pradesh</option>   
                             <option value="Assam">Assam</option>   
@@ -97,31 +97,31 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="city">City</label>
-                        <input type="text" class="form-control" id="city" placeholder="" required="">
+                        <input type="text" class="form-control" id="city" name="city" placeholder="" required="">
                         <div class="invalid-feedback">Please provide a valid city. </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="mobile">10-digit Mobile Number</label>
-                        <input type="text" class="form-control" id="mobile" placeholder="" required="">
+                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="" required="">
                         <div class="invalid-feedback"> 10-digit Mobile Number required. </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="zip">Zip</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required="">
+                        <label for="pin">Pin</label>
+                        <input type="text" class="form-control" id="pin" name="pin" placeholder="" required="">
                         <div class="invalid-feedback"> Zip code required. </div>
                     </div>
                 </div>
                 <hr class="mb-4">
                 <div class="form-check mb-3">
                     <label class="form-check-label" for="home">
-                        <input type="radio" checked="" class="form-check-input" name="optradio" value="home" id="home">Home(All day)
+                        <input type="radio" checked="" class="form-check-input" name="addtype" value="home" id="home">Home(All day)
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label" for="work">
-                        <input type="radio" class="form-check-input" value="work" name="optradio" id="work">Work(Between 10am to 5pm)
+                        <input type="radio" class="form-check-input" value="work" name="addtype" id="work">Work(Between 10am to 5pm)
                     </label>
                 </div>
                 <hr class="mb-4">

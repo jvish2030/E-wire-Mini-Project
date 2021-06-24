@@ -6,8 +6,10 @@
 package com.mvc.controller;
 
 import com.mvc.beans.CategoryBean;
+import com.mvc.beans.CustDetails;
 import com.mvc.beans.UserBean;
 import com.mvc.dao.AdminDao;
+import com.mvc.dao.CustInfoDao;
 import com.mvc.dao.LoginDao;
 import com.mvc.dao.RegisterDao;
 import java.io.IOException;
@@ -28,6 +30,7 @@ import org.apache.tomcat.jni.SSLContext;
  */
 @WebServlet(name = "OperationServlet", urlPatterns = {"/Operation"})
 public class OperationServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,6 +44,7 @@ public class OperationServlet extends HttpServlet {
                 error(request, response);
         }
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,12 +70,13 @@ public class OperationServlet extends HttpServlet {
                 login(request, response, user);
                 break;
             case "saveinfo":
-                 saveInfo(request, response);
+                saveInfo(request, response);
                 break;
             default:
                 error(request, response);
         }
     }
+
     private void register(HttpServletRequest request, HttpServletResponse response, UserBean user) {
         RegisterDao registerDao = new RegisterDao();
         //The core Logic of the Registration application is present here. We are going to insert user data in to the database.
@@ -135,6 +140,7 @@ public class OperationServlet extends HttpServlet {
             }
         }
     }
+
     private void logout(HttpServletRequest request, HttpServletResponse response) {
         //response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
@@ -146,6 +152,7 @@ public class OperationServlet extends HttpServlet {
         }
 
     }
+
     private void error(HttpServletRequest request, HttpServletResponse response) {
         try {
             response.sendRedirect("error.jsp");
@@ -155,7 +162,56 @@ public class OperationServlet extends HttpServlet {
     }
 
     private void saveInfo(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HttpSession session = request.getSession();
+       
+        int userid = Integer.parseInt(session.getAttribute("userid").toString());
+       
+        String fname = request.getParameter("fname");
+        String lname = request.getParameter("lname");
+        String email = request.getParameter("email");
+        String address1 = request.getParameter("address1");
+        String address2 = request.getParameter("address2");
+        String country = request.getParameter("country");
+        String state = request.getParameter("state");
+        String city = request.getParameter("city");
+        int pin = Integer.parseInt(request.getParameter("pin"));
+        int mobile = Integer.parseInt(request.getParameter("mobile"));
+        String addtype = request.getParameter("addtype");
+
+        CustDetails obj = new CustDetails();
+        obj.setUserid(userid);
+        obj.setFname(fname);
+        obj.setLname(lname);
+        obj.setEmail(email);
+        obj.setAddress1(address1);
+        obj.setAddress2(address2);
+        obj.setCountry(country);
+        obj.setState(state);
+        obj.setCity(city);
+        obj.setPin(pin);
+        obj.setMobile(mobile);
+        obj.setAddType(addtype);
+
+        String authorize = new CustInfoDao().saveCustDetails(obj);
+
+        if (authorize.equals("Information saved successfully!")) //On success, you can display a message to user on Home page
+        {
+            session.setAttribute("message", authorize);
+            System.out.println(authorize);
+//            try {
+//                request.getRequestDispatcher("index.jsp").forward(request, response);
+//            } catch (IOException | ServletException ex) {
+//                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        } else //On Failure, display a meaningful message to the User.
+        {
+            session.setAttribute("errMessage", authorize);
+            try {
+                request.getRequestDispatcher("deliveryInfo.jsp").forward(request, response);
+            } catch (IOException | ServletException ex) {
+                Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }

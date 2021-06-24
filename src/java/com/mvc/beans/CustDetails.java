@@ -19,8 +19,26 @@ public class CustDetails {
     private String address2;
     private String country;
     private String state;
+    private String city;
     private int pin;
     private int mobile;
+    private String addType;
+
+    public String getAddType() {
+        return addType;
+    }
+
+    public void setAddType(String addType) {
+        this.addType = addType;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
     private String addtype;
 
     public int getUserid() {
