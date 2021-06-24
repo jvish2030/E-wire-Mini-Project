@@ -1,4 +1,4 @@
-
+var totalprice = 0;
 function validateUser()
 {
     var fullname = document.forms["myUserRegisterForm"]["fullname"].value;
@@ -104,7 +104,7 @@ function updateCart(uid)
         console.log(cart);
         $(".cart-items").html(`( ${cart.length} )`);
         let table = ``;
-        let totalPrice = 0;
+        totalPrice = 0;
         cart.map((item) => {
             table += `
                              <div class="card p-4">
@@ -200,7 +200,6 @@ function qtyChange(localStorageName, pid, qty) {
     //    showToast("Product quantity is increased , Quantity = " + oldProduct.productQuantity);
     cartString = localStorage.getItem(localStorageName);
     cart = JSON.parse(cartString);
-    let totalPrice = 0;
     cart.map((item) => {
         let id = '#' + item.productId + '';
         $(id).html('&#8377;' + item.productQuantity * item.productPrice);
@@ -211,3 +210,8 @@ function qtyChange(localStorageName, pid, qty) {
     $("#total_cart_amt").html(totalPrice + 50);
 }
 
+function order(){
+    let confirmPrice = totalPrice + 50;
+     window.location.assign("view?page=order&total="+confirmPrice);
+     return true;
+}

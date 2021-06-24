@@ -46,6 +46,10 @@ public class ViewServlet extends HttpServlet {
             case "cart":
                 cart(request, response);
                 break;
+            case "order":
+                System.out.println("order");
+                order(request, response);
+                break;
             default:
                 errorPage(request, response);
         }
@@ -135,6 +139,18 @@ public class ViewServlet extends HttpServlet {
         request.setAttribute("title", "MyCart");
         try {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("cart.jsp");
+            requestDispatcher.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void order(HttpServletRequest request, HttpServletResponse response) {
+        String total = request.getParameter("total");
+        request.setAttribute("title", "Checkout form");
+        request.setAttribute("total", total);
+        try {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("deliveryInfo.jsp");
             requestDispatcher.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(HomeServlet.class.getName()).log(Level.SEVERE, null, ex);

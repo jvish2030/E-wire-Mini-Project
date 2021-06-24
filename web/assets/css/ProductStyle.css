@@ -34,7 +34,7 @@
 .modal-footer {
     padding-top: 0rem;
 }
-.product-grid{font-family:Raleway,sans-serif;text-align:center;padding:0 0 72px;border:1px solid rgba(0,0,0,.1);overflow:hidden;position:relative;z-index:1}
+/*z.product-grid{font-family:Raleway,sans-serif;text-align:center;padding:0 0 72px;border:1px solid rgba(0,0,0,.1);overflow:hidden;position:relative;z-index:1}
 .product-grid .product-image{position:relative;transition:all .3s ease 0s}
 .product-grid .product-image a{display:block}
 .product-grid .product-image img{width:auto;height:120px; max-width:500px;}
@@ -63,4 +63,169 @@
 
 
 @media only screen and (max-width:990px){.product-grid{margin-bottom:30px}
+}*/
+
+
+/********************* Shopping Demo-4 **********************/
+
+
+.product-content {
+    border: 2px solid #dfe5e9;
+    margin-bottom: 20px;
+    margin-top: 12px;
+    background: #fff;
+    padding: 4px;
+        -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
+}
+
+.product-content .carousel-control.left {
+    margin-left: 0
+}
+
+.product-content .product-image {
+    background-color: #fff;
+    display: block;
+    min-height: 238px;
+    overflow: hidden;
+    position: relative
+}
+
+.product-content .product-deatil {
+    border-bottom: 1px solid #dfe5e9;
+    padding-bottom: 17px;
+    padding-left: 16px;
+    padding-top: 16px;
+    position: relative;
+    background: #fff
+}
+
+.product-content .product-deatil h5 a {
+    color: #2f383d;
+    font-size: 15px;
+    line-height: 19px;
+    text-decoration: none;
+    padding-left: 0;
+    margin-left: 0
+}
+
+
+
+
+.product-content name.a {
+    padding: 5px 10px;
+    margin-left: 16px
+}
+
+.product-wrap .product-image span.tag2 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    padding: 10px 0;
+    color: #fff;
+    font-size: 11px;
+    text-align: center
+}
+.product-wrap .product-image span.hot {
+    background-color: #a90329
+}
+
+
+
+
+
+.product-block .product-deatil p.price-container span,
+.product-content .product-deatil p.price-container span,
+.product-entry .product-deatil p.price-container span,
+.shipping table tbody tr td p.price-container span,
+.shopping-items table tbody tr td p.price-container span {
+    color: #21c2f8;
+    font-family: Lato, sans-serif;
+    font-size: 24px;
+    line-height: 20px
+}
+
+
+
+.product-deatil {
+    padding: 30px 30px 50px
+}
+
+.product-deatil hr+.description-tabs {
+    padding: 0 0 5px!important
+}
+
+.product-deatil .carousel-control.left,
+.product-deatil .carousel-control.right {
+    background: none!important
+}
+
+.product-deatil .glyphicon {
+    color: #3276b1
+}
+
+.product-deatil .product-image {
+    border-right: 0px solid #fff !important
+}
+
+.product-deatil .name {
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+.product-deatil .name small {
+    display: block
+}
+
+.product-deatil .name a {
+    margin-left: 0
+}
+
+
+
+.card-product .info-wrap {
+    overflow: hidden;
+    padding: 5px;
+    border-top: 1px solid #eee;
+}
+.card-product .bottom-wrap {
+   
+    border-top: 1px solid #eee;
+}
+
+.label-rating { margin-right:10px;
+    color: #333;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.card-product .price-old {
+    color: #999;
+}
+product-wrap:hover{
+    background: #ffeecc;
+}
+@media only screen and (min-width:1024px) {
+    .product-content div[class*=col-md-4] {
+        padding-right: 0
+    }
+    .product-content div[class*=col-md-8] {
+        padding: 0 13px 0 0
+    }
+    .product-wrap div[class*=col-md-5] {
+        padding-right: 0
+    }
+    .product-wrap div[class*=col-md-7] {
+        padding: 0 13px 0 0
+    }
+    .product-content .product-image {
+        border-right: 1px solid #dfe5e9
+    }
+    .product-content .product-info {
+        position: relative
+    }
+   
 }

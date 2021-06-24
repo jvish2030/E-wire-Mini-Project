@@ -12,13 +12,7 @@
 <%@page import="java.util.Set"%>
 <%@ taglib uri="/WEB-INF/tlds/Helper.tld" prefix="helper"%>
 
-
-
-
 <!--        header area-->
-
-
-
 
 <!doctype html>
 <html lang="zxx">
@@ -35,7 +29,12 @@
 
 
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-
+        <style>
+            .product-wrap:hover{
+                border:#ffeecc outset  ; 
+            }
+            
+        </style>
     </head>
     <body>
         <section class="w3l-banner-slider-main inner-pagehny">
@@ -124,15 +123,15 @@
                             <h2 class="fw-title">Categories</h2>
                             <ul class="category-menu" >
                                 <!--                        OUTER LOOP-->
-                                <%  
+                                <%
                                     while (itr1.hasNext()) {
                                         Map.Entry CategoryEntry = (Map.Entry) itr1.next();
                                         int id = (int) CategoryEntry.getKey();
                                         String value = CategoryEntry.getValue().toString();
                                 %> 
                                 <li style="list-style :none;">
-                                    <a style="font-size: 15px;background-color: #f1eeee"><%= value%> <i id="listhover" class="fa fa-caret-down"></i></a>
-                                  
+                                    <a style="font-size: 15px;background-color: #fbfbfb"><%= value%> <i id="listhover" class="fa fa-caret-down"></i></a>
+
                                     <ul class="sub-menu">
                                         <li ><a  href="${pageContext.request.contextPath}\home?page=category&id=<%=id%>&value=<%=value%>" style="font-size: 13px;"><%= value%></a></li>
                                         <!-- OUTER LOOP-->
@@ -176,35 +175,53 @@
                         <div class="row">
                             <c:forEach var="product" items="${productsList}">
 
-                                <div class="col-md-3 col-sm-6 py-2">
-                                    <div class="product-grid">
-                                        <div class="product-image">
-                                            <a href="#">
-                                                <img class="pic-1" src="images/products/${product.pId}.jpg">
-                                            </a>
-                                            <ul class="social">
-                                                <li><a href="${pageContext.request.contextPath}\view?page=single&cat=${param.value}&pid=${product.pId}" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
-                                                <li><a href="" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
-                                                <li><a data-tip="Add to Cart" onclick="addToCartCheck('${sessionScope.userid}',${product.pId}, '${product.pName}', '${product.getPriceAfterApplyingDiscount()}')"><i class="fa fa-shopping-cart" ></i></a></li>
-                                            </ul>
-                                            <span class="product-new-label">${product.pRemark}</span>
-                                            <span class="product-discount-label">${product.pDiscount}% off</span>
-                                        </div>
-                                        <ul class="rating">
-                                            <li class="fa fa-star"></li>
-                                            <li class="fa fa-star"></li>
-                                            <li class="fa fa-star"></li>
-                                            <li class="fa fa-star"></li>
-                                            <li class="fa fa-star"></li>
-                                        </ul>
-                                        <div class="product-content">
-                                            <h3 class="title"><a href="${pageContext.request.contextPath}\view?page=single&cat=${param.value}&pid=${product.pId}">${helper:get10Words(product.pName)}</a></h3>
-                                            <div class="price">${product.getPriceAfterApplyingDiscount()}/-
-                                                <span>${product.pPrice}/-</span>
+
+                                <div class="col-xs-12 col-md-6 bootstrap snippets bootdeys">
+                                    <!-- product -->
+                                    <div class="product-content product-wrap clearfix" >
+                                        <div class="row">
+                                            <div class="col-md-5 col-sm-12 col-xs-12">
+                                                <div class="product-image"> 
+                                                    <a href="${pageContext.request.contextPath}\view?page=single&cat=${param.value}&pid=${product.pId}">
+                                                        <img class="pic-1" src="images/products/${product.pId}.jpg"/>
+                                                        <span class="tag2 hot">
+                                                            ${product.pRemark}
+                                                        </span> 
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <a class="add-to-cart" style="cursor: pointer;" onclick="addToCartCheck('${sessionScope.userid}',${product.pId}, '${product.pName}', '${product.getPriceAfterApplyingDiscount()}')">+ Add To Cart</a>
+                                            <div class="col-md-7 col-sm-12 col-xs-12">
+                                                <div class="product-deatil">
+                                                    <h5 style="height: 70px;"  class="name">
+                                                        <a href="${pageContext.request.contextPath}\view?page=single&cat=${param.value}&pid=${product.pId}">
+                                                            ${helper:get10Words(product.pName)}
+                                                        </a>
+                                                    </h5>
+
+                                                    <span class="tag1"></span> 
+                                                </div>
+                                                <figure class=" card-product pl-2 pr-2">
+                                                    <figcaption class="info-wrap" >
+                                                        <h5 class="title">${product.pCategory}</h5>
+                                                        <p class="desc">${param.value}</p>
+                                                        <div class="bottom-wrap">
+                                                            <a href="" class="label-rating float-right">0 reviews</a>	
+                                                            <div class="price-wrap h5">
+                                                                <div class="label-rating">0 orders </div>                                                       
+                                                            </div> <!-- price-wrap.// -->
+                                                        </div> 
+                                                    </figcaption>
+                                                    <div class="bottom-wrap">
+                                                        <button class="btn btn-sm btn-outline-warning float-right"  style="cursor: pointer;" onclick="addToCartCheck('${sessionScope.userid}',${product.pId}, '${product.pName}', '${product.getPriceAfterApplyingDiscount()}')">Add to Cart</button>	
+                                                        <div class="price-wrap h5">
+                                                            <span class="price-new">&#8377;${product.getPriceAfterApplyingDiscount()}</span> <del class="price-old small">&#8377;${product.pPrice}</del>
+                                                        </div> <!-- price-wrap.// -->
+                                                    </div> <!-- bottom-wrap.// -->
+                                                </figure>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!-- end product -->
                                 </div>
                             </c:forEach>
                         </div>
@@ -259,7 +276,7 @@
             </nav>
         </div>
 
-      <script src="categoryAssets/js/jquery.slicknav.min.js"></script>
+        <script src="categoryAssets/js/jquery.slicknav.min.js"></script>
         <!--        <script src="categoryAssets/js/owl.carousel.min.js"></script>-->
         <script src="categoryAssets/js/jquery.nicescroll.min.js"></script>
         <!--        <script src="categoryAssets/js/jquery.zoom.min.js"></script>-->

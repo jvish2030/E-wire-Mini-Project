@@ -46,7 +46,11 @@ $(window).on('load', function() {
 		$(this).addClass('active');
 		e.preventDefault();
 	});
-	
+	$('.category-menu').mouseleave( function(e) {
+		$('.category-menu li').removeClass('active');
+		e.preventDefault();
+	});
+
 
 	/*------------------
 		Background Set

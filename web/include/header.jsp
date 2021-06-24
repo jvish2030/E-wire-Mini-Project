@@ -14,6 +14,36 @@ Author URL: http://w3layouts.com
         </title>
         <jsp:include page="css_js.jsp"/>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+        <style>
+            .lh-condensed { line-height: 1.25; }
+            .card-blue {
+                background-color: #492bc4
+            }
+
+            .hightlight {
+                background-color: #5737d9;
+                padding: 10px;
+                border-radius: 10px;
+                margin-top: 15px;
+                font-size: 14px
+            }
+
+            .yellow {
+                color: #fdcc49
+            }
+
+            .decoration {
+                text-decoration: none;
+                font-size: 14px
+            }
+
+           
+          
+            .decoration:hover {
+                text-decoration: none;
+                color: #fdcc49
+            }
+        </style>
     </head>
     <body>
         <section class="w3l-banner-slider-main inner-pagehny">
