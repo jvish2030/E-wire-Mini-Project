@@ -30,13 +30,13 @@
         <div class="col-md-4 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Your cart</span>
-                <span class="badge badge-secondary badge-pill">3</span>
+                <span class="badge badge-secondary badge-pill"><%= request.getParameter("cartTotal")%></span>
             </h4>
             <div class="card card-blue p-3 text-white mb-3"> <span>You have to pay</span>
                 <div class="d-flex flex-row align-items-end mb-3">
                     <h1 class="mb-0 yellow"><c:out value="${total}"/></h1> <span>.00</span>
-                </div> <span>Enjoy all the features and perk after you complete the payment</span> <a href="#" class="yellow decoration">Know all the features</a>
-                <div class="hightlight"> <span>100% Guaranteed support and update for the next 5 years.</span> </div>
+                </div> <span> At Razorpay, we are devoted to making sure you have the best payments infrastructure in place.</span> <a href="https://razorpay.com/" class="yellow decoration">Know all the features</a>
+                <div class="hightlight"> <span>All of Razorpay?s products are secured by an industry-standard 100% PCI DSS compliant and certified solution.</span> </div>
             </div>
             <form class="card p-2">
                 <div class="input-group">
@@ -87,7 +87,7 @@
                         <label for="country">Country</label>
                         <select class="custom-select d-block w-100" id="country" name="country"  required="">
                             <option value="">Choose...</option>
-                            <option  >India</option>
+                            <option selected >India</option>
                         </select>
                         <div class="invalid-feedback"> Please select a valid country. </div>
                     </div>

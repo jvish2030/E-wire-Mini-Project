@@ -1,4 +1,5 @@
 var totalprice = 0;
+var count = 0;
 function validateUser()
 {
     var fullname = document.forms["myUserRegisterForm"]["fullname"].value;
@@ -146,6 +147,7 @@ function updateCart(uid)
                             </div>
                             <hr/>
                  `;
+            count++;
             totalPrice += item.productPrice * item.productQuantity;
         });
 
@@ -166,7 +168,7 @@ function deleteItemFromCart(localStorageName, pid)
     let newcart = cart.filter((item) => item.productId !== pid);
 
     localStorage.setItem(localStorageName, JSON.stringify(newcart));
-
+    count--;
     updateCart(localStorageName);
 
     $('#toast2').toast('show');
@@ -210,8 +212,9 @@ function qtyChange(localStorageName, pid, qty) {
     $("#total_cart_amt").html(totalPrice + 50);
 }
 
-function order(){
+function order() {
     let confirmPrice = totalPrice + 50;
-     window.location.assign("view?page=order&total="+confirmPrice);
-     return true;
+    let cart = count;
+    window.location.assign("view?page=order&cartTotal=" + cart + "&total=" + confirmPrice);
+    return true;
 }
