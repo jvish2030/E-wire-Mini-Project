@@ -65,6 +65,9 @@ public class OperationServlet extends HttpServlet {
                 //System.out.println(user.getEmail()+"....."+user.getPassword());
                 login(request, response, user);
                 break;
+            case "saveinfo":
+                 saveInfo(request, response);
+                break;
             default:
                 error(request, response);
         }
@@ -149,6 +152,10 @@ public class OperationServlet extends HttpServlet {
         } catch (IOException ex) {
             Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void saveInfo(HttpServletRequest request, HttpServletResponse response) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
