@@ -39,7 +39,6 @@ public class CustInfoDao {
             ResultSet rs1 = pst.executeQuery();
             if (rs1.next()) {
                 //perform update operation
-                System.out.println("perform update operation");
 
                 int userid = obj.getUserid();
                 String fname = obj.getFname();
@@ -75,10 +74,7 @@ public class CustInfoDao {
 
             } else {
                 //perform insert operation
-                System.out.println("perform insert operation");
                 int userid = obj.getUserid();
-                System.out.println("userid : "+userid);
-
                 String fname = obj.getFname();
                 String lname = obj.getLname();
                 String email = obj.getEmail();
