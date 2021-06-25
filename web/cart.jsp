@@ -183,23 +183,24 @@
                         <div class="col-md-12 col-lg-4 col-11 mx-auto mt-lg-0 mt-md-5">
                             <div class="right_side p-3 shadow bg-white">
                                 <h2 class="product_name mb-5">The Total Amount Of</h2>
-<!--                                <form method="post" action="view">-->
-                                    <div class="price_indiv d-flex justify-content-between">
-                                        <p>Product amount</p>
-                                        <p>&#8377; <span id="product_total_amt">0.00</span></p>
-                                    </div>
-                                    <div class="price_indiv d-flex justify-content-between">
-                                        <p>Shipping Charge</p>
-                                        <p>&#8377; <span id="shipping_charge">50.0</span></p>
-                                    </div>
-                                    <hr />
-                                    <div class="total-amt d-flex justify-content-between font-weight-bold">
-                                        <p>The total amount of (including VAT)</p>
-                                        <p>&#8377; <span id="total_cart_amt">0.00</span></p>
-                                    </div>
-                                    <input type="hidden" value="order" name="page"/>
-                                    <button type="submit" class="btn btn-primary text-uppercase text-light checkout-btn" onclick="order();">Checkout</button>
-<!--                                </form>-->
+                                <!--                                <form method="post" action="view">-->
+                                <div class="price_indiv d-flex justify-content-between">
+                                    <p>Product amount</p>
+                                    <p>&#8377; <span id="product_total_amt">0.00</span></p>
+                                </div>
+                                <div class="price_indiv d-flex justify-content-between">
+                                    <p>Shipping Charge</p>
+                                    <p>&#8377; <span id="shipping_charge">50.0</span></p>
+                                </div>
+                                <hr />
+                                <div class="total-amt d-flex justify-content-between font-weight-bold">
+                                    <p>The total amount of (including VAT)</p>
+                                    <p>&#8377; <span id="total_cart_amt">0.00</span></p>
+                                </div>
+                                <input type="hidden" value="order" name="page"/>
+                                <button class="btn btn-primary text-uppercase text-light checkout-btn" onclick="order()">Checkout</button>
+                                
+                                <!--                                </form>-->
                             </div>
                             <!-- discount code part -->
                             <div class="discount_code mt-3 shadow">
@@ -222,7 +223,6 @@
 
 
 
-
                             <!-- discount code ends -->
                             <div class="mt-3 shadow p-3 bg-white">
                                 <div class="pt-4">
@@ -236,6 +236,9 @@
             </div>
         </div>
 
+        <script>
+          
 
+        </script>
 
         <jsp:include page="include/footer.jsp"/>
