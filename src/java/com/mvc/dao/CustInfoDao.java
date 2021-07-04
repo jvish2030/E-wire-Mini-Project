@@ -7,7 +7,6 @@ package com.mvc.dao;
 
 import com.java.ConPool.DBUtils;
 import com.mvc.beans.CustDetails;
-import static com.mvc.dao.ProductsDao.connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,7 +49,7 @@ public class CustInfoDao {
                 String state = obj.getState();
                 int pin = obj.getPin();
                 String city = obj.getCity();
-                int mobile = obj.getMobile();
+                long mobile = obj.getMobile();
                 String addType = obj.getAddType();
 
                 pst = connection.prepareStatement(query3);
@@ -64,7 +63,7 @@ public class CustInfoDao {
                 pst.setString(7, state);
                 pst.setString(8, city);
                 pst.setInt(9, pin);
-                pst.setInt(10, mobile);
+                pst.setLong(10, mobile);
                 pst.setString(11, addType);
                 pst.setInt(12, userid);
                 count = pst.executeUpdate();
@@ -84,7 +83,7 @@ public class CustInfoDao {
                 String state = obj.getState();
                 int pin = obj.getPin();
                 String city = obj.getCity();
-                int mobile = obj.getMobile();
+                long mobile = obj.getMobile();
                 String addType = obj.getAddType();
 
                 pst = connection.prepareStatement(query2);
@@ -98,7 +97,7 @@ public class CustInfoDao {
                 pst.setString(8, state);
                 pst.setString(9, city);
                 pst.setInt(10, pin);
-                pst.setInt(11, mobile);
+                pst.setLong(11, mobile);
                 pst.setString(12, addType);
                 count = pst.executeUpdate();
                 if (count > 0) {
@@ -131,7 +130,7 @@ public class CustInfoDao {
                 obj.setState(rs.getString(8));
                 obj.setCity(rs.getString(9));
                 obj.setPin(rs.getInt(10));
-                obj.setMobile(rs.getInt(11));
+                obj.setMobile(rs.getLong(11));
                 obj.setAddType(rs.getString(12));
             }
         } catch (SQLException ex) {

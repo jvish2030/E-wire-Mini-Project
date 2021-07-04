@@ -1,3 +1,4 @@
+
 var totalprice = 0;
 var count = 0;
 function validateUser()
@@ -6,7 +7,6 @@ function validateUser()
     var email = document.forms["myUserRegisterForm"]["email"].value;
     var password = document.forms["myUserRegisterForm"]["password"].value;
     var conpassword = document.forms["myUserRegisterForm"]["conpassword"].value;
-
     if (fullname === null || fullname === "")
     {
         window.alert("Full Name can't be blank");
@@ -78,9 +78,7 @@ function add_to_cart(uid, pid, pname, price, pqty = 1)
     }
 //    $('#cartModal').modal('show');
     updateCart(uid);
-
 }
-
 //update cart:
 function updateCart(uid)
 {
@@ -109,7 +107,7 @@ function updateCart(uid)
         cart.map((item) => {
             table += `
                              <div class="card p-4">
-                               
+                           
                                 <div class="row">
                                     <!-- cart images div -->
                                     <div class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
@@ -141,7 +139,7 @@ function updateCart(uid)
                                                <p> <h5>price:<span id="itemval"> &#8377;  ${item.productPrice}</span></h5></p>
                                                <p> <h5> total: <span id="${item.productId}"> &#8377; ${item.productPrice * item.productQuantity}</span></h5></p>
                                            </div>
-                                            
+                              
                                     </div>
                                 </div>
                             </div>
@@ -150,8 +148,6 @@ function updateCart(uid)
             count++;
             totalPrice += item.productPrice * item.productQuantity;
         });
-
-
         $(".cart-body").html(table);
         $("#product_total_amt").html(totalPrice);
         $("#shipping_charge").html('50.0');
@@ -164,27 +160,20 @@ function updateCart(uid)
 function deleteItemFromCart(localStorageName, pid)
 {
     let cart = JSON.parse(localStorage.getItem(localStorageName));
-
     let newcart = cart.filter((item) => item.productId !== pid);
-
     localStorage.setItem(localStorageName, JSON.stringify(newcart));
     count--;
     updateCart(localStorageName);
-
     $('#toast2').toast('show');
 }
-
-
 function showToast(content) {
     $(".toast-body").html(content);
     $("#toast").toast({delay: 2000});
     $('#toast').toast('show');
 }
-
 function goToCheckout() {
     window.location = "checkout.jsp";
 }
-
 function qtyChange(localStorageName, pid, qty) {
     let cartString = localStorage.getItem(localStorageName);
     let cart = JSON.parse(cartString);
@@ -207,14 +196,34 @@ function qtyChange(localStorageName, pid, qty) {
         $(id).html('&#8377;' + item.productQuantity * item.productPrice);
         totalPrice += item.productPrice * item.productQuantity;
     });
-
     $("#product_total_amt").html(totalPrice);
     $("#total_cart_amt").html(totalPrice + 50);
 }
-
 function order() {
     let confirmPrice = totalPrice + 50;
     let cart = count;
-    window.location.assign("view?page=order&cartTotal=" + cart + "&total=" + confirmPrice);
+    window.location.assign("view?page=order&cart=" + cart + "&price=" + confirmPrice);
     return true;
 }
+
+//first request to server to create order
+const paymentStart = () => {
+    console.log("payment started...");
+    let amount = $("#payment_field").html();
+    console.log(amount);
+    //amount validation
+    if (amount === "" || amount === null) {
+        alert("amount is required");
+    }
+
+    //we will use ajax to send request to server to create order
+
+    $.ajax({
+        url: 'Payment', //calling payment servlet
+//        JSON.stringify({amount: amount, info: 'order_request'})
+        data: {amount: amount, info: 'order_request'},//data to be passed
+        type: 'POST' // post request 
+    }).done(function (data) {
+        alert("data");//data object represents the response
+    });
+};

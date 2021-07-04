@@ -190,7 +190,7 @@ public class DBUtils {
     
         Connection con;
         con = DBUtils.connect();
-        String query = "SELECT * FROM USERS where Role = 'Customer' order by FULLNAME";
+        String query = "SELECT * FROM USERS";
         ResultSet rs = null;
         try {
             rs = con.createStatement().executeQuery(query);
@@ -201,9 +201,4 @@ public class DBUtils {
         return rs;
     }
 
-    public static void main(String[] args) {
-        System.out.println("conn................"+connect()); 
-    }
 }
-
-

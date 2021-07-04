@@ -48,6 +48,7 @@ public class OperationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("inside operation servlet");
         String operation = request.getParameter("operation");
         operation = operation.toLowerCase();
         String fullName = null;
@@ -175,7 +176,7 @@ public class OperationServlet extends HttpServlet {
         String state = request.getParameter("state");
         String city = request.getParameter("city");
         int pin = Integer.parseInt(request.getParameter("pin"));
-        int mobile = Integer.parseInt(request.getParameter("mobile"));
+        long mobile = Long.parseLong(request.getParameter("mobile"));
         String addtype = request.getParameter("addtype");
 
         CustDetails obj = new CustDetails();
@@ -197,8 +198,14 @@ public class OperationServlet extends HttpServlet {
         if (authorize.equals("Information Saved Successfully!") || authorize.equals("Information Update successfully!")) //On success, you can display a message to user on Home page
         {
             session.setAttribute("message", authorize);
+            request.setAttribute("title", "checkout");
+//            String cart = request.getAttribute("cartItem").toString();
+//            String price = request.getAttribute("total").toString();
+//            System.out.println("cart" + cart);
+//            System.out.println("price" + price);
+
             try {
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getRequestDispatcher("checkout.jsp").forward(request, response);
             } catch (IOException | ServletException ex) {
                 Logger.getLogger(OperationServlet.class.getName()).log(Level.SEVERE, null, ex);
             }

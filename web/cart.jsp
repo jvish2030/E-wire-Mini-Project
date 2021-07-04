@@ -212,8 +212,8 @@
                                         </a>
                                         <div class="collapse" id="collapseExample">
                                             <div class="mt-3">
-                                                <input type="text" name="" id="discount_code1" class="form-control font-weight-bold" placeholder="Enter the discount code">
-                                                <small id="error_trw" class="text-dark mt-3">code is thapa</small>
+                                                <input type="text" name="disCode" id="discount_code1" class="form-control font-weight-bold" placeholder="Enter the discount code">
+                                                <small id="error_trw" class="text-dark mt-3">code is e-wire</small>
                                             </div>
                                             <button class="btn btn-primary btn-sm mt-3" onclick="discount_code()">Apply</button>
                                         </div>

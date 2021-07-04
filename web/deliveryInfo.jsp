@@ -5,7 +5,8 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <jsp:include page="include/header.jsp"/>
-<c:set var="total" scope="session" value="${total}"/>  
+    <c:set var="price" scope="session" value="${param.price}"/>
+    <c:set var="cart" scope="session" value="${param.cart}"/>
 
 <c:if  test="${CustDetails ne null}">  
     <c:set var="fname" scope="page" value="${CustDetails.fname}"/>
@@ -20,34 +21,14 @@
     <c:set var="mobile" scope="page" value="${CustDetails.mobile}"/>
     <c:set var="addType" scope="page" value="${CustDetails.addType}"/>
 </c:if>  
-
 <div class="container">
     <!--    <div class="py-1 text-center">
             <h2>Checkout form</h2>
             <p class="lead">Below is an example form built entirely with Bootstrap?s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
         </div>-->
     <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Your cart</span>
-                <span class="badge badge-secondary badge-pill"><%= request.getParameter("cartTotal")%></span>
-            </h4>
-            <div class="card card-blue p-3 text-white mb-3"> <span>You have to pay</span>
-                <div class="d-flex flex-row align-items-end mb-3">
-                    <h1 class="mb-0 yellow"><c:out value="${total}"/></h1> <span>.00</span>
-                </div> <span> At Razorpay, we are devoted to making sure you have the best payments infrastructure in place.</span> <a href="https://razorpay.com/" class="yellow decoration">Know all the features</a>
-                <div class="hightlight"> <span>All of Razorpay?s products are secured by an industry-standard 100% PCI DSS compliant and certified solution.</span> </div>
-            </div>
-            <form class="card p-2">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Promo code">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-secondary">Redeem</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-8 order-md-1">
+   
+        <div class="col-md-12 ">
             <h4 class="mb-3">Billing address</h4>
             <form class="needs-validation" method="post" action="Operation" >
                 <div class="row">
@@ -121,7 +102,7 @@
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="mobile">10-digit Mobile Number</label>
-                        <input type="text" class="form-control" id="mobile" name="mobile" value="<c:out value="${mobile}"/>" placeholder="" required="">
+                        <input type="text" maxlength="10" class="form-control" id="mobile" name="mobile" value="<c:out value="${mobile}"/>" placeholder="" required="">
                         <div class="invalid-feedback"> 10-digit Mobile Number required. </div>
                     </div>
                     <div class="col-md-3 mb-3">
@@ -143,7 +124,7 @@
                 </div>
                 <hr class="mb-4">
 
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm Address</button>
             </form>
         </div>
     </div>

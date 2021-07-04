@@ -178,27 +178,27 @@
                                                     </div>
                                                     <div class="card mt-2"> <span>Similar items:</span>
                                                         <div class="similar-products mt-2 d-flex flex-row">
-                                                            <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="https://i.imgur.com/KZpuufK.jpg" class="card-img-top" alt="...">
+                                                            <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="images/products/136.jpg" class="card-img-top" alt="...">
                                                                 <div class="card-body">
                                                                     <h6 class="card-title">$1,999</h6>
                                                                 </div>
                                                             </div>
-                                                            <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="https://i.imgur.com/GwiUmQA.jpg" class="card-img-top" alt="...">
+                                                            <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="images/products/137.jpg" class="card-img-top" alt="...">
                                                                 <div class="card-body">
                                                                     <h6 class="card-title">$1,699</h6>
                                                                 </div>
                                                             </div>
-                                                            <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="https://i.imgur.com/c9uUysL.jpg" class="card-img-top" alt="...">
+                                                            <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="images/products/138.jpg" class="card-img-top" alt="...">
                                                                 <div class="card-body">
                                                                     <h6 class="card-title">$2,999</h6>
                                                                 </div>
                                                             </div>
-                                                            <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="https://i.imgur.com/kYWqL7k.jpg" class="card-img-top" alt="...">
+                                                            <div class="card border p-1" style="width: 9rem;margin-right: 3px;"> <img src="images/products/139.jpg" class="card-img-top" alt="...">
                                                                 <div class="card-body">
                                                                     <h6 class="card-title">$3,999</h6>
                                                                 </div>
                                                             </div>
-                                                            <div class="card border p-1" style="width: 9rem;"> <img src="https://i.imgur.com/DhKkTrG.jpg" class="card-img-top" alt="...">
+                                                            <div class="card border p-1" style="width: 9rem;"> <img src="images/products/144.jpg" class="card-img-top" alt="...">
                                                                 <div class="card-body">
                                                                     <h6 class="card-title">$999</h6>
                                                                 </div>

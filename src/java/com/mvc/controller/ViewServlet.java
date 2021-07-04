@@ -155,7 +155,7 @@ public class ViewServlet extends HttpServlet {
         int userid = Integer.parseInt(session.getAttribute("userid").toString());
         CustDetails obj = new CustInfoDao().getCustDetails(userid);
         request.setAttribute("CustDetails", obj);   
-        request.setAttribute("title", "Checkout form");
+        request.setAttribute("title", "Delivery Details");
         request.setAttribute("total", total);
         try {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("deliveryInfo.jsp");

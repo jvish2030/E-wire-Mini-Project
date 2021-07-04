@@ -7,13 +7,12 @@
             <div class="text-txt row">
                 <div class="left-side col-lg-4">
                     <h3><a class="logo-footer" href="index.html">
-                            Spry<span class="lohny">S</span>tore</a></h3>
+                            Hariom<span class="lohny">E</span>Wire</a></h3>
                     <!-- if logo is image enable this   
                                   <a class="navbar-brand" href="#index.html">
                                       <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
                                   </a> -->
-                    <p>Lorem ipsum dolor sit amet,Ea consequuntur illum facere aperiam sequi optio consectetur.Vivamus
-                        a ligula quam. Ut blandit eu leo non suscipit. </p>
+                    <p>Find the best qualities of Wire and Cable at reasonable price with huge discount. Hurry up!! Shop Now. </p>
                     <ul class="social-footerhny mt-lg-5 mt-4">
 
                         <li><a class="facebook" href="#"><span class="fa fa-facebook" aria-hidden="true"></span></a>
@@ -28,8 +27,8 @@
                 </div>
 
                 <div class="right-side col-lg-8 pl-lg-5">
-                    <h4>Women's Day Special Offer
-                        All Branded Sandals are Flat 50% Discount</h4>
+                    <h4>Diwali Special Offer
+                        All types of wires with 50% Discount</h4>
                     <div class="sub-columns">
                         <div class="sub-one-left">
                             <h6>Useful Links</h6>
@@ -51,7 +50,7 @@
                         </div>
                         <div class="sub-two-right">
                             <h6>Our Store</h6>
-                            <p class="mb-5">49436 Broaddus Honey Court Avenue, Madisonville KY 95020, United States of America</p>
+                            <p class="mb-5">49436 Golibar sq,Nagpur</p>
 
                             <h6>We accept:</h6>
                             <ul>
@@ -81,8 +80,8 @@
                     </ul>
                 </div>
                 <div class="columns col-lg-6 text-lg-right">
-                    <p>© 2020 SpryStore. All rights reserved. Design by <a href="https://w3layouts.com/" target="_blank">
-                            W3Layouts</a>
+                    <p>© 2020 e-wire. All rights reserved. Design by <a href="https://w3layouts.com/" target="_blank">
+                            technophilic</a>
                     </p>
                 </div>
                 <button onclick="topFunction()" id="movetop" title="Go to top">

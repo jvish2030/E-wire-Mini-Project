@@ -21,7 +21,7 @@ public class CustDetails {
     private String state;
     private String city;
     private int pin;
-    private int mobile;
+    private long mobile;
     private String addType;
 
     public String getAddType() {
@@ -113,11 +113,11 @@ public class CustDetails {
         this.pin = pin;
     }
 
-    public int getMobile() {
+    public Long getMobile() {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(long mobile) {
         this.mobile = mobile;
     }
 

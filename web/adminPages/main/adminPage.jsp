@@ -233,7 +233,8 @@
 
                                 </a>
                                 <div id="<%=s%>" class="collapse" data-parent="#accordion">
-                                    <div class="card-body px-0">                             
+                                    <div class="card-body px-0">
+
                                         <div style="height: 500px;overflow: scroll;">
                                             <div class="table-responsive ">
                                                 <table class="table table-hover table-dark text-white-50 py-5">
@@ -351,8 +352,18 @@
             </div>
 
             <div id="Orders2" class="tabcontent">
-                content4
+                <table class="table  table-dark text-white-50 py-5">
 
+                    <thead style="background-color:#48D1CC;">
+                        <tr>
+                            <th class="text-light"><h3>Order id</h3>  </th>
+                            <th class="text-light"><h3>Order date</h3>  </th>
+                            <th class="text-light"><h3>User id</h3>  </th>
+                            <th class="text-light"><h3>Order Status</h3>  </th>
+                            <th class="text-light"><h3>Operations</h3>  </th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
 
 
