@@ -30,7 +30,6 @@ import org.apache.tomcat.jni.SSLContext;
  */
 @WebServlet(name = "OperationServlet", urlPatterns = {"/Operation"})
 public class OperationServlet extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,7 +43,6 @@ public class OperationServlet extends HttpServlet {
                 error(request, response);
         }
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

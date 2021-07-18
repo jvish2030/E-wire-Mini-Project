@@ -103,6 +103,7 @@ public class ViewServlet extends HttpServlet {
     }
 
     private void faqs(HttpServletRequest request, HttpServletResponse response) {
+        
         try {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("faq.jsp");
             request.setAttribute("title", "FAQ's");

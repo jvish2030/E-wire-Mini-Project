@@ -159,41 +159,32 @@ public class AdminOperationServlet extends HttpServlet {
             proObj.setpRemark(productRemark);
             proObj.setpPhoto(FileName);
             proObj.setpDescription(productDescription);
-
             //creating DAO object and passing product Object to insert into database
             AdminDao dao = new AdminDao();
             authorize = dao.saveProduct(proObj);
             Integer id = Integer.valueOf(DBUtils.getMaxProId()) - 1;
             FileName = id + ".jpg";
         }
-
         //Finding the path to store Image
         String path = request.getRealPath("images") + File.separator + "products" + File.separator + FileName;
-
         //using try with resource to perform auto close operation
         //creating File output stream object to put image to that specified location
         //getiing image binary data and creating Input stream object
         try (FileOutputStream fos = new FileOutputStream(path);
                 InputStream is = productPhoto.getInputStream();) {
-
 //            creating byte array to store binary data of input stream
             byte[] data = new byte[is.available()];
-
 //            read data from input stream to byte array
             is.read(data);
-
             //writing binary data to byte array
             fos.write(data);
-
         } catch (FileNotFoundException ex) {
             Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
         HttpSession session = request.getSession();
-
         //if inserted then redirecting to same page else to error page
         if (authorize.equals("PRODUCT ADDDED SUCCESSFULLY!")) //On success, you can display a message to user on Home page
         {
@@ -225,7 +216,6 @@ public class AdminOperationServlet extends HttpServlet {
         } catch (IOException | ServletException ex) {
             Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         String authorize = null;
         String FileName = "unknown.jpg";
         if (DBUtils.getMaxCatId() == null) {
@@ -242,33 +232,25 @@ public class AdminOperationServlet extends HttpServlet {
             Integer id = Integer.valueOf(DBUtils.getMaxCatId()) - 1;
             FileName = id + ".jpg";
             System.out.println("photo name _ " + FileName);
-
         }
-
         //Finding the path to store Image
         String path = request.getRealPath("images") + File.separator + "category" + File.separator + FileName;
-
         //using try with resource to perform auto close operation
         //creating File output stream object to put image to that specified location
         //getiing image binary data and creating Input stream object
         try (FileOutputStream fos = new FileOutputStream(path);
                 InputStream is = categoryPhoto.getInputStream();) {
-
 //            creating byte array to store binary data of input stream
             byte[] data = new byte[is.available()];
-
 //            read data from input stream to byte array
             is.read(data);
-
             //writing binary data to byte array
             fos.write(data);
-
         } catch (FileNotFoundException ex) {
             Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(AdminOperationServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
         HttpSession session = request.getSession();
 
@@ -290,7 +272,6 @@ public class AdminOperationServlet extends HttpServlet {
             }
         }
     }
-
     private void addSubCategoryOperation(HttpServletRequest request, HttpServletResponse response) {
         //GETTING CATEGORY ID AND STORING INTO LOCAL VARIABLE ID
         int id = Integer.parseInt(request.getParameter("SelectCategory"));
@@ -301,10 +282,8 @@ public class AdminOperationServlet extends HttpServlet {
         //PASSING &  CATEGORYBEAN OBJECT TO DATABASE THROUGN DAO 
         String authorize = AdminDao.createNewSubCategory(subCatObj);
         //if inserted then redirecting to same page else to error page
-
         // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
         HttpSession session = request.getSession();
-
         if (authorize.equals("SUBCATEGORY INSERTED SUCCESSFULLY!")) //On success, you can display a message to user on Home page
         {
             session.setAttribute("message", authorize);
