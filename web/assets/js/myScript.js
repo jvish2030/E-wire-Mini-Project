@@ -1,6 +1,7 @@
 
 var totalprice = 0;
 var count = 0;
+var userid = 0;
 function validateUser()
 {
     var fullname = document.forms["myUserRegisterForm"]["fullname"].value;
@@ -40,6 +41,7 @@ function addToCartCheck(uid, pid, pname, price, pqty = 1) {
         $(".overlay-login-page").fadeIn(200);
         return false;
     } else {
+        userid = uid;
         add_to_cart(uid, pid, pname, price, pqty);
         return true;
 }
@@ -80,9 +82,8 @@ function add_to_cart(uid, pid, pname, price, pqty = 1)
     updateCart(uid);
 }
 //update cart:
-function updateCart(uid)
+function updateCart(localStorageName)
 {
-    let localStorageName = uid;
     let cartString = localStorage.getItem(localStorageName);
     let cart = JSON.parse(cartString);
     if (cart === null || cart.length === 0)
@@ -187,7 +188,7 @@ function qtyChange(localStorageName, pid, qty) {
         }
     });
     localStorage.setItem(localStorageName, JSON.stringify(cart));
-    console.log("Product quantity is increased" + qty);
+
     //    showToast("Product quantity is increased , Quantity = " + oldProduct.productQuantity);
     cartString = localStorage.getItem(localStorageName);
     cart = JSON.parse(cartString);
@@ -207,10 +208,12 @@ function order() {
 }
 
 //first request to server to create order
-const paymentStart = () => {
-    console.log("payment started...");
+const paymentStart = (userid) => {
+
     let amount = $("#payment_field").html();
-    console.log(amount);
+    console.log("uid" + userid);
+    let cart = JSON.parse(localStorage.getItem(userid));
+    console.log("cart" + cart);
     //amount validation
     if (amount === "" || amount === null) {
         swal("Failed !!", "amount is required !!", "error");
@@ -220,7 +223,7 @@ const paymentStart = () => {
     $.ajax({
         //calling payment servlet
 //        JSON.stringify({amount: amount, info: 'order_request'})
-        data: {amounts: amount},
+        data: {amounts: amount, jsonData: JSON.stringify(cart)},
         url: 'Payment', //data to be passed
         type: 'POST', // post request 
         dataType: 'json',
@@ -240,7 +243,7 @@ const paymentStart = () => {
                         console.log(response.razorpay_order_id);
                         console.log(response.razorpay_signature);
                         console.log("payment successful");
-                        swal("Good job!", "congrats !! Payment successful !!", "success");
+                        updatePaymentOnServer(response.razorpay_payment_id, response.razorpay_order_id, 'Paid');
                     },
                     "prefill": {"name": "", "email": "", "contact": ""},
                     "notes": {"address": "Hari Om Electricals"},
@@ -263,6 +266,20 @@ const paymentStart = () => {
         },
         error: function (data) {
             alert("error: " + data);
+        }
+    });
+};
+const updatePaymentOnServer = (payment_id, order_id, status) => {
+    $.ajax({
+        data: {payment_id: payment_id, order_id: order_id, status: status},
+        url: 'UpdateOrderServlet', //data to be passed
+        type: 'POST', // post request 
+        dataType: 'json',
+        success: function (data) {
+            swal("Good job!", "congrats !! Payment successful !!", "success");
+        },
+        error: function (err) {
+            swal("Failed !!", "Your payment is successful, but we did not get on server, we will contac6t you as soon as possible", "error");
         }
     });
 };

@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </form>
-                <button class="btn btn-primary btn-lg btn-block"  onclick="paymentStart()" type="submit">Continue to checkout</button>
+                <button class="btn btn-primary btn-lg btn-block"  onclick="paymentStart(${sessionScope.userid})" type="submit">Continue to checkout</button>
         </div>
     </div>
     <footer class="my-5 pt-5 text-muted text-center text-small">

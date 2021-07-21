@@ -6,10 +6,12 @@
 package com.mvc.controller;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.mvc.beans.OrderDetails;
+import com.mvc.beans.Orders;
+import com.mvc.dao.OrderDao;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -17,11 +19,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient; 
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,17 +45,33 @@ public class PaymentController extends HttpServlet {
         // initializing key id and key_secret with razorpay provided id  
         String key_id = "p_test_JcWu5d1ITT2h0i";
         String key_secret = "uqeT129uaOu2ghjRCfBFHEwx";
-        System.out.println("Inside Payment Servlet");
         String amt_string = request.getParameter("amounts");
-        System.out.println("amtConversion:" + amt_string);
         int amt = Integer.parseInt(amt_string);
-        System.out.println("conv");
-        System.out.println("amt:" + amt);
+
+        String JSONcart = request.getParameter("jsonData");
+        System.out.println("json"+JSONcart);
+        ArrayList<OrderDetails> Order_details_AL;
+        //creating list of items
+        Order_details_AL = new ArrayList<OrderDetails>();
+        try {
+            JSONArray jsonArr = new JSONArray(JSONcart);
+            for (int i = 0; i < jsonArr.length(); i++) {
+                JSONObject jsonObj = jsonArr.getJSONObject(i);
+                int         id      =       jsonObj.getInt("productId");
+                String      name    =       jsonObj.getString("productName");
+                int         qty     =       jsonObj.getInt("productQuantity");
+                float       price   =       Float.parseFloat(jsonObj.getString("productPrice"));   
+                Order_details_AL.add(new OrderDetails().setProdid(id).setQty(qty).setProdName(name).setProdPrice(price));
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         MediaType typeJson = MediaType.parse("application/json; charset=utf-8");
 
         JSONObject json = new JSONObject();
         try {
-            json.put("amount", amt*100);
+            json.put("amount", amt * 100);
             json.put("currency", "INR");
             json.put("receipt", "txn_123456");
             json.put("payment_capture", 1);
@@ -72,15 +92,27 @@ public class PaymentController extends HttpServlet {
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Basic cnpwX3Rlc3RfSmNXdTVkMUlUVDJoMGk6dXFlVDEyOXVhT3UyZ2hqUkNmQkZIRXd4")
                 .build();
-        Response responses = client.newCall(requests).execute();
-        String jsonOrderStr = responses.body().string();
-
+        Response                    responses       =       client.newCall(requests).execute();
+        String                      jsonOrderStr    =       responses.body().string();
+        System.out.println(jsonOrderStr);
+        HashMap<String, Object>     JsonMap         =       new Gson().fromJson(jsonOrderStr, HashMap.class);
+        
+        HttpSession                 session         =       request.getSession();
+        String                      useridObj       =       session.getAttribute("userid").toString();
+       
+        
+        int                         userid          =       Integer.parseInt(useridObj);
+        float                       amount          =       Float.parseFloat(JsonMap.get("amount").toString())/100;
+        String                      order_id        =       JsonMap.get("id").toString();
+        String                      receipt         =   
+                JsonMap.get("receipt").toString();
+               
+        //creating Orders object
+        Orders order =  new Orders().setOrderId(order_id).setAmount(amount).setUser_id(userid).setReciept(receipt);
+        
+        new OrderDao().saveOrderInfo(order,Order_details_AL);
         //save order ionformation to the database
         System.out.println("executed...");
-
-        HashMap<String, Object> JsonMap = new Gson().fromJson(jsonOrderStr, HashMap.class);
-        System.out.println(JsonMap);
-
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(JsonMap));
