@@ -16,8 +16,9 @@ public class Orders {
     private float amount;
     private String reciept;
     private String date;
-    private String status;
+    private String order_status;
     private String payment_id;
+    private String payment_status;
 
     public String getPayment_id() {
         return payment_id;
@@ -73,12 +74,21 @@ public class Orders {
         return this;
     }
 
-    public String getStatus() {
-        return status;
+    public String getOrder_status() {
+        return order_status;
     }
 
-    public Orders setStatus(String status) {
-        this.status = status;
+    public Orders setOrder_status(String order_status) {
+        this.order_status = order_status;
+        return this;
+    }
+
+    public String getPayment_status() {
+        return payment_status;
+    }
+
+    public Orders setPayment_status(String payment_status) {
+        this.payment_status = payment_status;
         return this;
     }
 

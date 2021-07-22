@@ -8,6 +8,7 @@
 <%@page import="java.util.Map"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.java.ConPool.DBUtils" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -192,11 +193,11 @@
                         <div style="height: 500px;overflow: scroll;">
                             <div class="table-responsive ">
                                 <table class="table table-hover table-dark text-white-50 py-5">
-                                    <thead class="bg-primary p-lg-5" >
+                                    <thead class="bg-primary p-md-5" >
                                         <tr >
-                                            <th class="text-light"> <h3>Customer id</h3> </th>
-                                            <th class="text-light"><h3>FullName</h3>  </th>
-                                            <th class="text-light"> <h3>Email</h3> </th>
+                                            <th class="text-light"> <h4>Customer id</h4> </th>
+                                            <th class="text-light"><h4>FullName</h4>  </th>
+                                            <th class="text-light"> <h4>Email</h4> </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -240,20 +241,20 @@
                                                 <table class="table table-hover table-dark text-white-50 py-5">
                                                     <thead style="background-color:#32CD32;">
                                                         <tr>
-                                                            <th class="text-light"><h3>Product id</h3>  </th>
-                                                            <th class="text-light"><h3>Photo</h3>  </th>
-                                                            <th class="text-light"><h3>Product</h3>  </th>
-                                                            <th class="text-light"><h3>Category</h3>  </th>
-                                                            <th class="text-light"><h3>Price</h3>  </th>
-                                                            <th class="text-light"><h3>Discount </h3> </th>
-                                                            <th class="text-light"><h3>Remark</h3>  </th>
-                                                            <th class="text-light"><h3>Date </h3></th>
-                                                            <th class="text-light"><h3>Edit </h3>  </th>
+                                                            <th class="text-light"><h4>Product id</h4>  </th>
+                                                            <th class="text-light"><h4>Photo</h4>  </th>
+                                                            <th class="text-light"><h4>Product</h4>  </th>
+                                                            <th class="text-light"><h4>Category</h4>  </th>
+                                                            <th class="text-light"><h4>Price</h4>  </th>
+                                                            <th class="text-light"><h4>Discount </h4> </th>
+                                                            <th class="text-light"><h4>Remark</h4>  </th>
+                                                            <th class="text-light"><h4>Date </h4></th>
+                                                            <th class="text-light"><h4>Edit </h4>  </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <%while (rs3.next()) {%>
-                                                        <tr>
+                                                        <tr> 
                                                             <td> <%=rs3.getInt(1)%> </td>
                                                             <td> <img class="center" alt="#" src="../../images/products/<%=rs3.getInt(1)%>.jpg" style="max-width: 230px;"/> </td>
                                                             <td id='productData' >
@@ -350,21 +351,46 @@
                 </div>
 
             </div>
-
+            <jsp:useBean id="OrdersInfo" class="com.mvc.dao.OrderDao"/>
             <div id="Orders2" class="tabcontent">
-                <table class="table  table-dark text-white-50 py-5">
+                <div class="table-responsive ">
+                    <table class="table table-hover table-dark text-white-50 py-5">
 
-                    <thead style="background-color:#48D1CC;">
-                        <tr>
-                            <th class="text-light"><h3>Order id</h3>  </th>
-                            <th class="text-light"><h3>Order date</h3>  </th>
-                            <th class="text-light"><h3>User id</h3>  </th>
-                            <th class="text-light"><h3>Order Status</h3>  </th>
-                            <th class="text-light"><h3>Operations</h3>  </th>
-                        </tr>
-                    </thead>
-                </table>
+                        <thead style="background-color:#48D1CC;">
+                            <tr>
+                                <th class="text-light"><h4>User id</h4>  </th>
+                                <th class="text-light"><h4>Order id</h4>  </th>
+                                <th class="text-light"><h4>Order date</h4>  </th>
+                                <th class="text-light"><h4>Payment</h4>  </th>
+                                <th class="text-light"><h4>Order Status</h4>  </th>
+                                <th class="text-light"><h4>Operations</h4>  </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${OrdersInfo.getOrders()}" var="element">    
+                                <tr>
+                                    <td>${element.getUser_id()}</td>
+                                    <td>${element.getOrderId()}</td>
+                                    <td>${element.getDate()}</td>
+                                    <td class="font-weight-bold text-white">${element.getPayment_status()}</td>
+                                    <c:choose>
+                                        <c:when test="${element.getOrder_status() eq 'Pending'}">
+                                            <td class="font-weight-bold text-white bg-danger">${element.getOrder_status()}</td>    
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td class="font-weight-bold text-white bg-success">${element.getOrder_status()}</td>    
+                                        </c:otherwise>
+                                    </c:choose>           
+                                    <td><a href="OrderDetails.jsp?oid=${element.getOrderId()}" class="btn btn-sm btn-primary">Show Details</a></td>
+                                </tr> 
+                            </c:forEach>
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
+
+
 
 
             <script>

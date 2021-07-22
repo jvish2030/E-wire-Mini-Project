@@ -49,7 +49,6 @@ public class PaymentController extends HttpServlet {
         int amt = Integer.parseInt(amt_string);
 
         String JSONcart = request.getParameter("jsonData");
-        System.out.println("json"+JSONcart);
         ArrayList<OrderDetails> Order_details_AL;
         //creating list of items
         Order_details_AL = new ArrayList<OrderDetails>();
@@ -57,16 +56,16 @@ public class PaymentController extends HttpServlet {
             JSONArray jsonArr = new JSONArray(JSONcart);
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject jsonObj = jsonArr.getJSONObject(i);
-                int         id      =       jsonObj.getInt("productId");
-                String      name    =       jsonObj.getString("productName");
-                int         qty     =       jsonObj.getInt("productQuantity");
-                float       price   =       Float.parseFloat(jsonObj.getString("productPrice"));   
+                int id = jsonObj.getInt("productId");
+                String name = jsonObj.getString("productName");
+                int qty = jsonObj.getInt("productQuantity");
+                float price = Float.parseFloat(jsonObj.getString("productPrice"));
                 Order_details_AL.add(new OrderDetails().setProdid(id).setQty(qty).setProdName(name).setProdPrice(price));
             }
         } catch (JSONException ex) {
             Logger.getLogger(PaymentController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         MediaType typeJson = MediaType.parse("application/json; charset=utf-8");
 
         JSONObject json = new JSONObject();
@@ -92,27 +91,25 @@ public class PaymentController extends HttpServlet {
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Basic cnpwX3Rlc3RfSmNXdTVkMUlUVDJoMGk6dXFlVDEyOXVhT3UyZ2hqUkNmQkZIRXd4")
                 .build();
-        Response                    responses       =       client.newCall(requests).execute();
-        String                      jsonOrderStr    =       responses.body().string();
+        Response responses = client.newCall(requests).execute();
+        String jsonOrderStr = responses.body().string();
         System.out.println(jsonOrderStr);
-        HashMap<String, Object>     JsonMap         =       new Gson().fromJson(jsonOrderStr, HashMap.class);
-        
-        HttpSession                 session         =       request.getSession();
-        String                      useridObj       =       session.getAttribute("userid").toString();
-       
-        
-        int                         userid          =       Integer.parseInt(useridObj);
-        float                       amount          =       Float.parseFloat(JsonMap.get("amount").toString())/100;
-        String                      order_id        =       JsonMap.get("id").toString();
-        String                      receipt         =   
-                JsonMap.get("receipt").toString();
-               
+        HashMap<String, Object> JsonMap = new Gson().fromJson(jsonOrderStr, HashMap.class);
+
+        HttpSession session = request.getSession();
+        String useridObj = session.getAttribute("userid").toString();
+
+        int userid = Integer.parseInt(useridObj);
+        float amount = Float.parseFloat(JsonMap.get("amount").toString()) / 100;
+        String order_id = JsonMap.get("id").toString();
+        String receipt
+                = JsonMap.get("receipt").toString();
+
         //creating Orders object
-        Orders order =  new Orders().setOrderId(order_id).setAmount(amount).setUser_id(userid).setReciept(receipt);
-        
-        new OrderDao().saveOrderInfo(order,Order_details_AL);
+        Orders order = new Orders().setOrderId(order_id).setAmount(amount).setUser_id(userid).setReciept(receipt);
+
+        new OrderDao().saveOrderInfo(order, Order_details_AL);
         //save order ionformation to the database
-        System.out.println("executed...");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(JsonMap));

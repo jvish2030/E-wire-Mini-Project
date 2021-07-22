@@ -1,7 +1,7 @@
 
 var totalprice = 0;
 var count = 0;
-var userid = 0;
+var userid = "";
 function validateUser()
 {
     var fullname = document.forms["myUserRegisterForm"]["fullname"].value;
@@ -177,6 +177,7 @@ function goToCheckout() {
 }
 function qtyChange(localStorageName, pid, qty) {
     let cartString = localStorage.getItem(localStorageName);
+    
     let cart = JSON.parse(cartString);
     let oldProduct = cart.find((item) => item.productId === pid);
     //we have to increase the quantity
@@ -211,9 +212,7 @@ function order() {
 const paymentStart = (userid) => {
 
     let amount = $("#payment_field").html();
-    console.log("uid" + userid);
     let cart = JSON.parse(localStorage.getItem(userid));
-    console.log("cart" + cart);
     //amount validation
     if (amount === "" || amount === null) {
         swal("Failed !!", "amount is required !!", "error");
@@ -274,12 +273,17 @@ const updatePaymentOnServer = (payment_id, order_id, status) => {
         data: {payment_id: payment_id, order_id: order_id, status: status},
         url: 'UpdateOrderServlet', //data to be passed
         type: 'POST', // post request 
-        dataType: 'json',
+
         success: function (data) {
             swal("Good job!", "congrats !! Payment successful !!", "success");
+            localStorage.removeItem(data); 
+            setInterval(function () {
+                            window.location.assign("home?page=home");
+            }, 3000);
+            
         },
         error: function (err) {
-            swal("Failed !!", "Your payment is successful, but we did not get on server, we will contac6t you as soon as possible", "error");
+            swal("Failed !!", "Your payment is successful, but we did not get on server, we will contact you as soon as possible", "error");
         }
     });
 };
