@@ -220,14 +220,14 @@ public class AdminOperationServlet extends HttpServlet {
         String FileName = "unknown.jpg";
         if (DBUtils.getMaxCatId() == null) {
             CategoryBean cat = new CategoryBean(name, FileName);
-            authorize = AdminDao.createNewCategory(cat);
+            authorize = new AdminDao().createNewCategory(cat);
             Integer id = Integer.valueOf(DBUtils.getMaxCatId()) - 1;
             FileName = id + ".jpg";
             System.out.println("photo name _ " + FileName);
         } else {
             CategoryBean cat = new CategoryBean(name, FileName);
             //PASSING & INSERTING CATEGORYBEANOBJECT TO DATABASE THROUGN DAO 
-            authorize = AdminDao.createNewCategory(cat);
+            authorize = new AdminDao().createNewCategory(cat);
             //if inserted then redirecting to same page else to error page
             Integer id = Integer.valueOf(DBUtils.getMaxCatId()) - 1;
             FileName = id + ".jpg";
@@ -280,7 +280,7 @@ public class AdminOperationServlet extends HttpServlet {
         //CREATING CATEGORYBEAN OBJECT BY PASING ID AND SUBCATEGORY NAME
         CategoryBean subCatObj = new CategoryBean(id, subCategory);
         //PASSING &  CATEGORYBEAN OBJECT TO DATABASE THROUGN DAO 
-        String authorize = AdminDao.createNewSubCategory(subCatObj);
+        String authorize = new AdminDao().createNewSubCategory(subCatObj);
         //if inserted then redirecting to same page else to error page
         // GETTING HTTP SESSION OBJECT TO STRONG SESSION OBJECT
         HttpSession session = request.getSession();

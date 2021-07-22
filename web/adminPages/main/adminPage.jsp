@@ -381,7 +381,7 @@
                                             <td class="font-weight-bold text-white bg-success">${element.getOrder_status()}</td>    
                                         </c:otherwise>
                                     </c:choose>           
-                                    <td><a href="OrderDetails.jsp?oid=${element.getOrderId()}" class="btn btn-sm btn-primary">Show Details</a></td>
+                                    <td><a href="OrderDetails.jsp?uid=${element.getUser_id()}&oid=${element.getOrderId()}" class="btn btn-sm btn-primary">Show Details</a></td>
                                 </tr> 
                             </c:forEach>
                         </tbody>

@@ -28,16 +28,20 @@ public class CustDetails {
         return addType;
     }
 
-    public void setAddType(String addType) {
+    public CustDetails setAddType(String addType) {
         this.addType = addType;
+        return this;
+
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public CustDetails setCity(String city) {
         this.city = city;
+        return this;
+
     }
     private String addtype;
 
@@ -45,88 +49,109 @@ public class CustDetails {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public CustDetails setUserid(int userid) {
         this.userid = userid;
+        return this;
+
     }
 
     public String getFname() {
         return fname;
     }
 
-    public void setFname(String fname) {
+    public CustDetails setFname(String fname) {
         this.fname = fname;
+        return this;
+
     }
 
     public String getLname() {
         return lname;
     }
 
-    public void setLname(String lname) {
+    public CustDetails setLname(String lname) {
         this.lname = lname;
+        return this;
+
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public CustDetails setEmail(String email) {
         this.email = email;
+        return this;
+
     }
 
     public String getAddress1() {
         return address1;
     }
 
-    public void setAddress1(String address1) {
+    public CustDetails setAddress1(String address1) {
         this.address1 = address1;
+        return this;
     }
 
     public String getAddress2() {
         return address2;
     }
 
-    public void setAddress2(String address2) {
+    public CustDetails setAddress2(String address2) {
         this.address2 = address2;
+        return this;
+
     }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public CustDetails setCountry(String country) {
         this.country = country;
+        return this;
+
     }
 
     public String getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public CustDetails setState(String state) {
         this.state = state;
+        return this;
+
     }
 
     public int getPin() {
         return pin;
     }
 
-    public void setPin(int pin) {
+    public CustDetails setPin(int pin) {
         this.pin = pin;
+        return this;
+
     }
 
     public Long getMobile() {
         return mobile;
     }
 
-    public void setMobile(long mobile) {
+    public CustDetails setMobile(long mobile) {
         this.mobile = mobile;
+        return this;
+
     }
 
     public String getAddtype() {
         return addtype;
     }
 
-    public void setAddtype(String addtype) {
+    public CustDetails setAddtype(String addtype) {
         this.addtype = addtype;
+        return this;
+
     }
 
 }
