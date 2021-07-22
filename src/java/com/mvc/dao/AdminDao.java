@@ -185,7 +185,9 @@ public class AdminDao {
                 int pin = rs.getInt(10);
                 long mobile = rs.getLong(11);
                 String addType = rs.getString(12);
-                obj.setUserid(userid).setFname(fname).setLname(lname).setEmail(email).setAddress1(address1).setAddress2(address2).setCountry(country).setState(state).setCity(city).setPin(pin).setMobile(mobile).setAddtype(addType);
+                System.out.println("addtype" + addType);
+                obj.setUserid(userid).setFname(fname).setLname(lname).setEmail(email).setAddress1(address1).setAddress2(address2).setCountry(country).setState(state).setCity(city).setPin(pin).setMobile(mobile);
+                obj.setAddType(addType);
             }
         } catch (SQLException ex) {
             Logger.getLogger(AdminDao.class
@@ -195,7 +197,7 @@ public class AdminDao {
     }
 
     public List getUserCart(String oid) {
-        String query = "SELECT * from order_details where oid=?";
+        String query = "SELECT * from order_details where order_id=?";
         List list = new ArrayList();
         try {
             pst = connection.prepareStatement(query);
@@ -216,5 +218,23 @@ public class AdminDao {
         }
 
         return list;
+    }
+
+    public String confirmOrder(String orderid) {
+        String query = "UPDATE orders set order_status='Confirmed' where order_id=?";
+        int count = 0;
+        try {
+            pst = connection.prepareStatement(query);
+            pst.setString(1, orderid);
+            count = pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (count > 0) {
+            return "success";
+        } else {
+            return "fails";
+
+        }
     }
 }

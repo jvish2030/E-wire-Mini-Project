@@ -22,7 +22,7 @@
             <fieldset>
                 <div class="table-responsive ">
 
-                    <table class="table table-bordered table-dark table-striped">
+                    <table class="table table-bordered table-dark ">
                         <tr>
                             <td class="text-light">First Name : </td>
                             <td class="font-weight-bold text-white">${obj.getFname()}</td>
@@ -61,7 +61,7 @@
         <fieldset>
             <div class="table-responsive ">
 
-                <table class="table table-bordered table-dark table-striped">
+                <table class="table table-bordered table-dark ">
                     <tr>
                         <td class="text-light">Address 1 : </td>
                         <td class="font-weight-bold text-white">${obj.getAddress1()}</td>
@@ -76,38 +76,41 @@
 
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
-            <th>Sr. No.</th>
-            <th>Product Name</th>
-            <th>Photo</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Amount</th>                    
+            <th class="font-weight-bold text-white">Sr. No.</th>
+            <th class="font-weight-bold text-white">Product Name</th>
+            <th class="font-weight-bold text-white">Photo</th>
+            <th class="font-weight-bold text-white">Price</th>
+            <th class="font-weight-bold text-white">Quantity</th>
+            <th class="font-weight-bold text-white">Amount</th>                    
             </thead>
             <tbody>
-                <c:set var="count" value="${1}"/>
+                <c:set var="count" value="${0}"/>
+                <c:set var="total" value="${0}"/>
                 <c:forEach items="${DeliveryDetails.getUserCart(param.oid)}" var="element">
                     <tr>
-                        <td></td>
+                        <td>${count=count+1}</td>
+                        <td class="text-light">${element.getProdName()} </td>
+                        <td ><img src='../../images/products/${element.getProdid()}.jpg' width="100" height="70">} </td>
+                        <td class="text-light">&#8377; ${element.getProdPrice()}  </td>
+                        <td class="text-light">${element.getQty()}  </td>
+                        <td class="text-light">&#8377; ${element.getQty()*element.getProdPrice()}  </td>
                     </tr>
+                    <c:set var="total" value="${total+element.getQty()*element.getProdPrice()}"/>
+                    
                 </c:forEach>
-                <%
-                    int counter = 1, total = 0;
-                    while (rs.next()) {
-                %>
 
-                <%
-                        counter++;
-                        total += rs.getInt("qty") * rs.getInt("disc_price");
-                    }
-                %>
             </tbody>
             <tfoot class="table-dark">
                 <tr>
                     <th colspan="5">Total Bill Amount</th>
-                    <th>&#8377; <%= total%></th>
+                    <th>&#8377; ${total}</th>
                 </tr>
             </tfoot>
         </table>
+        <div>
+            <a class="btn btn-primary float-right" href="../../ConfirmOrderServlet?oid=${param.oid}">Confirm Order</a>
+
+        </div>
 
     </div>
 </div>

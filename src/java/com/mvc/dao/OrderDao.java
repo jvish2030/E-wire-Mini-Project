@@ -90,7 +90,7 @@ public class OrderDao {
     }
 
     public List getOrders() {
-        String query = "Select * from Orders order by order_status";
+        String query = "Select * from Orders order by order_date";
         ArrayList List = new ArrayList();
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a");
